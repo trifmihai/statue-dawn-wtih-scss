@@ -13,10 +13,21 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": ""
+      }
+    },
+    "collections_Yb8pHp": {
+      "type": "collections",
+      "name": "t:general.collections_grid",
+      "settings": {
+        "grid_item_width": "collections--full",
+        "grid_gap": 10
+      }
     }
   },
   "order": [
-    "header"
-  ],
+    "header",
+    "collections_Yb8pHp"
+  ]
 }
