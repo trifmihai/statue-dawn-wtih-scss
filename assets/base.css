@@ -1,0 +1,654 @@
+/* Client-First Boilerplate CSS
+   Minimal, brand-agnostic starting point extracted from Webflow export.
+   Keep utilities and structure. Remove site-specific colors, gradients, and "is-*" variants tied to one project.
+*/
+h1 {
+  color: red !important;
+}
+
+/* 1) Root tokens: spacing, typography scales, neutral palette */
+:root {
+  /* Spacing scale */
+  --space-0: 0rem;
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-28: 1.75rem;
+  --space-32: 2rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-56: 3.5rem;
+  --space-64: 4rem;
+  --space-72: 4.5rem;
+  --space-80: 5rem;
+  --space-96: 6rem;
+  --space-112: 7rem;
+  --space-128: 8rem;
+  --space-144: 9rem;
+  --space-160: 10rem;
+  /* Typography scale */
+  --h1: 4.5rem;
+  --h2: 3.5rem;
+  --h3: 3rem;
+  --h4: 2.5rem;
+  --h5: 2rem;
+  --h6: 1.75rem;
+  --lh-h1: 1.28;
+  --lh-h2: 1.14;
+  --lh-h3: 1.2;
+  --lh-h4: 1.3;
+  --lh-h5: 1.25;
+  --lh-h6: 1.29;
+  --p-xl: 1.5rem;
+  --p-lg: 1.25rem;
+  --p-md: 1.125rem;
+  --p-rg: 1rem;
+  --p-sm: 0.875rem;
+  --p-tiny: 0.75rem;
+  --lh-p-xl: 1.33;
+  --lh-p-lg: 1.4;
+  --lh-p-md: 1.44;
+  --lh-p-rg: 1.5;
+  --lh-p-sm: 1.43;
+  --lh-p-tiny: 1.33;
+  /* Neutrals */
+  --neutral-0: #fff;
+  --neutral-50: #fafafa;
+  --neutral-100: #f7f7f7;
+  --neutral-200: #efefef;
+  --neutral-300: #e6e6e6;
+  --neutral-400: #d6d6d6;
+  --neutral-500: #a6a6a6;
+  --neutral-600: #727272;
+  --neutral-700: #464646;
+  --neutral-800: #292929;
+  --neutral-900: #212121;
+  --neutral-950: #141414;
+  /* Text */
+  --text-dark: #0e213d;
+  --text-dark-2: rgba(14, 33, 61, 0.75);
+  --text-dark-3: rgba(14, 33, 61, 0.63);
+  --text-light: #ffffff;
+  --text-light-2: rgba(255, 255, 255, 0.8);
+  --text-light-3: rgba(255, 255, 255, 0.65);
+}
+
+/* 2) Base elements */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  color: var(--text-dark);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  background: var(--neutral-0);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+h1 {
+  font-size: var(--h1);
+  line-height: var(--lh-h1);
+}
+
+h2 {
+  font-size: var(--h2);
+  line-height: var(--lh-h2);
+}
+
+h3 {
+  font-size: var(--h3);
+  line-height: var(--lh-h3);
+}
+
+h4 {
+  font-size: var(--h4);
+  line-height: var(--lh-h4);
+}
+
+h5 {
+  font-size: var(--h5);
+  line-height: var(--lh-h5);
+}
+
+h6 {
+  font-size: var(--h6);
+  line-height: var(--lh-h6);
+}
+
+p {
+  margin: 0 0 0.75rem;
+  font-size: var(--p-rg);
+  line-height: var(--lh-p-rg);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+blockquote {
+  border-left: 0.25rem solid #e2e2e2;
+  padding: 0 1.25rem;
+  margin: 0 0 1rem;
+  font-size: var(--p-lg);
+  line-height: var(--lh-p-lg);
+}
+
+/* 3) Webflow structural helpers */
+.w-layout-grid {
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+/* 4) Containers */
+.container-small {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.container-medium {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.container-large {
+  width: 100%;
+  max-width: 76.5rem;
+  margin: 0 auto;
+}
+
+.max-width-full {
+  width: 100%;
+  max-width: none;
+}
+
+.max-width-small {
+  width: 100%;
+  max-width: 32rem;
+}
+
+.max-width-medium {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.max-width-large {
+  width: 100%;
+  max-width: 48rem;
+}
+
+.max-width-xlarge {
+  width: 100%;
+  max-width: 64rem;
+}
+
+.max-width-xxlarge {
+  width: 100%;
+  max-width: 80rem;
+}
+
+/* 5) Sections and wrappers */
+.page-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.padding-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.padding-section.is-small {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.padding-section.is-large {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.padding-section.is-none-top {
+  padding-top: 0;
+}
+
+.padding-section.is-none-bottom {
+  padding-bottom: 0;
+}
+
+/* 6) Spacing utilities */
+.padding-0 {
+  padding: var(--space-0);
+}
+
+.padding-tiny {
+  padding: var(--space-4);
+}
+
+.padding-xxsmall {
+  padding: var(--space-8);
+}
+
+.padding-xsmall {
+  padding: var(--space-16);
+}
+
+.padding-small {
+  padding: var(--space-24);
+}
+
+.padding-medium {
+  padding: var(--space-32);
+}
+
+.padding-large {
+  padding: var(--space-48);
+}
+
+.padding-xlarge {
+  padding: var(--space-56);
+}
+
+.padding-xxlarge {
+  padding: var(--space-80);
+}
+
+.padding-huge {
+  padding: var(--space-96);
+}
+
+.padding-xhuge {
+  padding: var(--space-112);
+}
+
+.padding-xxhuge {
+  padding: var(--space-160);
+}
+
+.margin-0 {
+  margin: var(--space-0);
+}
+
+.margin-tiny {
+  margin: var(--space-4);
+}
+
+.margin-xxsmall {
+  margin: var(--space-8);
+}
+
+.margin-xsmall {
+  margin: var(--space-16);
+}
+
+.margin-small {
+  margin: var(--space-24);
+}
+
+.margin-medium {
+  margin: var(--space-32);
+}
+
+.margin-large {
+  margin: var(--space-48);
+}
+
+.margin-xlarge {
+  margin: var(--space-56);
+}
+
+.margin-xxlarge {
+  margin: var(--space-80);
+}
+
+.margin-huge {
+  margin: var(--space-96);
+}
+
+.margin-xhuge {
+  margin: var(--space-112);
+}
+
+.margin-xxhuge {
+  margin: var(--space-160);
+}
+
+/* Axis-specific helpers */
+.padding-top {
+  padding-top: var(--space-16);
+}
+
+.padding-bottom {
+  padding-bottom: var(--space-16);
+}
+
+.padding-left {
+  padding-left: var(--space-16);
+}
+
+.padding-right {
+  padding-right: var(--space-16);
+}
+
+.padding-vertical {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+.padding-horizontal {
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
+}
+
+.margin-top {
+  margin-top: var(--space-16);
+}
+
+.margin-bottom {
+  margin-bottom: var(--space-16);
+}
+
+.margin-left {
+  margin-left: var(--space-16);
+}
+
+.margin-right {
+  margin-right: var(--space-16);
+}
+
+.margin-vertical {
+  margin-top: var(--space-16);
+  margin-bottom: var(--space-16);
+}
+
+.margin-horizontal {
+  margin-left: var(--space-16);
+  margin-right: var(--space-16);
+}
+
+/* 7) Typography utilities */
+.text-size-xlarge {
+  font-size: var(--p-xl);
+  line-height: var(--lh-p-xl);
+}
+
+.text-size-large {
+  font-size: var(--p-lg);
+  line-height: var(--lh-p-lg);
+}
+
+.text-size-medium {
+  font-size: var(--p-md);
+  line-height: var(--lh-p-md);
+}
+
+.text-size-regular {
+  font-size: var(--p-rg);
+  line-height: var(--lh-p-rg);
+}
+
+.text-size-small {
+  font-size: var(--p-sm);
+  line-height: var(--lh-p-sm);
+}
+
+.text-size-tiny {
+  font-size: var(--p-tiny);
+  line-height: var(--lh-p-tiny);
+}
+
+.text-weight-black {
+  font-weight: 900;
+}
+
+.text-weight-xbold {
+  font-weight: 800;
+}
+
+.text-weight-bold {
+  font-weight: 700;
+}
+
+.text-weight-semibold {
+  font-weight: 600;
+}
+
+.text-weight-medium {
+  font-weight: 500;
+}
+
+.text-weight-normal {
+  font-weight: 400;
+}
+
+.text-weight-light {
+  font-weight: 300;
+}
+
+.text-style-underline {
+  text-decoration: underline;
+}
+
+.text-style-italic {
+  font-style: italic;
+}
+
+.text-style-strikethrough {
+  text-decoration: line-through;
+}
+
+.text-style-allcaps {
+  text-transform: uppercase;
+}
+
+.text-style-notcaps {
+  text-transform: none;
+}
+
+.text-style-nowrap {
+  white-space: nowrap;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+/* 8) Color utilities (neutrals only) */
+.text-color-primary-light {
+  color: var(--text-dark);
+}
+
+.text-color-secondary-light {
+  color: var(--text-dark-2);
+}
+
+.text-color-tertiary-light {
+  color: var(--text-dark-3);
+}
+
+.text-color-primary-dark {
+  color: var(--text-light);
+}
+
+.text-color-secondary-dark {
+  color: var(--text-light-2);
+}
+
+.text-color-tertiary-dark {
+  color: var(--text-light-3);
+}
+
+.background-color-primary {
+  background-color: var(--neutral-0);
+}
+
+.background-color-secondary {
+  background-color: var(--neutral-100);
+}
+
+.background-color-dark {
+  background-color: var(--neutral-950);
+}
+
+/* 9) Buttons (neutral, brand-agnostic) */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 12px;
+  padding: 0.75rem 2rem;
+  background: var(--neutral-900);
+  color: var(--neutral-0);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.button-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 10) Forms */
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.form-field-wrapper {
+  position: relative;
+}
+
+.field-label {
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--neutral-700);
+  border-radius: 8px;
+  background: var(--neutral-0);
+  color: var(--text-dark);
+  font-size: var(--p-rg);
+  line-height: var(--lh-p-rg);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:hover {
+  border-color: var(--neutral-600);
+}
+
+.form-input:focus {
+  border-color: var(--neutral-600);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+.form-input.is-text-area {
+  min-height: 10.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-checkbox-label {
+  margin: 0;
+}
+
+.form-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem 1rem 3rem;
+  border: 1px solid var(--neutral-700);
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.form-radio:hover,
+.form-radio:focus {
+  border-color: var(--neutral-600);
+}
+
+/* 11) Hide helper */
+.hide {
+  display: none !important;
+}
