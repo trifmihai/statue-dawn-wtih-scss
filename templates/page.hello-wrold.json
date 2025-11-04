@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "navbar": {
+      "type": "nav"
+    },
+    "main": {
+      "type": "hello-world"
+    }
+  },
+  "order": ["navbar", "main"]
+}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "navbar": {
+      "type": "nav"
+    },
+    "main": {
+      "type": "styles-draft"
+    }
+  },
+  "order": ["navbar", "main"]
+}
