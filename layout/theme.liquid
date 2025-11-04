@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang='{{ request.locale.iso_code }}'>
   <head>
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'nav.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
@@ -14,10 +15,10 @@
   </head>
 
   <body>
-    {% sections 'header-group' %}
+    {% section 'nav' %}
 
     {{ content_for_layout }}
 
-    {% sections 'footer-group' %}
+    {% comment %} {% section 'footer-group' %} {% endcomment %}
   </body>
 </html>

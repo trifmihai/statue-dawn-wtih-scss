@@ -2,78 +2,9 @@
    Minimal, brand-agnostic starting point extracted from Webflow export.
    Keep utilities and structure. Remove site-specific colors, gradients, and "is-*" variants tied to one project.
 */
-h1 {
-  color: red !important;
-}
-
-/* 1) Root tokens: spacing, typography scales, neutral palette */
-:root {
-  /* Spacing scale */
-  --space-0: 0rem;
-  --space-4: 0.25rem;
-  --space-8: 0.5rem;
-  --space-12: 0.75rem;
-  --space-16: 1rem;
-  --space-20: 1.25rem;
-  --space-24: 1.5rem;
-  --space-28: 1.75rem;
-  --space-32: 2rem;
-  --space-40: 2.5rem;
-  --space-48: 3rem;
-  --space-56: 3.5rem;
-  --space-64: 4rem;
-  --space-72: 4.5rem;
-  --space-80: 5rem;
-  --space-96: 6rem;
-  --space-112: 7rem;
-  --space-128: 8rem;
-  --space-144: 9rem;
-  --space-160: 10rem;
-  /* Typography scale */
-  --h1: 4.5rem;
-  --h2: 3.5rem;
-  --h3: 3rem;
-  --h4: 2.5rem;
-  --h5: 2rem;
-  --h6: 1.75rem;
-  --lh-h1: 1.28;
-  --lh-h2: 1.14;
-  --lh-h3: 1.2;
-  --lh-h4: 1.3;
-  --lh-h5: 1.25;
-  --lh-h6: 1.29;
-  --p-xl: 1.5rem;
-  --p-lg: 1.25rem;
-  --p-md: 1.125rem;
-  --p-rg: 1rem;
-  --p-sm: 0.875rem;
-  --p-tiny: 0.75rem;
-  --lh-p-xl: 1.33;
-  --lh-p-lg: 1.4;
-  --lh-p-md: 1.44;
-  --lh-p-rg: 1.5;
-  --lh-p-sm: 1.43;
-  --lh-p-tiny: 1.33;
-  /* Neutrals */
-  --neutral-0: #fff;
-  --neutral-50: #fafafa;
-  --neutral-100: #f7f7f7;
-  --neutral-200: #efefef;
-  --neutral-300: #e6e6e6;
-  --neutral-400: #d6d6d6;
-  --neutral-500: #a6a6a6;
-  --neutral-600: #727272;
-  --neutral-700: #464646;
-  --neutral-800: #292929;
-  --neutral-900: #212121;
-  --neutral-950: #141414;
-  /* Text */
-  --text-dark: #0e213d;
-  --text-dark-2: rgba(14, 33, 61, 0.75);
-  --text-dark-3: rgba(14, 33, 61, 0.63);
-  --text-light: #ffffff;
-  --text-light-2: rgba(255, 255, 255, 0.8);
-  --text-light-3: rgba(255, 255, 255, 0.65);
+body {
+  color: #0e213d;
+  background: #fff;
 }
 
 /* 2) Base elements */
@@ -88,11 +19,17 @@ html {
 }
 
 body {
-  color: var(--text-dark);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #0e213d;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  background: var(--neutral-0);
+  background: #fff;
 }
 
 h1,
@@ -103,43 +40,43 @@ h5,
 h6 {
   margin: 0;
   font-weight: 700;
-  color: var(--text-dark);
+  color: #0e213d;
 }
 
 h1 {
-  font-size: var(--h1);
-  line-height: var(--lh-h1);
+  font-size: 4.5rem;
+  line-height: 1.28;
 }
 
 h2 {
-  font-size: var(--h2);
-  line-height: var(--lh-h2);
+  font-size: 3.5rem;
+  line-height: 1.14;
 }
 
 h3 {
-  font-size: var(--h3);
-  line-height: var(--lh-h3);
+  font-size: 3rem;
+  line-height: 1.2;
 }
 
 h4 {
-  font-size: var(--h4);
-  line-height: var(--lh-h4);
+  font-size: 2.5rem;
+  line-height: 1.3;
 }
 
 h5 {
-  font-size: var(--h5);
-  line-height: var(--lh-h5);
+  font-size: 2rem;
+  line-height: 1.25;
 }
 
 h6 {
-  font-size: var(--h6);
-  line-height: var(--lh-h6);
+  font-size: 1.75rem;
+  line-height: 1.29;
 }
 
 p {
   margin: 0 0 0.75rem;
-  font-size: var(--p-rg);
-  line-height: var(--lh-p-rg);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 a {
@@ -166,8 +103,8 @@ blockquote {
   border-left: 0.25rem solid #e2e2e2;
   padding: 0 1.25rem;
   margin: 0 0 1rem;
-  font-size: var(--p-lg);
-  line-height: var(--lh-p-lg);
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 /* 3) Webflow structural helpers */
@@ -266,47 +203,47 @@ blockquote {
 
 /* 6) Spacing utilities */
 .padding-0 {
-  padding: var(--space-0);
+  padding: 0rem;
 }
 
 .padding-tiny {
-  padding: var(--space-4);
+  padding: 0.25rem;
 }
 
 .padding-xxsmall {
-  padding: var(--space-8);
+  padding: 0.5rem;
 }
 
 .padding-xsmall {
-  padding: var(--space-16);
+  padding: 1rem;
 }
 
 .padding-small {
-  padding: var(--space-24);
+  padding: 1.5rem;
 }
 
 .padding-medium {
-  padding: var(--space-32);
+  padding: 2rem;
 }
 
 .padding-large {
-  padding: var(--space-48);
+  padding: 3rem;
 }
 
 .padding-xlarge {
-  padding: var(--space-56);
+  padding: 3.5rem;
 }
 
 .padding-xxlarge {
-  padding: var(--space-80);
+  padding: 5rem;
 }
 
 .padding-huge {
-  padding: var(--space-96);
+  padding: 6rem;
 }
 
 .padding-xhuge {
-  padding: var(--space-112);
+  padding: 7rem;
 }
 
 .padding-xxhuge {
@@ -314,47 +251,47 @@ blockquote {
 }
 
 .margin-0 {
-  margin: var(--space-0);
+  margin: 0rem;
 }
 
 .margin-tiny {
-  margin: var(--space-4);
+  margin: 0.25rem;
 }
 
 .margin-xxsmall {
-  margin: var(--space-8);
+  margin: 0.5rem;
 }
 
 .margin-xsmall {
-  margin: var(--space-16);
+  margin: 1rem;
 }
 
 .margin-small {
-  margin: var(--space-24);
+  margin: 1.5rem;
 }
 
 .margin-medium {
-  margin: var(--space-32);
+  margin: 2rem;
 }
 
 .margin-large {
-  margin: var(--space-48);
+  margin: 3rem;
 }
 
 .margin-xlarge {
-  margin: var(--space-56);
+  margin: 3.5rem;
 }
 
 .margin-xxlarge {
-  margin: var(--space-80);
+  margin: 5rem;
 }
 
 .margin-huge {
-  margin: var(--space-96);
+  margin: 6rem;
 }
 
 .margin-xhuge {
-  margin: var(--space-112);
+  margin: 7rem;
 }
 
 .margin-xxhuge {
@@ -363,86 +300,86 @@ blockquote {
 
 /* Axis-specific helpers */
 .padding-top {
-  padding-top: var(--space-16);
+  padding-top: 1rem;
 }
 
 .padding-bottom {
-  padding-bottom: var(--space-16);
+  padding-bottom: 1rem;
 }
 
 .padding-left {
-  padding-left: var(--space-16);
+  padding-left: 1rem;
 }
 
 .padding-right {
-  padding-right: var(--space-16);
+  padding-right: 1rem;
 }
 
 .padding-vertical {
-  padding-top: var(--space-16);
-  padding-bottom: var(--space-16);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .padding-horizontal {
-  padding-left: var(--space-16);
-  padding-right: var(--space-16);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .margin-top {
-  margin-top: var(--space-16);
+  margin-top: 1rem;
 }
 
 .margin-bottom {
-  margin-bottom: var(--space-16);
+  margin-bottom: 1rem;
 }
 
 .margin-left {
-  margin-left: var(--space-16);
+  margin-left: 1rem;
 }
 
 .margin-right {
-  margin-right: var(--space-16);
+  margin-right: 1rem;
 }
 
 .margin-vertical {
-  margin-top: var(--space-16);
-  margin-bottom: var(--space-16);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .margin-horizontal {
-  margin-left: var(--space-16);
-  margin-right: var(--space-16);
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 /* 7) Typography utilities */
 .text-size-xlarge {
-  font-size: var(--p-xl);
-  line-height: var(--lh-p-xl);
+  font-size: 1.5rem;
+  line-height: 1.33;
 }
 
 .text-size-large {
-  font-size: var(--p-lg);
-  line-height: var(--lh-p-lg);
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 .text-size-medium {
-  font-size: var(--p-md);
-  line-height: var(--lh-p-md);
+  font-size: 1.125rem;
+  line-height: 1.44;
 }
 
 .text-size-regular {
-  font-size: var(--p-rg);
-  line-height: var(--lh-p-rg);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .text-size-small {
-  font-size: var(--p-sm);
-  line-height: var(--lh-p-sm);
+  font-size: 0.875rem;
+  line-height: 1.43;
 }
 
 .text-size-tiny {
-  font-size: var(--p-tiny);
-  line-height: var(--lh-p-tiny);
+  font-size: 0.75rem;
+  line-height: 1.33;
 }
 
 .text-weight-black {
@@ -511,39 +448,39 @@ blockquote {
 
 /* 8) Color utilities (neutrals only) */
 .text-color-primary-light {
-  color: var(--text-dark);
+  color: #0e213d;
 }
 
 .text-color-secondary-light {
-  color: var(--text-dark-2);
+  color: rgba(14, 33, 61, 0.75);
 }
 
 .text-color-tertiary-light {
-  color: var(--text-dark-3);
+  color: rgba(14, 33, 61, 0.63);
 }
 
 .text-color-primary-dark {
-  color: var(--text-light);
+  color: #fff;
 }
 
 .text-color-secondary-dark {
-  color: var(--text-light-2);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .text-color-tertiary-dark {
-  color: var(--text-light-3);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .background-color-primary {
-  background-color: var(--neutral-0);
+  background-color: #fff;
 }
 
 .background-color-secondary {
-  background-color: var(--neutral-100);
+  background-color: #f7f7f7;
 }
 
 .background-color-dark {
-  background-color: var(--neutral-950);
+  background-color: #141414;
 }
 
 /* 9) Buttons (neutral, brand-agnostic) */
@@ -554,11 +491,14 @@ blockquote {
   gap: 0.75rem;
   border-radius: 12px;
   padding: 0.75rem 2rem;
-  background: var(--neutral-900);
-  color: var(--neutral-0);
+  background: #212121;
+  color: #fff;
   text-decoration: none;
   line-height: 1.4;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .button:hover {
@@ -590,7 +530,7 @@ blockquote {
 
 .field-label {
   margin-bottom: 0.5rem;
-  color: var(--text-dark);
+  color: #0e213d;
   font-weight: 500;
 }
 
@@ -598,22 +538,24 @@ blockquote {
   width: 100%;
   min-height: 2.75rem;
   padding: 0.875rem 1rem;
-  border: 1px solid var(--neutral-700);
+  border: 1px solid #464646;
   border-radius: 8px;
-  background: var(--neutral-0);
-  color: var(--text-dark);
-  font-size: var(--p-rg);
-  line-height: var(--lh-p-rg);
+  background: #fff;
+  color: #0e213d;
+  font-size: 1rem;
+  line-height: 1.5;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .form-input:hover {
-  border-color: var(--neutral-600);
+  border-color: #727272;
 }
 
 .form-input:focus {
-  border-color: var(--neutral-600);
+  border-color: #727272;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
 }
 
@@ -638,14 +580,14 @@ blockquote {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2rem 1rem 3rem;
-  border: 1px solid var(--neutral-700);
+  border: 1px solid #464646;
   border-radius: 8px;
   transition: border-color 0.2s ease;
 }
 
 .form-radio:hover,
 .form-radio:focus {
-  border-color: var(--neutral-600);
+  border-color: #727272;
 }
 
 /* 11) Hide helper */

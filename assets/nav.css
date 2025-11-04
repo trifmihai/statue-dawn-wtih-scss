@@ -1,0 +1,99 @@
+.navbar_component {
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding-top: 1.5rem;
+  padding-bottom: 0;
+  display: flex;
+  position: sticky;
+  top: 0;
+  overflow: visible;
+}
+
+.nav_component {
+  width: 100%;
+}
+
+.nav_wrapper {
+  background-color: #fcfcfc;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+.nav-content {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2rem;
+  display: flex;
+  box-shadow: 0 4px 8px rgba(199, 199, 199, 0.0509803922), 0 15px 15px rgba(199, 199, 199, 0.0392156863), 0 34px 21px rgba(199, 199, 199, 0.031372549), 0 61px 24px rgba(199, 199, 199, 0.0117647059), 0 95px 27px rgba(199, 199, 199, 0);
+}
+
+.navbar_logo-link {
+  padding-left: 0;
+}
+
+.navbar_logo {
+  width: 8.25rem;
+  height: auto;
+  transition: all 0.2s;
+}
+
+.navbar_logo:hover {
+  text-shadow: 8px 1px 1px var(--_colors---color--text--light--primary);
+}
+
+.navbar_links {
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.navbar_link-wrapper {
+  color: var(--_colors---color--text--light--tertiary);
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar_link-wrapper:hover {
+  text-shadow: 0 0 0 var(--_colors---color--text--light--secondary);
+}
+
+.navbar_link {
+  color: var(--_colors---color--text--dark--tertiary);
+  font-size: var(--_responsive---p-size--p-medium);
+  line-height: var(--_responsive---p-line-height--p-medium);
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+}
+
+.navbar_link:hover {
+  color: var(--_colors---color--text--dark--primary);
+  border: 0 solid #000;
+}
+
+.navbar_link.w--current {
+  color: var(--_colors---color--text--dark--primary);
+}
+
+.navbar_cta-group {
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  z-index: 1;
+  display: flex;
+}

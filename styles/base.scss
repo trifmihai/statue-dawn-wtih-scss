@@ -82,7 +82,13 @@ html {
 
 body {
   color: $text-dark;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   background: $neutral-0;
@@ -470,7 +476,10 @@ blockquote {
   color: $neutral-0;
   text-decoration: none;
   line-height: 1.4;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 .button:hover {
   transform: translateY(-2px);
@@ -513,7 +522,9 @@ blockquote {
   font-size: $p-rg;
   line-height: $lh-p-rg;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .form-input:hover {
   border-color: $neutral-600;
