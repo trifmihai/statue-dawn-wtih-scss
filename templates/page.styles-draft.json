@@ -1,11 +1,9 @@
 {
   "sections": {
-    "navbar": {
-      "type": "nav"
-    },
     "main": {
-      "type": "styles-draft"
+      "type": "styles-draft",
+      "settings": {}
     }
   },
-  "order": ["navbar", "main"]
+  "order": ["main"]
 }

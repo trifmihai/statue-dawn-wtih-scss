@@ -7,6 +7,8 @@
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'nav.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'button.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
@@ -15,7 +17,9 @@
   </head>
 
   <body>
-    {% section 'nav' %}
+    {% unless template.suffix == 'styles-draft' %}
+      {% section 'nav' %}
+    {% endunless %}
 
     {{ content_for_layout }}
 
