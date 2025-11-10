@@ -1,9 +1,45 @@
 {
   "sections": {
-    "main": {
-      "type": "landing-page",
+    "hero": {
+      "type": "section-1_hero",
+      "settings": {}
+    },
+    "value_stack": {
+      "type": "section-1-2_value-stack",
+      "settings": {}
+    },
+    "stakes": {
+      "type": "section-2_stakes",
+      "settings": {}
+    },
+    "summary": {
+      "type": "section-3_summary",
+      "settings": {}
+    },
+    "plan": {
+      "type": "section-4_plan",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "section-5_testimonials",
+      "settings": {}
+    },
+    "pricing": {
+      "type": "section-6_pricing",
+      "settings": {}
+    },
+    "faq": {
+      "type": "section-7_faq",
+      "settings": {}
+    },
+    "lead_gen": {
+      "type": "section-8_lead-gen",
+      "settings": {}
+    },
+    "footer": {
+      "type": "section-99_footer",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["hero", "value_stack", "stakes", "summary", "plan", "testimonials", "pricing", "faq", "lead_gen", "footer"]
 }

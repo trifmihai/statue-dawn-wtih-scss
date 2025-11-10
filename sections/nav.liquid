@@ -2,46 +2,56 @@
 {{ 'nav.css' | asset_url | stylesheet_tag }}
 {{ 'button.css' | asset_url | stylesheet_tag }}
 
-<div class='navbar_component'>
-  <div class='container-medium'>
-    <div class='nav_wrapper'>
-      <div class='nav-content'>
-        <!-- LOGO -->
-        <a href='#' class='navbar_logo-link w-nav-brand'>
-          <img
-            width='132'
-            height='30'
-            alt='Musashi Challenge homepage logo link'
-            src='{{ 'musashi-logo.svg' | asset_url }}'
-            loading='lazy'
-            class='navbar_logo'
-          >
-        </a>
-        <!-- NAVIGATION MENU -->
-        <div class='navbar_links'>
-          <div class='navbar_link-wrapper'>
-            <a href='#section-pricing' class='navbar_link w-nav-link'>Home</a>
-          </div>
-          <div class='navbar_link-wrapper'>
-            <a href='#section-pricing' class='navbar_link w-nav-link'>Summary</a>
-          </div>
-          <div class='navbar_link-wrapper'>
-            <a href='#section-pricing' class='navbar_link w-nav-link'>Pricing</a>
-          </div>
-          <div class='navbar_link-wrapper'>
-            <a href='#section-pricing' class='navbar_link w-nav-link'>FAQ</a>
-          </div>
-        </div>
-        <!-- CALL TO ACTION -->
-        <div class='navbar_button-wrapper'>
+<div
+  data-collapse='medium'
+  data-animation='over-right'
+  data-duration='400'
+  fs-scrolldisable-element='smart-nav'
+  data-easing='ease'
+  data-easing2='ease'
+  role='banner'
+  class='navbar_component w-nav'>
+  <div class='container-large'>
+    <div class='nav_component'>
+      <div class='nav_wrapper'>
+        <div class='nav-content'>
           <a
-            href='https://app.sitekeep.com?user=admin_signup'
-            class='button is-default w-inline-block'
-          >
-            <div class='button is-nav'>
-              <div class='text-size-medium is-primary'>Get Pack</div>
-            </div>
+            href='index.html'
+            aria-current='page'
+            class='navbar_logo-link w-nav-brand w--current'>
+            <img
+              width="132"
+              height="30"
+              alt=""
+              src="{{ 'statue-logo.svg' | asset_url }}"
+              loading="lazy"
+              class="navbar_logo" />
           </a>
+          <div class='navbar_links'>
+            <div class='navbar_link-wrapper'>
+              <a href='#section-hero' class='navbar_link w-nav-link'>Home</a>
+            </div>
+            <div class='navbar_link-wrapper'>
+              <a href='#section-summary' class='navbar_link w-nav-link'>Summary</a>
+            </div>
+            <div class='navbar_link-wrapper'>
+              <a href='#section-pricing' class='navbar_link w-nav-link'>Pricing</a>
+            </div>
+            <div class='navbar_link-wrapper'>
+              <a href='#section-faq' class='navbar_link w-nav-link'>FAQ</a>
+            </div>
+          </div>
+          <div class='navbar_cta-group'>
+            <div class='navbar_button-wrapper'>
+              <a href='#section-pricing' class='button is-default w-inline-block'>
+                <div class='button_line is-top'></div>
+                <div class='button_content is-nav'>
+                  <div class='text-size-regular is-primary'>Get Pack</div>
+                </div>
+                <div class='button_line is-bottom'></div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

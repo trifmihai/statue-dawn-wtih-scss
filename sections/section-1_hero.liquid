@@ -1,0 +1,109 @@
+<section id='section-hero' class='section_hero'>
+  <div class='padding-global'>
+    <div class='container-large is-line'>
+      <div class='line-wrapper is-desktop'>
+        <div class='line-long'></div>
+        <div class='line-short'></div>
+        <div class='line-long'></div>
+      </div>
+      <div class='line-wrapper is-mobile'>
+        <div class='line-long is-mobile'></div>
+      </div>
+      <div class='content-wrapper'>
+        <div data-figma-id='8779:19256' class='hero_header'>
+          <div class='hero_top'>
+            <div class='hero_tag'>
+              <div class='hero_badge-wrapper'>
+                <div class='hero_badge'>
+                  <p class='text-size-small is-hero-tag'>LIMITED</p>
+                </div>
+              </div>
+              <p class='text-size-regular is-badge'>
+                <strong>FREE</strong>
+                SHIPPING
+                <strong>OVER $50</strong>
+              </p>
+            </div>
+            <div class='max-width-xlarge is-hero-heading'>
+              <h1 class='heading-style-h2 text-align-center'>
+                <span>{{ section.settings.hero_title }}</span>
+              </h1>
+            </div>
+          </div>
+          <div class='hero_image-wrapper'>
+            <img
+              src="{{ 'hero-image_mobile-responsive.png' | asset_url }}"
+              loading='lazy'
+              alt=''
+              class='hero-image is-hide-on-desktop'>
+          </div>
+          <div data-figma-id='8779:19264' class='hero_bottom'>
+            <div class='max-width-small'>
+              <div data-figma-id='8779:19265' class='hero_description text-align-center'>
+                <p class='text-size-medium'>
+                  No BS productivity tips. No noise. No short term hacks.
+                  <strong>You get a proven plan</strong>
+                  you can
+                  <strong>start today</strong>
+                  to stay consistent and in control of your life.
+                </p>
+              </div>
+            </div>
+            <div class='hero_button-wrapper'>
+              <a href='#section-pricing' class='button is-default w-inline-block'>
+                <div class='button_line is-top'></div>
+                <div class='button_content'>
+                  <div class='text-size-regular is-primary'>Get Pack</div>
+                </div>
+                <div class='button_line is-bottom'></div>
+              </a>
+              <a href='#section-lead-gen' class='button is-secondary w-inline-block'>
+                <div class='text-size-regular is-secondary'>Free Sample (38 pages)</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class='spacer-xxlarge'></div>
+        <div class='image-wrapper'>
+          <img
+            src="{{ 'hero-image.webp' | asset_url }}"
+            loading='lazy'
+            sizes='(max-width: 2574px) 100vw, 2574px'
+            srcset="{{ 'hero-image-p-500.webp' | asset_url }} 500w, {{ 'hero-image-p-800.webp' | asset_url }} 800w, {{ 'hero-image-p-1080.webp' | asset_url }} 1080w, {{ 'hero-image-p-1600.webp' | asset_url }} 1600w, {{ 'hero-image-p-2000.webp' | asset_url }} 2000w, {{ 'hero-image.webp' | asset_url }} 2574w"
+            alt=''
+            class='main-image is-hero'>
+        </div>
+        <div class='spacer-xxlarge hide-mobile-portrait'></div>
+      </div>
+      <div class='line-wrapper is-desktop'>
+        <div class='line-long'></div>
+        <div class='line-short'></div>
+        <div class='line-long'></div>
+      </div>
+      <div class='line-wrapper is-mobile'>
+        <div class='line-long is-mobile'></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Your section's HTML and Liquid code here -->
+
+{% schema %}
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hero_title",
+        "label": "Hero Title",
+        "default": "The 5-week Musashi Challenge to Build Unbreakable Discipline"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Section"
+      }
+    ]
+  }
+{% endschema %}
