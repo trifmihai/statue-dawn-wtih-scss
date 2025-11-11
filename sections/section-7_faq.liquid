@@ -16,6 +16,9 @@
                 Here’s what most people ask before starting the challenge. If you don&#x27;t find your answer
  
  
+ 
+ 
+ 
                         here, feel free to reach out!
               </p>
             </div>
@@ -54,7 +57,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -63,6 +66,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       Anyone who struggles with consistency, discipline, or finishing what they start. Creators,
+ 
+ 
+ 
  
  
                               athletes, students, entrepreneurs, or anyone who wants to sharpen their disciplined in 35
@@ -82,7 +88,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -91,6 +97,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       No experience needed. The journal and audio guide walk you through the challenge step by
+ 
+ 
+ 
  
  
                               step. If you can follow simple instructions and mark your progress daily you can complete
@@ -110,7 +119,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -119,6 +128,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       5-10 minutes. Open the journal, do the daily discipline, and log it in your tracker.
+ 
+ 
+ 
  
  
                               That&#x27;s it.
@@ -137,7 +149,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -146,6 +158,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       Because information isn’t the problem, implementation is. The Musashi Challenge gives you
+ 
+ 
+ 
  
  
                               a plan to follow, not just ideas to think about.
@@ -164,7 +179,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -173,6 +188,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       You’ll get a 54-minute Guided Audio Program, split into a quick-start orientation and
+ 
+ 
+ 
  
  
                               daily boosts. You can listen on your phone, computer, or tablet.
@@ -191,7 +209,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -200,6 +218,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       It’s your command center. You’ll log wins, track habits, and reflect daily. Everything is
+ 
+ 
+ 
  
  
                               synced to the Musashi Challenge so you can see real progress in one place.
@@ -218,7 +239,7 @@
                     <img
                       src="{{ 'plus-icon.svg' | asset_url }}"
                       loading='lazy'
-                      alt='Toggle FAQ answer'
+                      alt="{{ section.settings.alt_plus_icon }}"
                       class='faq_plus-icon'>
                   </div>
                 </div>
@@ -227,6 +248,9 @@
                     <div class='faq_divider'></div>
                     <p data-figma-id='8833:25484' class='text-size-regular'>
                       Yes, absolutely! Lifetime updates are included for all digital assets (eBook, Notion
+ 
+ 
+ 
  
  
                               Journal, audio program). We’ll notify you by email so you can grab the newest version at
@@ -256,3 +280,23 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+  {
+    "name": "Section: FAQ",
+    "settings": [
+
+      {
+        "type": "text",
+        "id": "alt_plus_icon",
+        "label": "Alt Text: plus-icon",
+        "default": "Toggle FAQ answer"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Section: FAQ"
+      }
+    ]
+  }
+{% endschema %}

@@ -15,7 +15,7 @@
                       <img
                         width='132'
                         height='30'
-                        alt=''
+                        alt="{{ section.settings.alt_statue_logo }}"
                         src="{{ 'statue-logo.svg' | asset_url }}"
                         loading='lazy'
                         class='navbar_logo is-footer-logo'>
@@ -45,7 +45,7 @@
                           class='footer_clipboard-icon is-default'
                           src="{{ 'copy-icon.svg' | asset_url }}"
                           data-figma-image-id='67cba6d08ae8762187a60cdf'
-                          alt='Copy email to clipboard'
+                          alt="{{ section.settings.alt_copy_icon }}"
                           data-figma-id='8805:19249'
                           data-figma-image-hash='c4c7e1c9c021019ab4e2566d4c511a6c'
                           loading='lazy'>
@@ -53,7 +53,7 @@
                           class='footer_clipboard-icon is-copied hidden'
                           src="{{ 'success-copy-icon.svg' | asset_url }}"
                           data-figma-image-id='67cba6d08ae8762187a60cdf'
-                          alt='Email copied to clipboard'
+                          alt="{{ section.settings.alt_success_copy_icon }}"
                           data-figma-id='8805:19249'
                           data-figma-image-hash='c4c7e1c9c021019ab4e2566d4c511a6c'
                           loading='lazy'>
@@ -132,7 +132,7 @@
                 <img
                   src="{{ 'footer_logo.svg' | asset_url }}"
                   loading='lazy'
-                  alt=''
+                  alt="{{ section.settings.alt_footer_logo }}"
                   class='footer_logo'>
               </a>
               <div data-figma-id='8805:19270' class='footer_bottom-wrapper'>
@@ -149,7 +149,7 @@
                       class='footer_social-link'
                       src="{{ 'youtube.svg' | asset_url }}"
                       data-figma-image-id='67cba6d4fb0db561d5438876'
-                      alt=''
+                      alt="{{ section.settings.alt_youtube }}"
                       data-figma-id='8805:19285'
                       data-figma-image-hash='9c34b2d4df8bc866da65d0fdf9d5b81e'
                       loading='lazy'>
@@ -193,3 +193,48 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Section: Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "alt_statue_logo",
+      "label": "Alt Text: statue-logo",
+      "default": "Musashi Challenge Logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_copy_icon",
+      "label": "Alt Text: copy-icon",
+      "default": "Copy email to clipboard"
+    },
+    {
+      "type": "text",
+      "id": "alt_success_copy_icon",
+      "label": "Alt Text: success-copy-icon",
+      "default": "Email copied to clipboard"
+    },
+
+    {
+      "type": "text",
+      "id": "alt_footer_logo",
+      "label": "Alt Text: footer_logo",
+      "default": "Musashi Challenge Footer Logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_youtube",
+      "label": "Alt Text: youtube",
+      "default": "YouTube Logo"
+    },
+
+  ],
+  "presets": [
+    {
+      "name": "Section: Footer"
+    }
+  ]
+}
+{% endschema %}

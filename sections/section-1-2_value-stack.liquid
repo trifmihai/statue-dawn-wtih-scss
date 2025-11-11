@@ -34,12 +34,12 @@
             <img
               src="{{ 'left-wing.webp' | asset_url }}"
               loading='lazy'
-              alt="{{ section.settings.left_wing_alt | escape }}"
+              alt="{{ section.settings.left_wing_alt}}"
               class='wing left-wing'>
             <img
               src="{{ 'right-wing.webp' | asset_url }}"
               loading='lazy'
-              alt="{{ section.settings.right_wing_alt | escape }}"
+              alt="{{ section.settings.right_wing_alt}}"
               class='wing right-wing'>
           </div>
         </div>
@@ -72,7 +72,7 @@
 
 {% schema %}
 {
-  "name": "Value Stack Section",
+  "name": "Section: Value Stack",
   "settings": [
     {
       "type": "text",
@@ -90,7 +90,7 @@
   ],
   "presets": [
     {
-      "name": "Value Stack Section"
+      "name": "Section: Value Stack"
     }
   ]
 }

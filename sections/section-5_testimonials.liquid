@@ -30,7 +30,7 @@
                       <img
                         src="{{ 'david-langford-testimonial-avatar.webp' | asset_url }}"
                         loading='lazy'
-                        alt=''
+                        alt="{{ section.settings.alt_david_langford_testimonial_avatar }}"
                         class='testimonials_avatar-image'>
                     </div>
                   </div>
@@ -101,7 +101,7 @@
                       <img
                         src="{{ 'ryan-carter-testimonial-avatar.webp' | asset_url }}"
                         loading='lazy'
-                        alt=''
+                        alt="{{ section.settings.alt_ryan_carter_testimonial_avatar }}"
                         class='testimonials_avatar-image'>
                     </div>
                   </div>
@@ -161,6 +161,14 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                             really did it for me.
                   </span>
                 </p>
@@ -176,7 +184,7 @@
                     <img
                       src="{{ 'claudia-criss-testimonial-avatar.webp' | asset_url }}"
                       loading='lazy'
-                      alt=''
+                      alt="{{ section.settings.alt_claudia_criss_testimonial_avatar }}"
                       class='testimonials_avatar-image'>
                   </div>
                   <div class='testimonials_avatar-line is-bottom'></div>
@@ -235,6 +243,14 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                             else, but those few minutes ended up giving me
                     <strong>so much space to breathe.</strong>
                     I actually started looking forward to them every day.
@@ -251,7 +267,7 @@
                       <img
                         src="{{ 'emma-ciurea-testimonial-avatar.webp' | asset_url }}"
                         loading='lazy'
-                        alt=''
+                        alt="{{ section.settings.alt_emma_ciurea_testimonial_avatar }}"
                         class='testimonials_avatar-image'>
                     </div>
                   </div>
@@ -313,6 +329,14 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                             gradual.” It made me realize how easy it is to stay stuck without even noticing. That&#x27;s
                             just a line, but the depth of the lessons is something that I really loved about this book.
                   </span>
@@ -330,7 +354,7 @@
                       <img
                         src="{{ 'diana-muresan-testimonial-avatar.webp' | asset_url }}"
                         loading='lazy'
-                        alt=''
+                        alt="{{ section.settings.alt_diana_muresan_testimonial_avatar }}"
                         class='testimonials_avatar-image'>
                     </div>
                   </div>
@@ -390,6 +414,14 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                             but after the first week (you’ll see what I mean when you get there), it felt so natural to
                             replace that time with something productive instead.
                     <strong>My mind feels sooooo much better</strong>
@@ -407,7 +439,7 @@
                       <img
                         src="{{ 'nicholas-andronesi-testimonial-avatar.webp' | asset_url }}"
                         loading='lazy'
-                        alt=''
+                        alt="{{ section.settings.alt_nicholas_andronesi_testimonial_avatar }}"
                         class='testimonials_avatar-image'>
                     </div>
                   </div>
@@ -506,3 +538,55 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+  {
+    "name": "Section: Testimonials",
+    "settings": [
+      {
+        "type": "text",
+        "id": "alt_david_langford_testimonial_avatar",
+        "label": "Alt Text: david-langford-testimonial-avatar",
+        "default": "Portrait of a man who wrote a testimonial. He has short hair wearing a light striped shirt and black strap, with a body of water and buildings in the background."
+      },
+      {
+        "type": "text",
+        "id": "alt_ryan_carter_testimonial_avatar",
+        "label": "Alt Text: ryan-carter-testimonial-avatar",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "alt_claudia_criss_testimonial_avatar",
+        "label": "Alt Text: claudia-criss-testimonial-avatar",
+        "default": "The woman who shared a testimonial, smiling indoors with curly hair and glasses, holding a pink book."
+      },
+      {
+        "type": "text",
+        "id": "alt_emma_ciurea_testimonial_avatar",
+        "label": "Alt Text: emma-ciurea-testimonial-avatar",
+        "default": "Woman who wrote a testimonial, wearing glasses and a lace top, sitting indoors near window curtains with her chin resting on her hand."
+      }, {
+        "type": "text",
+        "id": "alt_diana_muresan_testimonial_avatar",
+        "label": "Alt Text: diana-muresan-testimonial-avatar",
+        "default": "Close-up of a woman who wrote a testimonial. She has long brown hair and subtle makeup, smiling slightly against a wooden background."
+      }, {
+        "type": "text",
+        "id": "alt_nicholas_andronesi_testimonial_avatar",
+        "label": "Alt Text: nicholas-andronesi-testimonial-avatar",
+        "default": "Portrait of a man who wrote a testimonial. He has styled dark hair and a trimmed beard standing outdoors with brown foliage in the background."
+      }, {
+        "type": "text",
+        "id": "alt_check_circle",
+        "label": "Alt Text: check-circle",
+        "default": "The man who shared a testimonial, smiling outdoors with glasses and medium-length brown hair."
+      },
+    ],
+    "presets": [
+      {
+        "name": "Section: Testimonials"
+      }
+    ]
+  }
+{% endschema %}

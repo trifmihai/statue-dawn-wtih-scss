@@ -35,6 +35,15 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                         discipline feels easier the further you go.
               </p>
             </div>
@@ -55,12 +64,21 @@
                 <img
                   src={{ 'sword-day-1.webp' | asset_url }}
                   loading='lazy'
-                  alt=''
+                  alt="{{ section.settings.alt_sword_day_1 }}"
                   class='sword-asset is-day-1'>
                 <div data-figma-id='8907:32788' class='plan_card-header'>
                   <h3 data-figma-id='8907:32789' class='text-size-large is-plan'>Start &amp; Find Clarity</h3>
                   <p data-figma-id='8907:32790' class='text-size-regular'>
                     Uncover what’s really draining your focus and get clarity on what to fix first without
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -99,13 +117,22 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                             schedule.
                   </p>
                 </div>
                 <img
                   src={{ 'sword-week-1.webp' | asset_url }}
                   loading='lazy'
-                  alt=''
+                  alt="{{ section.settings.alt_sword_week_1 }}"
                   class='sword-asset is-week-1'>
               </div>
             </div>
@@ -140,13 +167,22 @@
  
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                             when tired and act with purpose.
                   </p>
                 </div>
                 <img
                   src={{ 'sword-week-5.webp' | asset_url }}
                   loading='lazy'
-                  alt=''
+                  alt="{{ section.settings.alt_sword_week_5 }}"
                   class='sword-asset is-week-5'>
               </div>
             </div>
@@ -182,7 +218,7 @@
                 <img
                   src={{ 'sword-beyond.webp' | asset_url }}
                   loading='lazy'
-                  alt=''
+                  alt="{{ section.settings.alt_sword_beyond }}"
                   class='sword-asset is-beyond'>
               </div>
             </div>
@@ -199,7 +235,7 @@
     {{ 'mountain-x1-p-1080.webp' | asset_url }} 1080w,
     {{ 'mountain-x1.webp' | asset_url }} 1222w
   "
-            alt=""
+            alt="{{ section.settings.alt_mountain_x1 }}"
             class="plan_mountain-asset" />
         </div>
         <div class='spacer-xhuge'></div>
@@ -215,3 +251,45 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+  {
+    "name": "Section: Plan",
+    "settings": [
+      {
+        "type": "text",
+        "id": "alt_sword_day_1",
+        "label": "Alt Text: sword-day-1",
+        "default": "Vertical wooden sword with metal bracket near the bottom signifying day 1."
+      },
+      {
+        "type": "text",
+        "id": "alt_sword_week_1",
+        "label": "Alt Text: sword-week-1",
+        "default": "A worn, straight-edged katana sword with a dark handle wrapped in black cord signifying week 1."
+      },
+      {
+        "type": "text",
+        "id": "alt_sword_week_5",
+        "label": "Alt Text: sword-week-5",
+        "default": "Japanese katana sword with a curved, sharp blade and a black wrapped handle signifying week 5."
+      },
+      {
+        "type": "text",
+        "id": "alt_sword_beyond",
+        "label": "Alt Text: sword-beyond",
+        "default": "Ceremonial sword with a curved, polished blade and ornate handle wrapped in dark cord signifying beyond week 5."
+      }, {
+        "type": "text",
+        "id": "alt_mountain_x1",
+        "label": "Alt Text: mountain-x1",
+        "default": "Monochrome digital artwork of multiple snow-covered mountains with sharp peaks fading into the mist signifying discipline journey and how far they've come."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Section: Plan"
+      }
+    ]
+  }
+{% endschema %}

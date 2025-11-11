@@ -47,7 +47,7 @@
                   loading='lazy'
                   sizes='(max-width: 882px) 100vw, 882px'
                   srcset="{{ 'ebook-p-500.webp' | asset_url }} 500w, {{ 'ebook-p-800.webp' | asset_url }} 800w, {{ 'ebook.webp' | asset_url }} 882w"
-                  alt=''
+                  alt="{{ section.settings.alt_ebook }}"
                   class='summary_image'>
               </div>
             </div>
@@ -77,7 +77,7 @@
                   loading='lazy'
                   sizes='(max-width: 903px) 100vw, 903px'
                   srcset="{{ 'printed-book-p-500.webp' | asset_url }} 500w, {{ 'printed-book-p-800.webp' | asset_url }} 800w, {{ 'printed-book.webp' | asset_url }} 903w"
-                  alt=''
+                  alt="{{ section.settings.alt_printed_book }}"
                   class='summary_image'>
               </div>
             </div>
@@ -99,6 +99,7 @@
                       <strong>No setup needed.</strong>
                       A ready-to-use hub synced with every book chapter so you can easily log and track your
  
+ 
                               progress.
                     </span>
                   </p>
@@ -110,14 +111,14 @@
                   loading='lazy'
                   sizes='100vw'
                   srcset="{{ 'notion-pocket-journal-p-500.webp' | asset_url }} 500w, {{ 'notion-pocket-journal-p-800.webp' | asset_url }} 800w, {{ 'notion-pocket-journal-p-1080.webp' | asset_url }} 1080w, {{ 'notion-pocket-journal.webp' | asset_url }} 1176w"
-                  alt=''
+                  alt="{{ section.settings.alt_notion_pocket_journal }}"
                   class='summary_image is-visibility'>
                 <img
                   src="{{ 'notion-pocket-journal-mobile.webp' | asset_url }}"
                   loading='lazy'
                   sizes='100vw'
                   srcset="{{ 'notion-pocket-journal-mobile-p-500.webp' | asset_url }} 500w, {{ 'notion-pocket-journal-mobile-p-800.webp' | asset_url }} 800w, {{ 'notion-pocket-journal-mobile-p-1080.webp' | asset_url }} 1080w, {{ 'notion-pocket-journal-mobile.webp' | asset_url }} 1176w"
-                  alt=''
+                  alt="{{ section.settings.alt_notion_pocket_journal_mobile }}"
                   class='summary_image hide-desktop'>
               </div>
             </div>
@@ -146,7 +147,7 @@
                   loading='lazy'
                   sizes='100vw'
                   srcset="{{ 'audio-guide-p-500.webp' | asset_url }} 500w, {{ 'audio-guide-p-800.webp' | asset_url }} 800w, {{ 'audio-guide-p-1080.webp' | asset_url }} 1080w, {{ 'audio-guide.webp' | asset_url }} 1176w"
-                  alt=''
+                  alt="{{ section.settings.alt_audio_guide }}"
                   class='summary_image'>
               </div>
             </div>
@@ -175,7 +176,7 @@
                   loading='lazy'
                   sizes='100vw'
                   srcset="{{ 'musashi-ai-coach-p-500.webp' | asset_url }} 500w, {{ 'musashi-ai-coach-p-800.webp' | asset_url }} 800w, {{ 'musashi-ai-coach.webp' | asset_url }} 1176w"
-                  alt=''
+                  alt="{{ section.settings.alt_musashi_ai_coach }}"
                   class='summary_image'>
               </div>
             </div>
@@ -219,3 +220,50 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+  {
+    "name": "Section: Product Summary",
+    "settings": [
+      {
+        "type": "text",
+        "id": "alt_ebook",
+        "label": "Alt Text: ebook",
+        "default": "Kindle displaying a page titled 'Day 1 - Monday' from 'Statue of Wisdom,' featuring a quote by Miyamoto Musashi and text about 'The Great Elimination' focused on clearing space and eliminating unnecessary items."
+      },
+      {
+        "type": "text",
+        "id": "alt_printed_book",
+        "label": "Alt Text: printed-book",
+        "default": "Black hardcover book titled 'The Musashi Challenge: 5 Weeks To Build Discipline That Doesn’t Break' by Shelby CRC."
+      },
+      {
+        "type": "text",
+        "id": "alt_notion_pocket_journal",
+        "label": "Alt Text: notion-pocket-journal",
+        "default": "Part of a digital calendar showing days of the week with check marks on Monday and Tuesday, and a popup note titled 'Day 1' noting '120 min of work' and 'Reflection Added.'"
+      },
+      {
+        "type": "text",
+        "id": "alt_notion_pocket_journal_mobile",
+        "label": "Alt Text: notion-pocket-journal-mobile",
+        "default": "Part of a digital calendar showing days of the week with check marks on Monday and Tuesday, and a popup note titled 'Day 1' noting '120 min of work' and 'Reflection Added.'"
+      }, {
+        "type": "text",
+        "id": "alt_audio_guide",
+        "label": "Alt Text: audio-guide",
+        "default": "Black headphones resting behind an audio player interface showing a play button and sound wave, with text reading '54 Minutes of On Demand Lessons.'"
+      }, {
+        "type": "text",
+        "id": "alt_musashi_ai_coach",
+        "label": "Alt Text: musashi-ai-coach",
+        "default": "Illustration of a chat interface with text boxes and a framed black-and-white portrait of a man with a beard and a bun."
+      },
+    ],
+    "presets": [
+      {
+        "name": "Section: Product Summary"
+      }
+    ]
+  }
+{% endschema %}

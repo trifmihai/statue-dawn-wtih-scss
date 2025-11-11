@@ -40,7 +40,7 @@
                     loading='lazy'
                     sizes='100vw'
                     srcset="{{ 'pack-option-1-p-500.webp' | asset_url }} 500w, {{ 'pack-option-1-p-800.webp' | asset_url }} 800w, {{ 'pack-option-1.webp' | asset_url }} 909w"
-                    alt=''
+                    alt="{{ section.settings.alt_pack_option_1 }}"
                     class='pricing_asset'>
                 </div>
                 <div class='pricing_divider'></div>
@@ -134,8 +134,8 @@
                     src="{{ 'pack-option-2.webp' | asset_url }}"
                     loading='lazy'
                     sizes='100vw'
-                    srcset="{{ 'pack-option-2-p-500.webp' | asset_url }} 500w, {{ 'pack-option-2-p-800.webp' | asset_url }} 800w, {{ 'pack-option-2.webp' | asset_url }} 934w"
-                    alt=''
+                    srcset="{{ 'pack-option-2-p-500.webp' | asset_url }} 500w, {{ 'pack-option-2-p-800.webp' | asset_url }} 800w, {{ 'pack-option-2.webp' | asset_url }} 909w"
+                    alt="{{ section.settings.alt_pack_option_2 }}"
                     class='pricing_asset'>
                 </div>
                 <div class='pricing_divider'></div>
@@ -249,8 +249,8 @@
                     src="{{ 'pack-option-3.webp' | asset_url }}"
                     loading='lazy'
                     sizes='100vw'
-                    srcset="{{ 'pack-option-3-p-500.webp' | asset_url }} 500w, {{ 'pack-option-3-p-800.webp' | asset_url }} 800w, {{ 'pack-option-3.webp' | asset_url }} 934w"
-                    alt=''
+                    srcset="{{ 'pack-option-3-p-500.webp' | asset_url }} 500w, {{ 'pack-option-3-p-800.webp' | asset_url }} 800w, {{ 'pack-option-3.webp' | asset_url }} 909w"
+                    alt="{{ section.settings.alt_pack_option_3 }}"
                     class='pricing_asset'>
                 </div>
                 <div class='pricing_divider'></div>
@@ -395,49 +395,49 @@
             <img
               src="{{ 'visa.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_visa }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'mastercard.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_mastercard }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'maestro.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_maestro }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'google-pay.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_google_pay }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'apple-pay.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_apple_pay }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'paypal.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_paypal }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'apple-pay.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_apple_pay }}"
               class='pricing_payment-logo'>
             <img
               src="{{ 'shop-pay.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_shop_pay }}"
               class='pricing_payment-logo'>
           </div>
           <div class='pricing_social-proof-body'>
             <img
               src="{{ 'lock-icon.svg' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.alt_lock_icon }}"
               class='pricing_social-proof-icon'>
             <p class='text-size-regular'>
               Secure transactions with
@@ -451,3 +451,75 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+  {
+    "name": "Section: Pricing",
+    "settings": [
+      {
+        "type": "text",
+        "id": "alt_pack_option_1",
+        "label": "Alt Text: pack-option-1",
+        "default": "Apprentice pack containing only the printed book"
+      },
+      {
+        "type": "text",
+        "id": "alt_pack_option_2",
+        "label": "Alt Text: pack-option-2",
+        "default": "Practitioner pack containing the printed book and the ebook"
+      },
+      {
+        "type": "text",
+        "id": "alt_pack_option_3",
+        "label": "Alt Text: pack-option-3",
+        "default": "Samurai pack cotaining all products"
+      },
+      {
+        "type": "text",
+        "id": "alt_visa",
+        "label": "Alt Text: visa",
+        "default": "Visa payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_mastercard",
+        "label": "Alt Text: mastercard",
+        "default": "Mastercard payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_maestro",
+        "label": "Alt Text: maestro",
+        "default": "Maestro payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_google_pay",
+        "label": "Alt Text: google-pay",
+        "default": "Google Pay payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_apple_pay",
+        "label": "Alt Text: apple-pay",
+        "default": "Apple Pay payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_paypal",
+        "label": "Alt Text: paypal",
+        "default": "PayPal payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_shop_pay",
+        "label": "Alt Text: shop-pay",
+        "default": "Shop Pay payment logo"
+      }, {
+        "type": "text",
+        "id": "alt_lock_icon",
+        "label": "Alt Text: lock-icon",
+        "default": "Lock icon representing secure transactions"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Section: Pricing"
+      }
+    ]
+  }
+{% endschema %}

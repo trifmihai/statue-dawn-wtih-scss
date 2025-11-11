@@ -147,7 +147,7 @@
                 loading='lazy'
                 sizes='100vw'
                 srcset="{{ 'lead-generator-mockup-p-500.webp' | asset_url }} 500w, {{ 'lead-generator-mockup-p-800.webp' | asset_url }} 800w, {{ 'lead-generator-mockup-p-1080.webp' | asset_url }} 1080w, {{ 'lead-generator-mockup.webp' | asset_url }} 1146w"
-                alt=''
+                alt="{{ section.settings.alt_lead_generator_mockup }}"
                 class='lead-gen_asset'>
             </div>
             <img
@@ -179,3 +179,24 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Section: Lead Gen",
+  "settings": [
+
+    {
+      "type": "text",
+      "id": "alt_lead_generator_mockup",
+      "label": "Alt Text: lead-generator-mockup",
+      "default": "Two pages from a the book, featuring what's inside the free pack. Includes a Notion app icon and text reading 'Secret Bonus Inside'."
+    },
+
+  ],
+  "presets": [
+    {
+      "name": "Section: Lead Gen"
+    }
+  ]
+}
+{% endschema %}
