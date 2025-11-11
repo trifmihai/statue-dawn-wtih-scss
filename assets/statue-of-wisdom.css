@@ -2455,8 +2455,9 @@ figcaption {
 }
 
 .navbar_logo {
-  width: 6rem;
-  height: auto;
+  height: 1.75rem;
+  width: auto;
+  max-height: 1.75rem;
   transition: all 0.2s;
 }
 
@@ -7227,7 +7228,6 @@ figcaption {
   .nav-content {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    padding-left: 1rem;
   }
 
   .hero_product {
