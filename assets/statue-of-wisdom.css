@@ -8156,6 +8156,10 @@ figcaption {
   .sword-asset.is-beyond {
     top: -30%;
   }
+
+  .pricing_payment-logos {
+    flex-wrap: wrap;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -8179,15 +8183,28 @@ figcaption {
     top: -18%;
   }
   .sword-asset.is-week-1 {
-    top: -2%;
+    top: -15%;
   }
 
   .sword-asset.is-week-5 {
-    top: 5%;
+    top: -1%;
   }
 
   .sword-asset.is-beyond {
     top: -25%;
+  }
+
+  .pricing_social-proof {
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  .pricing_social-proof-icon {
+    display: none;
+    visibility: hidden;
+  }
+
+  .text-size-regular.is-proof-copy {
+    text-align: center;
   }
 }
 
