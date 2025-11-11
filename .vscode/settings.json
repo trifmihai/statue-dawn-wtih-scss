@@ -8,5 +8,6 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
-  }
+  },
+  "gutterPreview.filetypes": ["html", "liquid", "jsx", "tsx", "php", "markdown", "erb", "svelte", "vue"]
 }

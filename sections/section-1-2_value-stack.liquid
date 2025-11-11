@@ -34,12 +34,12 @@
             <img
               src="{{ 'left-wing.webp' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.left_wing_alt | escape }}"
               class='wing left-wing'>
             <img
               src="{{ 'right-wing.webp' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.right_wing_alt | escape }}"
               class='wing right-wing'>
           </div>
         </div>
@@ -69,3 +69,29 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Value Stack Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "left_wing_alt",
+      "label": "Alt Text: left-wing",
+      "default": "Left positioned stylized golden laurel branch with evenly spaced leaves, angled upward."
+    },
+    {
+      "type": "text",
+      "id": "right_wing_alt",
+      "label": "Alt Text: right-wing",
+      "default": "Right positioned stylized golden laurel branch with evenly spaced leaves, angled upward."
+    },
+
+  ],
+  "presets": [
+    {
+      "name": "Value Stack Section"
+    }
+  ]
+}
+{% endschema %}
