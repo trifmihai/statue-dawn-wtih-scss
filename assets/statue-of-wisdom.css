@@ -7400,6 +7400,8 @@ figcaption {
 
   .plan_content {
     grid-column-gap: 2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     grid-row-gap: 2rem;
     flex-flow: column;
     justify-content: flex-start;
@@ -7974,8 +7976,8 @@ figcaption {
   }
 
   .plan_card-wrapper {
-    border-left-width: 0;
-    border-right-width: 0;
+    border-left-width: 1;
+    border-right-width: 1;
   }
 
   .plan_card-wrapper.is-beyond {
