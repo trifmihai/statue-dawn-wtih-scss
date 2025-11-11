@@ -8129,33 +8129,29 @@ figcaption {
   }
 
   .pricing_plan-item {
-    border-right-width: 1;
-    border-left-width: 1;
+    border-right-width: 1px;
+    border-left-width: 1px;
     flex: 1;
   }
 
   .pricing_plan-item.is-main-option {
-    border-right-width: 1;
-    border-left-width: 1;
+    border-right-width: 1px;
+    border-left-width: 1px;
   }
 
   .pricing_plan-item.is-extended-top {
-    border-right-width: 1;
-    border-left-width: 1;
+    border-right-width: 1px;
+    border-left-width: 1px;
   }
 
   .pricing_plan-item.is-extended-bottom {
-    border-right-width: 1;
-    border-left-width: 1;
+    border-right-width: 1px;
+    border-left-width: 1px;
   }
 }
 
 @media screen and (max-width: 375px) {
-  .padding-global {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
+  .padding-global,
   .navbar_component,
   .nav_component,
   .plan_content,
@@ -8169,6 +8165,21 @@ figcaption {
   .plan_header {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  .sword-asset.is-day-1 {
+    top: -18%;
+  }
+  .sword-asset.is-week-1 {
+    top: -2%;
+  }
+
+  .sword-asset.is-week-5 {
+    top: 5%;
+  }
+
+  .sword-asset.is-beyond {
+    top: -13%;
   }
 }
 
