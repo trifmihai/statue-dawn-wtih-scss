@@ -1,123 +1,93 @@
-{% comment %} 
-  HERO SECTION
-  Purpose: editable hero while preserving exact structure and classes for styling.
-  Notes: keep all wrappers, classes, data-figma-id, and spacer elements intact. 
-{% endcomment %}
-
-<section id="section-hero" class="section_hero">
-  <div class="padding-global">
-    <div class="container-large is-line">
-      <div class="line-wrapper is-desktop">
-        <div class="line-long"></div>
-        <div class="line-short"></div>
-        <div class="line-long"></div>
+<section id='section-hero' class='section_hero'>
+  <div class='padding-global'>
+    <div class='container-large is-line'>
+      <div class='line-wrapper is-desktop'>
+        <div class='line-long'></div>
+        <div class='line-short'></div>
+        <div class='line-long'></div>
       </div>
-      <div class="line-wrapper is-mobile">
-        <div class="line-long is-mobile"></div>
+      <div class='line-wrapper is-mobile'>
+        <div class='line-long is-mobile'></div>
       </div>
-      <div class="content-wrapper">
-        <div data-figma-id="8779:19256" class="hero_header">
-          <div class="hero_top">
-            <div class="hero_tag">
-              <div class="hero_badge-wrapper">
-                <div class="hero_badge">
-                  <p class="text-size-small is-hero-tag">{{ section.settings.tag_limited_label }}</p>
+      <div class='content-wrapper'>
+        <div data-figma-id='8779:19256' class='hero_header'>
+          <div class='hero_top'>
+            <div class='hero_tag'>
+              <div class='hero_badge-wrapper'>
+                <div class='hero_badge'>
+                  <p class='text-size-small is-hero-tag'>LIMITED</p>
                 </div>
               </div>
-              <p class="text-size-regular is-badge">
-                <strong>{{ section.settings.badge_strong_left }}</strong>
-                {{ section.settings.badge_middle_text }}
-                <strong>{{ section.settings.badge_strong_right }}</strong>
+              <p class='text-size-regular is-badge'>
+                <strong>FREE</strong>
+                SHIPPING
+                <strong>OVER $50</strong>
               </p>
             </div>
-            <div class="max-width-xlarge is-hero-heading">
-              <h1 class="heading-style-h2 text-align-center">
+            <div class='max-width-xlarge is-hero-heading'>
+              <h1 class='heading-style-h2 text-align-center'>
                 <span>{{ section.settings.hero_title }}</span>
               </h1>
             </div>
           </div>
-
-          <div class="hero_image-wrapper">
-            {% if section.settings.mobile_image != blank %}
-              <img
-                src="{{ section.settings.mobile_image | image_url: width: 1080 }}"
-                loading="lazy"
-                alt="{{ section.settings.mobile_image_alt | escape }}"
-                class="hero-image is-hide-on-desktop">
-            {% else %}
-              <img
-                src="{{ 'hero-image_mobile-responsive.png' | asset_url }}"
-                loading="lazy"
-                alt="{{ section.settings.mobile_image_alt | escape }}"
-                class="hero-image is-hide-on-desktop">
-            {% endif %}
+          <div class='hero_image-wrapper'>
+            <img
+              src="{{ 'hero-image_mobile-responsive.png' | asset_url }}"
+              loading='lazy'
+              alt=''
+              class='hero-image is-hide-on-desktop'>
           </div>
-
-          <div data-figma-id="8779:19264" class="hero_bottom">
-            <div class="max-width-small">
-              <div data-figma-id="8779:19265" class="hero_description text-align-center">
-                <div class="text-size-medium">
-                  {{ section.settings.description_richtext }}
-                </div>
+          <div data-figma-id='8779:19264' class='hero_bottom'>
+            <div class='max-width-small'>
+              <div data-figma-id='8779:19265' class='hero_description text-align-center'>
+                <p class='text-size-medium'>
+                  No BS productivity tips. No noise. No short term hacks.
+                  <strong>You get a proven plan</strong>
+                  you can
+                  <strong>start today</strong>
+                  to stay consistent and in control of your life.
+                </p>
               </div>
             </div>
-            <div class="hero_button-wrapper">
-              <a href="{{ section.settings.primary_button_link | default: '#section-pricing' }}" class="button is-default w-inline-block">
-                <div class="button_line is-top"></div>
-                <div class="button_content">
-                  <div class="text-size-regular is-primary">{{ section.settings.primary_button_label }}</div>
+            <div class='hero_button-wrapper'>
+              <a href='#section-pricing' class='button is-default w-inline-block'>
+                <div class='button_line is-top'></div>
+                <div class='button_content'>
+                  <div class='text-size-regular is-primary'>Get Pack</div>
                 </div>
-                <div class="button_line is-bottom"></div>
+                <div class='button_line is-bottom'></div>
               </a>
-              <a href="{{ section.settings.secondary_button_link | default: '#section-lead-gen' }}" class="button is-secondary w-inline-block">
-                <div class="text-size-regular is-secondary">{{ section.settings.secondary_button_label }}</div>
+              <a href='#section-lead-gen' class='button is-secondary w-inline-block'>
+                <div class='text-size-regular is-secondary'>Free Sample (38 pages)</div>
               </a>
             </div>
           </div>
         </div>
-
-        <div class="spacer-xxlarge"></div>
-
-        <div class="image-wrapper">
-          {% if section.settings.main_image != blank %}
-            <img
-              src="{{ section.settings.main_image | image_url: width: 2574 }}"
-              loading="lazy"
-              sizes="(max-width: 2574px) 100vw, 2574px"
-              srcset="
-                {{ section.settings.main_image | image_url: width: 500 }} 500w,
-                {{ section.settings.main_image | image_url: width: 800 }} 800w,
-                {{ section.settings.main_image | image_url: width: 1080 }} 1080w,
-                {{ section.settings.main_image | image_url: width: 1600 }} 1600w,
-                {{ section.settings.main_image | image_url: width: 2000 }} 2000w,
-                {{ section.settings.main_image | image_url: width: 2574 }} 2574w"
-              alt="{{ section.settings.main_image_alt | escape }}"
-              class="main-image is-hero">
-          {% else %}
-            <img
-              src="{{ 'hero-image.webp' | asset_url }}"
-              loading="lazy"
-              sizes="(max-width: 2574px) 100vw, 2574px"
-              srcset="{{ 'hero-image-p-500.webp' | asset_url }} 500w, {{ 'hero-image-p-800.webp' | asset_url }} 800w, {{ 'hero-image-p-1080.webp' | asset_url }} 1080w, {{ 'hero-image-p-1600.webp' | asset_url }} 1600w, {{ 'hero-image-p-2000.webp' | asset_url }} 2000w, {{ 'hero-image.webp' | asset_url }} 2574w"
-              alt="{{ section.settings.main_image_alt | escape }}"
-              class="main-image is-hero">
-          {% endif %}
+        <div class='spacer-xxlarge'></div>
+        <div class='image-wrapper'>
+          <img
+            src="{{ 'hero-image.webp' | asset_url }}"
+            loading='lazy'
+            sizes='(max-width: 2574px) 100vw, 2574px'
+            srcset="{{ 'hero-image-p-500.webp' | asset_url }} 500w, {{ 'hero-image-p-800.webp' | asset_url }} 800w, {{ 'hero-image-p-1080.webp' | asset_url }} 1080w, {{ 'hero-image-p-1600.webp' | asset_url }} 1600w, {{ 'hero-image-p-2000.webp' | asset_url }} 2000w, {{ 'hero-image.webp' | asset_url }} 2574w"
+            alt=''
+            class='main-image is-hero'>
         </div>
-
-        <div class="spacer-xxlarge hide-mobile-portrait"></div>
+        <div class='spacer-xxlarge hide-mobile-portrait'></div>
       </div>
-
-      <div class="line-wrapper is-desktop">
-        <div class="line-long"></div>
-        <div class="line-short"></div>
-        <div class="line-long"></div>
+      <div class='line-wrapper is-desktop'>
+        <div class='line-long'></div>
+        <div class='line-short'></div>
+        <div class='line-long'></div>
       </div>
-      <div class="line-wrapper is-mobile">
-        <div class="line-long is-mobile"></div>
+      <div class='line-wrapper is-mobile'>
+        <div class='line-long is-mobile'></div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Your section's HTML and Liquid code here -->
 
 {% schema %}
   {
@@ -125,75 +95,9 @@
     "settings": [
       {
         "type": "text",
-        "id": "tag_limited_label",
-        "label": "Small tag label",
-        "default": "LIMITED"
-      },
-      {
-        "type": "text",
-        "id": "badge_strong_left",
-        "label": "Badge left strong",
-        "default": "FREE"
-      },
-      {
-        "type": "text",
-        "id": "badge_middle_text",
-        "label": "Badge middle text",
-        "default": "SHIPPING"
-      },
-      {
-        "type": "text",
-        "id": "badge_strong_right",
-        "label": "Badge right strong",
-        "default": "OVER $50"
-      }, {
-        "type": "text",
         "id": "hero_title",
-        "label": "Hero title",
+        "label": "Hero Title",
         "default": "The 5-week Musashi Challenge to Build Unbreakable Discipline"
-      }, {
-        "type": "richtext",
-        "id": "description_richtext",
-        "label": "Description",
-        "default": "<p>No BS productivity tips. No noise. No short term hacks. <strong>You get a proven plan</strong> you can <strong>start today</strong> to stay consistent and in control of your life.</p>"
-      }, {
-        "type": "text",
-        "id": "primary_button_label",
-        "label": "Primary button label",
-        "default": "Get Pack"
-      }, {
-        "type": "url",
-        "id": "primary_button_link",
-        "label": "Primary button link",
-        "default": "#section-pricing"
-      }, {
-        "type": "text",
-        "id": "secondary_button_label",
-        "label": "Secondary button label",
-        "default": "Free Sample (38 pages)"
-      }, {
-        "type": "url",
-        "id": "secondary_button_link",
-        "label": "Secondary button link",
-        "default": "#section-lead-gen"
-      }, {
-        "type": "image_picker",
-        "id": "mobile_image",
-        "label": "Mobile hero image"
-      }, {
-        "type": "text",
-        "id": "mobile_image_alt",
-        "label": "Mobile image alt text",
-        "default": ""
-      }, {
-        "type": "image_picker",
-        "id": "main_image",
-        "label": "Main hero image"
-      }, {
-        "type": "text",
-        "id": "main_image_alt",
-        "label": "Main image alt text",
-        "default": ""
       }
     ],
     "presets": [

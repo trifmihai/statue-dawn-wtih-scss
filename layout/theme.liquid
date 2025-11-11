@@ -26,17 +26,13 @@
       type="image/x-icon">
     <link href="images/webclip.svg" rel="apple-touch-icon">
     <!-- Please keep this css code to improve the font quality -->
-    <style>
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-    </style>
+    <style></style>
 
   {% render 'css-variables' %}
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'fonts.css' | asset_url | stylesheet_tag }}
     {{ 'normalize.css' | asset_url | stylesheet_tag }}
     {{ 'webflow.css' | asset_url | stylesheet_tag }}
   {{ 'statue-of-wisdom.css' | asset_url | stylesheet_tag }}

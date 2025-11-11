@@ -1,6 +1,6 @@
-@font-face {
+/* @font-face {
   font-family: Playfair-Display;
-  src: url("{{ 'PlayfairDisplay-Regular.ttf' | asset_url }}") format('truetype');
+  src: url("{{ 'PlayfairDisplay-Regular.ttf' | asset_url }}") format('ttf');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: Playfair-Display;
-  src: url("{{ 'PlayfairDisplay-Medium.ttf' | asset_url }}") format('truetype');
+  src: url("{{ 'PlayfairDisplay-Medium.ttf' | asset_url }}") format('ttf');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: Playfair-Display;
-  src: url("{{ 'PlayfairDisplay-SemiBold.ttf' | asset_url }}") format('truetype');
+  src: url("{{ 'PlayfairDisplay-SemiBold.ttf' | asset_url }}") format('ttf');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: Playfair-Display;
-  src: url("{{ 'PlayfairDisplay-Bold.ttf' | asset_url }}") format('truetype');
+  src: url("{{ 'PlayfairDisplay-Bold.ttf' | asset_url }}") format('ttf');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: Satoshi;
-  src: url("{{ 'Satoshi-Bold.otf' | asset_url }}") format('opentype');
+  src: url("{{ 'Satoshi-Bold.otf' | asset_url }}") format('otf');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: Satoshi;
-  src: url("{{ 'Satoshi-Medium.otf' | asset_url }}") format('opentype');
+  src: url("{{ 'Satoshi-Medium.otf' | asset_url }}") format('otf');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -48,11 +48,11 @@
 
 @font-face {
   font-family: Satoshi;
-  src: url("{{ 'Satoshi-Regular.otf' | asset_url }}") format('opentype');
+  src: url("{{ 'Satoshi-Regular.otf' | asset_url }}") format('otf');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 :root {
   --neutral--0: white;
@@ -10398,55 +10398,4 @@ figcaption {
     grid-row: 5 / 6;
     grid-column-end: 2;
   }
-}
-
-@font-face {
-  font-family: 'Playfair-Display';
-  src: url('{{ "PlayfairDisplay-Regular.ttf" | asset_url }}') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Playfair-Display';
-  src: url('{{ "PlayfairDisplay-Medium.ttf" | asset_url }}') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Playfair-Display';
-  src: url('{{ "PlayfairDisplay-SemiBold.ttf" | asset_url }}') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Playfair-Display';
-  src: url('{{ "PlayfairDisplay-Bold.ttf" | asset_url }}') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('{{ "Satoshi-Bold.otf" | asset_url }}') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('{{ "Satoshi-Medium.otf" | asset_url }}') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('{{ "Satoshi-Regular.otf" | asset_url }}') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
