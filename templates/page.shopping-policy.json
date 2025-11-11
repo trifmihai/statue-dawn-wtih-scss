@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "shopping-policy": {
+      "type": "shopping-policy",
+      "settings": {}
+    },
+    "footer": {
+      "type": "section-99_footer",
+      "settings": {}
+    }
+  },
+  "order": ["shopping-policy", "footer"]
+}

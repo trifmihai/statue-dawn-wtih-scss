@@ -4376,6 +4376,7 @@ figcaption {
 }
 
 .faq_question {
+  user-select: none;
   justify-content: space-between;
   align-items: center;
   width: 100%;

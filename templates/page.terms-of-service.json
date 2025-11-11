@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "terms-of-service": {
+      "type": "terms-of-service",
+      "settings": {}
+    },
+    "footer": {
+      "type": "section-99_footer",
+      "settings": {}
+    }
+  },
+  "order": ["terms-of-service", "footer"]
+}
