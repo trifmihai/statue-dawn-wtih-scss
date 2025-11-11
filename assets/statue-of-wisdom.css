@@ -1437,6 +1437,10 @@ figcaption {
   text-decoration: none;
 }
 
+.text-size-regular.is-footer-link:hover {
+  color: var(--color--text--dark--primary);
+}
+
 .text-size-regular.is-footer-social {
   white-space: nowrap;
 }
@@ -4528,8 +4532,8 @@ figcaption {
 }
 
 .footer_copy-wrapper:hover {
-  border-color: var(--neutral--500);
-  background-color: var(--neutral--150);
+  border-color: var(--neutral--400);
+  background-color: var(--neutral--100);
 }
 
 .footer_copy-wrapper:active {
@@ -4628,9 +4632,14 @@ figcaption {
 .footer_social-link-wrapper {
   border-style: solid;
   border-width: 1px;
-  border-color: var(--neutral--300) var(--neutral--400) var(--neutral--300) var(--neutral--300);
+  border-color: var(--neutral--400);
   cursor: pointer;
   padding: 0.25rem;
+  transition: all 0.2s;
+}
+
+.footer_social-link-wrapper:hover {
+  background-color: var(--neutral--100);
 }
 
 .section_legal {
