@@ -35,7 +35,6 @@
  
  
  
- 
                         discipline feels easier the further you go.
               </p>
             </div>
@@ -62,7 +61,6 @@
                   <h3 data-figma-id='8907:32789' class='text-size-large is-plan'>Start &amp; Find Clarity</h3>
                   <p data-figma-id='8907:32790' class='text-size-regular'>
                     Uncover what’s really draining your focus and get clarity on what to fix first without
- 
  
  
  
@@ -97,7 +95,6 @@
                   <h3 data-figma-id='8907:32789' class='text-size-large is-plan'>Feel Discipline Forming</h3>
                   <p data-figma-id='8907:32790' class='text-size-regular'>
                     Start feeling in control again with short 5-minute daily wins designed to fit around your
- 
  
  
  
@@ -139,7 +136,6 @@
                   </h3>
                   <p data-figma-id='8907:32790' class='text-size-regular'>
                     Experience what consistency really feels like. Stay focused under pressure, think clearly
- 
  
  
  
@@ -193,27 +189,18 @@
           </div>
         </div>
         <div class='plan_mountain-wrapper'>
-          {% if section.settings.mountain_image != blank %}
-            <img
-              src="{{ section.settings.mountain_image | image_url: width: 1222 }}"
-              loading="lazy"
-              sizes="100vw"
-              srcset="
-      {{ section.settings.mountain_image | image_url: width: 500 }} 500w,
-      {{ section.settings.mountain_image | image_url: width: 800 }} 800w,
-      {{ section.settings.mountain_image | image_url: width: 1080 }} 1080w,
-      {{ section.settings.mountain_image | image_url: width: 1222 }} 1222w"
-              alt="{{ section.settings.mountain_image_alt | escape }}"
-              class="plan_mountain-asset">
-          {% else %}
-            <img
-              src="{{ 'mountain-x1.webp' | asset_url }}"
-              loading="lazy"
-              sizes="100vw"
-              srcset="{{ 'mountain-x1-p-500.webp' | asset_url }} 500w, {{ 'mountain-x1-p-800.webp' | asset_url }} 800w, {{ 'mountain-x1-p-1080.webp' | asset_url }} 1080w, {{ 'mountain-x1.webp' | asset_url }} 1222w"
-              alt="{{ section.settings.mountain_image_alt | escape }}"
-              class="plan_mountain-asset">
-          {% endif %}
+          <img
+            src="{{ 'mountain-x1.webp' | asset_url }}"
+            loading="lazy"
+            sizes="100vw"
+            srcset="
+    {{ 'mountain-x1-p-500.webp' | asset_url }} 500w,
+    {{ 'mountain-x1-p-800.webp' | asset_url }} 800w,
+    {{ 'mountain-x1-p-1080.webp' | asset_url }} 1080w,
+    {{ 'mountain-x1.webp' | asset_url }} 1222w
+  "
+            alt=""
+            class="plan_mountain-asset" />
         </div>
         <div class='spacer-xhuge'></div>
       </div>
@@ -228,23 +215,3 @@
     </div>
   </div>
 </section>
-
-
-{% schema %}
-  {
-    "name": "Hero Section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "hero_title",
-        "label": "Hero Title",
-        "default": "The 5-week Musashi Challenge"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Hero Section"
-      }
-    ]
-  }
-{% endschema %}
