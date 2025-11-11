@@ -9,7 +9,7 @@
                 <div class='footer_description-wrapper'>
                   <div class='footer_description'>
                     <a
-                      href='index.html'
+                      href="{{ routes.root_url }}"
                       aria-current='page'
                       class='navbar_logo-link w-nav-brand w--current'>
                       <img
@@ -100,22 +100,19 @@
                     <p data-figma-id='8805:19244' class='text-size-large is-footer-menu-title'>Policies</p>
                     <div class='footer_support-links is-top'>
                       <a
-                        data-figma-id='8805:19256'
-                        href='privacy-policy.html'
+                        href='{{ pages.main-privacy-policy.url }}'
                         target='_blank'
                         class='text-size-regular is-footer-link'>
                         Privacy Policy
                       </a>
                       <a
-                        data-figma-id='8805:19256'
-                        href='terms-conditions.html'
+                        href="{{ pages.terms-of-service.url }}"
                         target='_blank'
                         class='text-size-regular is-footer-link'>
                         Terms of Service
                       </a>
                       <a
-                        data-figma-id='8805:19256'
-                        href='shopping-policy.html'
+                        href="{{ pages.shopping-policy.url }}"
                         target='_blank'
                         class='text-size-regular is-footer-link'>
                         Shopping Policy
@@ -126,7 +123,7 @@
               </div>
               <a
                 data-figma-id='8805:19258'
-                href='index.html'
+                href='{{ routes.root_url }}'
                 aria-current='page'
                 class='footer_logo-wrapper w-inline-block w--current'>
                 <img
