@@ -8148,6 +8148,14 @@ figcaption {
     border-right-width: 1px;
     border-left-width: 1px;
   }
+
+  .sword-asset.is-week-5 {
+    top: -15%;
+  }
+
+  .sword-asset.is-beyond {
+    top: -30%;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -8179,7 +8187,7 @@ figcaption {
   }
 
   .sword-asset.is-beyond {
-    top: -13%;
+    top: -25%;
   }
 }
 
