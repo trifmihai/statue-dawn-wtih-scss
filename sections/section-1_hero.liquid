@@ -34,7 +34,7 @@
             <img
               src="{{ 'hero-image_mobile-responsive.png' | asset_url }}"
               loading='lazy'
-              alt=''
+              alt="{{ section.settings.hero_image_mobile_alt }}"
               class='hero-image is-hide-on-desktop'>
           </div>
           <div data-figma-id='8779:19264' class='hero_bottom'>
@@ -70,7 +70,7 @@
             loading='lazy'
             sizes='(max-width: 2574px) 100vw, 2574px'
             srcset="{{ 'hero-image-p-500.webp' | asset_url }} 500w, {{ 'hero-image-p-800.webp' | asset_url }} 800w, {{ 'hero-image-p-1080.webp' | asset_url }} 1080w, {{ 'hero-image-p-1600.webp' | asset_url }} 1600w, {{ 'hero-image-p-2000.webp' | asset_url }} 2000w, {{ 'hero-image.webp' | asset_url }} 2574w"
-            alt=''
+            alt="{{ section.settings.hero_image_alt }}"
             class='main-image is-hero'>
         </div>
         <div class='spacer-xxlarge hide-mobile-portrait'></div>
@@ -98,6 +98,16 @@
         "id": "hero_title",
         "label": "Hero Title",
         "default": "The 5-week Musashi Challenge to Build Unbreakable Discipline"
+      }, {
+        "type": "text",
+        "id": "hero_image_mobile_alt",
+        "label": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration.",
+        "default": "Hero image for mobile"
+      }, {
+        "type": "text",
+        "id": "hero_image_alt",
+        "label": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration.",
+        "default": "Main hero image"
       }
     ],
     "presets": [

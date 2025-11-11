@@ -4513,7 +4513,7 @@ figcaption {
 }
 
 .footer_copy-wrapper {
-  grid-column-gap: 16px;
+  grid-column-gap: 0.25rem;
   border: 1px solid var(--neutral--400);
   cursor: pointer;
   flex: 0 auto;
