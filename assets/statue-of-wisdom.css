@@ -3978,6 +3978,7 @@ figcaption {
 .pricing_plan-item.is-main-option {
   border-color: var(--brand--300);
   background-color: var(--brand--50);
+  border-width: 1px 1px 1px 1px;
 }
 
 .pricing_content-wrapper {

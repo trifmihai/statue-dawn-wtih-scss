@@ -1,19 +1,27 @@
 <!doctype html>
 <html lang='{{ request.locale.iso_code }}'>
   <head>
+      <!-- encoding -->
     <meta charset="utf-8">
-    <title>SiteKeep | Website Maintenance App for Designers &amp; Agencies</title>
-    <meta content="Simplify client reporting and earn predictable monthly revenue. SiteKeep is the website maintenance tool for designers and agencies. Try it free with no credit card required." name="description">
-    <meta content="SiteKeep | Website Maintenance App for Designers &amp; Agencies" property="og:title">
-    <meta content="Simplify client reporting and earn predictable monthly revenue. SiteKeep is the website maintenance tool for designers and agencies. Try it free with no credit card required." property="og:description">
-    <meta content="https://cdn.prod.website-files.com/67bd796453b2d1478e028672/67cee4a88d1ea0d405250833_sitekeep_open-graph.webp" property="og:image">
-    <meta content="Musashi Challenge | Build Unbreakable Discipline" property="twitter:title">
-    <meta content="Simplify client reporting and earn predictable monthly revenue. SiteKeep is the website maintenance tool for designers and agencies. Try it free with no credit card required." property="twitter:description">
-    <meta content="https://cdn.prod.website-files.com/67bd796453b2d1478e028672/67cee4a88d1ea0d405250833_sitekeep_open-graph.webp" property="twitter:image">
+
+    <!-- seo -->
+    <title>Musashi Challenge | 5 Weeks To Build Unbreakable Discipline</title>
+    <meta name="description" content="Get a proven plan you can start today to stay consistent and in control of your life.">
+
+      <!-- open graph -->
+    <meta property="og:title" content="Musashi Challenge | 5 Weeks To Build Unbreakable Discipline">
+    <meta property="og:description" content="The 5-week Musashi Challenge to Build Unbreakable Discipline">
+    <meta property="og:image" content="https://cdn.prod.website-files.com/67e1854c2284fc148a18b804/690ba51df0f330ffb3ea32af_hero-image.webp">
     <meta property="og:type" content="website">
-    <meta content="summary_large_image" name="twitter:card">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="OfF35kMQXml-p5EU61bBLXQjPvKpgiw6jgA88Rq-Veg" name="google-site-verification">
+
+      <!-- twitter -->
+    <meta name="twitter:title" content="Musashi Challenge | Build Unbreakable Discipline">
+    <meta name="twitter:description" content="The 5-week Musashi Challenge to Build Unbreakable Discipline">
+    <meta name="twitter:image" content="https://cdn.prod.website-files.com/67e1854c2284fc148a18b804/690ba51df0f330ffb3ea32af_hero-image.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+      <!-- responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="application/ld+json">
       {
@@ -154,11 +162,12 @@
     <script defer="" src="https://cdn.jsdelivr.net/gh/trifmihai/sitekeep-website@0.3/dist/index.js"></script>
 
     <link
-      href="images/favicon.png"
+      href="{{ 'favicon.png' | asset_url }}"
       rel="shortcut icon"
       type="image/x-icon">
-    <link href="images/webclip.svg" rel="apple-touch-icon">
+    <link href="{{ 'webclip.png' | asset_url }}" rel="apple-touch-icon">
     <!-- Please keep this css code to improve the font quality -->
+
     <style></style>
 
   {% render 'css-variables' %}
