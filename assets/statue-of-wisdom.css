@@ -4633,9 +4633,9 @@ figcaption {
 ._404_wrapper {
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
+  border: 1px solid var(--neutral--300);
   background-color: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 18px;
+  border-radius: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -4643,17 +4643,11 @@ figcaption {
   text-decoration: none;
   display: flex;
   overflow: hidden;
-  box-shadow:
-    3px 5px 13px #4040400d,
-    11px 20px 23px #4040400a,
-    25px 45px 31px #40404008,
-    45px 81px 37px #40404003,
-    70px 126px 40px #40404000;
 }
 
 ._404_content-wrapper {
-  grid-column-gap: 1.5rem;
-  grid-row-gap: 1.5rem;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -4669,18 +4663,6 @@ figcaption {
   align-items: center;
   text-decoration: none;
   display: flex;
-}
-
-.medium {
-  color: #0e213db3;
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-family: Satoshi, sans-serif;
-  font-size: 1.125rem;
-  font-weight: 400;
-  line-height: 26px;
-  text-decoration: none;
 }
 
 ._404_impulse {
@@ -4709,6 +4691,8 @@ figcaption {
 
 ._404_logo {
   transition: all 0.2s;
+  height: 2rem;
+  width: auto;
 }
 
 ._404_logo:hover {
@@ -4717,6 +4701,10 @@ figcaption {
 
 ._404_logo-link {
   padding-left: 0;
+}
+
+.button.is-default.is-404 {
+  align-self: center;
 }
 
 .benefits_card-copy {
@@ -6711,6 +6699,39 @@ figcaption {
   display: none;
 }
 
+._404-page_wrapper {
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
+  border: 1px solid var(--neutral--400);
+  background-color: var(--neutral--100);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  padding: 0.75rem;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+._404-page_wrapper.is-plan-paid {
+  background-image: none;
+}
+
+._404-page_wrapper.is-extended-top {
+  border-bottom-width: 0;
+}
+
+._404-page_wrapper.is-extended-bottom {
+  border-top-width: 0;
+  padding-top: 0;
+}
+
+._404-page_wrapper.is-main-option {
+  border-color: var(--brand--300);
+  background-color: var(--brand--50);
+}
+
 @media screen and (max-width: 991px) {
   .hide-tablet {
     visibility: hidden;
@@ -6760,7 +6781,8 @@ figcaption {
     grid-auto-flow: row;
   }
 
-  .padding-global {
+  .padding-global,
+  .padding-global.is-404 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
@@ -7126,7 +7148,8 @@ figcaption {
     padding-bottom: 2rem;
   }
 
-  .padding-global {
+  .padding-global,
+  .padding-global.is-404 {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
@@ -7538,7 +7561,8 @@ figcaption {
   }
 
   ._404_logo {
-    max-height: 1.5rem;
+    height: 2rem;
+    width: auto;
   }
 
   ._404_logo-link {
@@ -8163,6 +8187,7 @@ figcaption {
 }
 
 @media screen and (max-width: 375px) {
+  .padding-global.is-404,
   .padding-global,
   .navbar_component,
   .nav_component,

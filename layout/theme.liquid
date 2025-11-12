@@ -180,7 +180,9 @@
     <div class="page-wrapper">
       <div class='page-wrapper'>
         <main class='main-wrapper'>
-          {% section 'nav' %}
+          {% unless request.page_type == '404' %}
+            {% section 'nav' %}
+          {% endunless %}
 
           {{ content_for_layout }}
 

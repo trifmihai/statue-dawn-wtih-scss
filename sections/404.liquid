@@ -1,23 +1,50 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<h1>{{ '404.title' | t }}</h1>
-
-<p>
-  {{ '404.not_found' | t }}
-</p>
-
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
-</a>
-
-{% schema %}
-{
-  "name": "t:general.404",
-  "settings": []
-}
-{% endschema %}
+<div class="page-wrapper">
+  <section class="section_404">
+    <div class="padding-global is-404">
+      <div class="container-large is-404">
+        <div class="max-width-large">
+          <div class="_404-page_wrapper"><img
+              src="{{ 'corner_top-left.svg' | asset_url }}"
+              loading="lazy"
+              alt=""
+              class="corner is-top-left"><img
+              src="{{ 'corner_bottom-left.svg' | asset_url }}"
+              loading="lazy"
+              alt=""
+              class="corner is-bottom-left"><img
+              src="{{ 'corner_bottom-right.svg' | asset_url }}"
+              loading="lazy"
+              alt=""
+              class="corner is-bottom-right"><img
+              src="{{ 'corner_top-right.svg' | asset_url }}"
+              loading="lazy"
+              alt=""
+              class="corner is-top-right">
+            <div data-figma-id="8960:6589" class="_404_wrapper">
+              <a href="index.html" class="_404_logo-link w-nav-brand"><img
+                  loading="lazy"
+                  src="{{ 'statue-logo.svg' | asset_url }}"
+                  alt=""
+                  class="_404_logo"></a>
+              <div data-figma-id="8960:6599" class="_404_content-wrapper">
+                <div data-figma-id="8960:6600" class="_404_header">
+                  <h1 data-figma-id="8960:6601" class="heading-style-h4 is-404">
+                    <span>Oops, nothing here...</span>
+                  </h1>
+                  <p data-figma-id="8960:6602" class="text-size-medium text-align-center">Looks like this page might have moved or never existed. Either way, home is just a click away.</p>
+                </div>
+                <a href="{{ routes.root_url }}" class="button is-default is-404 w-inline-block">
+                  <div class="button_line is-top"></div>
+                  <div class="button_content">
+                    <div class="text-size-regular is-primary">Take me home</div>
+                  </div>
+                  <div class="button_line is-bottom"></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
