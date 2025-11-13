@@ -152,6 +152,19 @@
   --_typography---p-root_line-height--rp-tiny: 1.33;
 }
 
+/* Kaching cart drawer layering */
+[data-kaching-cart-drawer],
+#kaching-cart-drawer,
+.kaching-cart-drawer {
+  z-index: 999 !important;
+}
+
+[data-kaching-cart-overlay],
+#kaching-cart-overlay,
+.kaching-cart-overlay {
+  z-index: 998 !important;
+}
+
 /* Make text look crisper and more legible in all browsers */
 body {
   -webkit-font-smoothing: antialiased;
@@ -192,6 +205,7 @@ input[type='file']:focus-visible {
 .text-style-3lines {
   display: -webkit-box;
   overflow: hidden;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
@@ -199,6 +213,7 @@ input[type='file']:focus-visible {
 .text-style-2lines {
   display: -webkit-box;
   overflow: hidden;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
@@ -2434,7 +2449,7 @@ figcaption {
 }
 
 .navbar_component {
-  z-index: 9999;
+  z-index: 99;
   border-bottom: 1px solid var(--neutral--400);
   background-color: var(--neutral--0);
   justify-content: space-between;
@@ -4214,7 +4229,7 @@ figcaption {
 .blur-component {
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
-  z-index: 9999;
+  z-index: 99;
   pointer-events: none;
   background-image: linear-gradient(#ffffff1a, #ffffff1a);
   width: 100%;

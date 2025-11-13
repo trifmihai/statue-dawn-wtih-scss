@@ -301,3 +301,90 @@ window.addEventListener('scroll', function () {
     }, 10);
   }
 });
+
+// ==============================
+// KACHING CART DRAWER AUTOLAUNCH
+// ==============================
+(function () {
+  if (typeof window === 'undefined' || !window.location) return;
+
+  const PARAM = 'open_kaching_cart';
+  const search = window.location.search || '';
+  if (search.indexOf(PARAM) === -1) return;
+
+  const strategies = [
+    () => (window.KachingCart && typeof window.KachingCart.open === 'function' && window.KachingCart.open()) || false,
+    () =>
+      (window.Kaching &&
+        window.Kaching.cart &&
+        typeof window.Kaching.cart.open === 'function' &&
+        window.Kaching.cart.open()) ||
+      false,
+    () => {
+      const trigger = document.querySelector(
+        '[data-kaching-cart-trigger], [data-kaching-cart-open], [data-kaching-cart-button], .kaching-cart-open, .kaching-cart-button'
+      );
+      if (trigger) {
+        trigger.click();
+        return true;
+      }
+      return false;
+    },
+    () => {
+      const drawer = document.querySelector('[data-kaching-cart-drawer], #kaching-cart-drawer, .kaching-cart-drawer');
+      if (drawer && drawer.classList) {
+        drawer.classList.add('is-open', 'kaching-cart--visible');
+        document.documentElement.classList.add('kaching-cart-open');
+        return true;
+      }
+      return false;
+    },
+  ];
+
+  const tryOpen = () => {
+    for (const openStrategy of strategies) {
+      try {
+        if (openStrategy()) {
+          return true;
+        }
+      } catch (error) {
+        if (window.console && console.warn) {
+          console.warn('Kaching cart open attempt failed', error);
+        }
+      }
+    }
+    return false;
+  };
+
+  const removeParam = () => {
+    if (!window.history || typeof window.history.replaceState !== 'function') return;
+    try {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.delete(PARAM);
+      window.history.replaceState({}, document.title, nextUrl.toString());
+    } catch (error) {
+      const fallbackUrl = window.location.href.replace(new RegExp('[?&]' + PARAM + '(=[^&#]*)?(?=&|#|$)'), match => {
+        return match.startsWith('?') ? '?' : '';
+      });
+      window.history.replaceState({}, document.title, fallbackUrl);
+    }
+  };
+
+  const begin = () => {
+    let attempts = 0;
+    const maxAttempts = 40;
+    const timer = setInterval(() => {
+      attempts += 1;
+      if (tryOpen() || attempts >= maxAttempts) {
+        clearInterval(timer);
+        removeParam();
+      }
+    }, 150);
+  };
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    begin();
+  } else {
+    window.addEventListener('load', begin, { once: true });
+  }
+})();
