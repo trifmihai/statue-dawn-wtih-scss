@@ -1,12 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "section-1_hero",
-      "settings": {}
+      "settings": {
+        "hero_title": "The 5-week Musashi Challenge to Build Unbreakable Discipline",
+        "hero_image_mobile_alt": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration.",
+        "hero_image_alt": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration."
+      }
     },
     "value_stack": {
       "type": "section-1-2_value-stack",
-      "settings": {}
+      "settings": {
+        "left_wing_alt": "Left positioned stylized golden laurel branch with evenly spaced leaves, angled upward.",
+        "right_wing_alt": "Right positioned stylized golden laurel branch with evenly spaced leaves, angled upward."
+      }
     },
     "stakes": {
       "type": "section-2_stakes",
@@ -14,32 +30,86 @@
     },
     "summary": {
       "type": "section-3_summary",
-      "settings": {}
+      "settings": {
+        "alt_ebook": "Kindle displaying a page titled 'Day 1 - Monday' from 'Statue of Wisdom,' featuring a quote by Miyamoto Musashi and text about 'The Great Elimination' focused on clearing space and eliminating unnecessary items.",
+        "alt_printed_book": "Black hardcover book titled 'The Musashi Challenge: 5 Weeks To Build Discipline That Doesn’t Break' by Shelby CRC.",
+        "alt_notion_pocket_journal": "Part of a digital calendar showing days of the week with check marks on Monday and Tuesday, and a popup note titled 'Day 1' noting '120 min of work' and 'Reflection Added.'",
+        "alt_notion_pocket_journal_mobile": "Part of a digital calendar showing days of the week with check marks on Monday and Tuesday, and a popup note titled 'Day 1' noting '120 min of work' and 'Reflection Added.'",
+        "alt_audio_guide": "Black headphones resting behind an audio player interface showing a play button and sound wave, with text reading '54 Minutes of On Demand Lessons.'",
+        "alt_musashi_ai_coach": "Illustration of a chat interface with text boxes and a framed black-and-white portrait of a man with a beard and a bun."
+      }
     },
     "plan": {
       "type": "section-4_plan",
-      "settings": {}
+      "settings": {
+        "alt_sword_day_1": "Vertical wooden sword with metal bracket near the bottom signifying day 1.",
+        "alt_sword_week_1": "A worn, straight-edged katana sword with a dark handle wrapped in black cord signifying week 1.",
+        "alt_sword_week_5": "Japanese katana sword with a curved, sharp blade and a black wrapped handle signifying week 5.",
+        "alt_sword_beyond": "Ceremonial sword with a curved, polished blade and ornate handle wrapped in dark cord signifying beyond week 5.",
+        "alt_mountain_x1": "Monochrome digital artwork of multiple snow-covered mountains with sharp peaks fading into the mist signifying discipline journey and how far they've come."
+      }
     },
     "testimonials": {
       "type": "section-5_testimonials",
-      "settings": {}
+      "settings": {
+        "alt_david_langford_testimonial_avatar": "Portrait of a man who wrote a testimonial. He has short hair wearing a light striped shirt and black strap, with a body of water and buildings in the background.",
+        "alt_ryan_carter_testimonial_avatar": "The man who shared a testimonial, smiling outdoors with glasses and medium-length brown hair.",
+        "alt_claudia_criss_testimonial_avatar": "The woman who shared a testimonial, smiling indoors with curly hair and glasses, holding a pink book.",
+        "alt_emma_ciurea_testimonial_avatar": "Woman who wrote a testimonial, wearing glasses and a lace top, sitting indoors near window curtains with her chin resting on her hand.",
+        "alt_diana_muresan_testimonial_avatar": "Close-up of a woman who wrote a testimonial. She has long brown hair and subtle makeup, smiling slightly against a wooden background.",
+        "alt_nicholas_andronesi_testimonial_avatar": "Portrait of a man who wrote a testimonial. He has styled dark hair and a trimmed beard standing outdoors with brown foliage in the background.",
+        "alt_check_circle": "The man who shared a testimonial, smiling outdoors with glasses and medium-length brown hair."
+      }
     },
     "pricing": {
       "type": "section-6_pricing",
-      "settings": {}
+      "settings": {
+        "alt_pack_option_1": "Apprentice pack containing only the printed book",
+        "alt_pack_option_2": "Practitioner pack containing the printed book and the ebook",
+        "alt_pack_option_3": "Samurai pack cotaining all products",
+        "alt_visa": "Visa payment logo",
+        "alt_mastercard": "Mastercard payment logo",
+        "alt_maestro": "Maestro payment logo",
+        "alt_google_pay": "Google Pay payment logo",
+        "alt_apple_pay": "Apple Pay payment logo",
+        "alt_paypal": "PayPal payment logo",
+        "alt_shop_pay": "Shop Pay payment logo",
+        "alt_lock_icon": "Lock icon representing secure transactions"
+      }
     },
     "faq": {
       "type": "section-7_faq",
-      "settings": {}
+      "settings": {
+        "alt_plus_icon": "Toggle FAQ answer"
+      }
     },
     "lead_gen": {
       "type": "section-8_lead-gen",
-      "settings": {}
+      "settings": {
+        "alt_lead_generator_mockup": "Two pages from a the book, featuring what's inside the free pack. Includes a Notion app icon and text reading 'Secret Bonus Inside'."
+      }
     },
     "footer": {
       "type": "section-99_footer",
-      "settings": {}
+      "settings": {
+        "alt_statue_logo": "Musashi Challenge Logo",
+        "alt_copy_icon": "Copy email to clipboard",
+        "alt_success_copy_icon": "Email copied to clipboard",
+        "alt_footer_logo": "Musashi Challenge Footer Logo",
+        "alt_youtube": "YouTube Logo"
+      }
     }
   },
-  "order": ["hero", "value_stack", "stakes", "summary", "plan", "testimonials", "pricing", "faq", "lead_gen", "footer"]
+  "order": [
+    "hero",
+    "value_stack",
+    "stakes",
+    "summary",
+    "plan",
+    "testimonials",
+    "pricing",
+    "faq",
+    "lead_gen",
+    "footer"
+  ]
 }
