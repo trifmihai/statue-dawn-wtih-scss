@@ -77,14 +77,6 @@
         "alt_lock_icon": "Lock icon representing secure transactions"
       }
     },
-    "collections_pCKXJC": {
-      "type": "collections",
-      "name": "t:general.collections_grid",
-      "settings": {
-        "grid_item_width": "collections--full",
-        "grid_gap": 10
-      }
-    },
     "faq": {
       "type": "section-7_faq",
       "settings": {
@@ -116,7 +108,6 @@
     "plan",
     "testimonials",
     "pricing",
-    "collections_pCKXJC",
     "faq",
     "lead_gen",
     "footer"
