@@ -48,3 +48,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 200);
   });
 });
+
+//
+// Chat
+//
+(function () {
+  function tweakShopifyChatButton(chatEl) {
+    if (!chatEl || !chatEl.shadowRoot) return;
+
+    const btn = chatEl.shadowRoot.querySelector('button.chat-toggle');
+
+    if (!btn) return;
+
+    // Your custom styles
+    btn.style.borderRadius = '0';
+    // You can tweak more if you want:
+    // btn.style.padding = '10px 18px';
+    // btn.style.border = '1px solid #ffffff';
+  }
+
+  function initShopifyChatTweaks() {
+    const chatEl = document.querySelector('inbox-online-store-chat');
+    if (!chatEl) return false;
+
+    // Apply once
+    tweakShopifyChatButton(chatEl);
+
+    // Observe future changes inside the shadow root
+    const root = chatEl.shadowRoot;
+    if (!root) return true;
+
+    const observer = new MutationObserver(() => {
+      tweakShopifyChatButton(chatEl);
+    });
+
+    observer.observe(root, { childList: true, subtree: true });
+
+    return true;
+  }
+
+  // Try once immediately
+  if (!initShopifyChatTweaks()) {
+    // If the widget is injected later, poll for it
+    let tries = 0;
+    const maxTries = 40; // about 20 seconds if interval is 500ms
+
+    const id = setInterval(() => {
+      const ok = initShopifyChatTweaks();
+      tries += 1;
+
+      if (ok || tries >= maxTries) {
+        clearInterval(id);
+      }
+    }, 500);
+  }
+})();
