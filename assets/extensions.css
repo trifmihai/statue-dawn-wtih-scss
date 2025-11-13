@@ -18,3 +18,19 @@ button.chat-toggle.chat-toggle--text-button {
   white-space: nowrap;
   border: 0;
 }
+
+/* ============== */
+/* KACHING DRAWER */
+/* ============== */
+
+/* ============== */
+/* CHAT */
+/* ============== */
+
+#ShopifyChat {
+  z-index: 999 !important;
+}
+
+.chat-toggle {
+  border-radius: 0 !important;
+}

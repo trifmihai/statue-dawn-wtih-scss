@@ -16,7 +16,7 @@
           <div
             id="w-node-ead3f6c4-d47d-e5d8-5acf-91d2a9eb5ba4-8a18b800"
             class="pricing_plan-item js-select-bundle"
-            data-deal-bar-id="BQyD">
+            data-kaching-default-index="0">
             <div data-figma-id="8716:32160" class="pricing_content-wrapper">
               <div data-figma-id="8716:32161" class="pricing_assets-wrapper">
                 <div data-figma-id="8716:32162" class="pricing_info-wrapper">
@@ -73,8 +73,6 @@
               <div data-figma-id="8716:32183" class="pricing_feature-list"></div>
 
               <div class="pricing_button-group">
-                <!-- Old hard coded cart link removed, design handled by the button below -->
-
                 <form
                   action="/cart/add"
                   method="post"
@@ -90,6 +88,7 @@
                     <div class="button_line is-bottom"></div>
                   </button>
                 </form>
+
                 <a href="#section-lead-gen" class="button is-secondary is-stretching w-inline-block">
                   <div class="text-size-regular is-secondary">
                     Free Sample (38 pages)
@@ -123,19 +122,26 @@
           <div
             data-figma-id='8716:32159'
             id='w-node-_59fe5dc3-94be-4819-3830-ea130efd9605-8a18b800'
-            class='pricing_plan-item is-main-option'>
+            class='pricing_plan-item is-main-option js-select-bundle'
+            data-kaching-default-index='1'>
             <div data-figma-id='8716:32160' class='pricing_content-wrapper'>
               <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
                 <div data-figma-id='8716:32162' class='pricing_info-wrapper'>
-                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>The Practitioner Pack</h3>
+                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>
+                    The Practitioner Pack
+                  </h3>
                   <div data-figma-id='8716:32164' class='pricing_cost-wrapper'>
                     <div data-figma-id='8716:32166' class='pricing_cost-top'>
                       <div data-figma-id='8716:32167' class='pricing_price'>
-                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>$39</p>
+                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>
+                          $39
+                        </p>
                       </div>
                       <div class='pricing_discount-wrapper'>
                         <div class='pricing_discount'>
-                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>$52</p>
+                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>
+                            $52
+                          </p>
                           <div class='pricing-strikethrough'></div>
                         </div>
                         <div class='pricing_badge is-main-option'>
@@ -150,6 +156,7 @@
                 </div>
               </div>
             </div>
+
             <div data-figma-id='8716:32160' class='pricing_content-wrapper is-content'>
               <div class='pricing_content-top'>
                 <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
@@ -195,19 +202,33 @@
                   </div>
                 </div>
               </div>
+
               <div class='pricing_button-group'>
-                <a href='#' class='button is-default is-pricing w-inline-block'>
-                  <div class='button_line is-top'></div>
-                  <div class='button_content'>
-                    <div class='text-size-regular is-primary'>Get Pack</div>
-                  </div>
-                  <div class='button_line is-bottom'></div>
-                </a>
+                <form
+                  action='/cart/add'
+                  method='post'
+                  data-bundle-option-index='0'
+                  class='js-kaching-form'>
+                  <!-- If Practitioner has a different Kaching product, change this ID -->
+                  <kaching-bundle product-id='10252630786386'></kaching-bundle>
+
+                  <button type='submit' class='button is-default is-pricing w-inline-block js-kaching-submit'>
+                    <div class='button_line is-top'></div>
+                    <div class='button_content'>
+                      <div class='text-size-regular is-primary'>Get Pack</div>
+                    </div>
+                    <div class='button_line is-bottom'></div>
+                  </button>
+                </form>
+
                 <a href='#section-lead-gen' class='button is-secondary is-stretching w-inline-block'>
-                  <div class='text-size-regular is-secondary'>Free Sample (38 pages)</div>
+                  <div class='text-size-regular is-secondary'>
+                    Free Sample (38 pages)
+                  </div>
                 </a>
               </div>
             </div>
+
             <img
               src="{{ 'corner_top-left.svg' | asset_url }}"
               loading='lazy'
@@ -228,6 +249,7 @@
               loading='lazy'
               alt=''
               class='corner is-top-right'>
+
             <div class='pricing_tag'>
               <div class='pricing_tag-line is-top'></div>
               <div class='pricing_tag-content text-align-center'>
@@ -238,19 +260,29 @@
               <div class='pricing_tag-line is-right'></div>
             </div>
           </div>
-          <div data-figma-id='8716:32159' class='pricing_plan-item is-extended-top'>
+
+          <div
+            data-figma-id='8716:32159'
+            class='pricing_plan-item is-extended-top js-select-bundle'
+            data-kaching-default-index='2'>
             <div data-figma-id='8716:32160' class='pricing_content-wrapper'>
               <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
                 <div data-figma-id='8716:32162' class='pricing_info-wrapper'>
-                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>The Samurai Pack</h3>
+                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>
+                    The Samurai Pack
+                  </h3>
                   <div data-figma-id='8716:32164' class='pricing_cost-wrapper'>
                     <div data-figma-id='8716:32166' class='pricing_cost-top'>
                       <div data-figma-id='8716:32167' class='pricing_price'>
-                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>$78</p>
+                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>
+                          $78
+                        </p>
                       </div>
                       <div class='pricing_discount-wrapper'>
                         <div class='pricing_discount'>
-                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>$92</p>
+                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>
+                            $92
+                          </p>
                           <div class='pricing-strikethrough'></div>
                         </div>
                         <div class='pricing_badge'>
@@ -265,6 +297,7 @@
                 </div>
               </div>
             </div>
+
             <div data-figma-id='8716:32160' class='pricing_content-wrapper is-content'>
               <div class='pricing_content-top'>
                 <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
@@ -353,19 +386,34 @@
                   </div>
                 </div>
               </div>
+
               <div class='pricing_button-group'>
-                <a href='#' class='button is-default is-pricing w-inline-block'>
-                  <div class='button_line is-top'></div>
-                  <div class='button_content'>
-                    <div class='text-size-regular is-primary'>Get Pack</div>
-                  </div>
-                  <div class='button_line is-bottom'></div>
-                </a>
+                <form
+                  action='/cart/add'
+                  method='post'
+                  data-bundle-option-index='0'
+                  class='js-kaching-form'>
+                  <!-- Same Kaching product as the other packs.
+                    If Samurai uses a different one, replace the ID below. -->
+                  <kaching-bundle product-id='10252630786386'></kaching-bundle>
+
+                  <button type='submit' class='button is-default is-pricing w-inline-block js-kaching-submit'>
+                    <div class='button_line is-top'></div>
+                    <div class='button_content'>
+                      <div class='text-size-regular is-primary'>Get Pack</div>
+                    </div>
+                    <div class='button_line is-bottom'></div>
+                  </button>
+                </form>
+
                 <a href='#section-lead-gen' class='button is-secondary is-stretching w-inline-block'>
-                  <div class='text-size-regular is-secondary'>Free Sample (38 pages)</div>
+                  <div class='text-size-regular is-secondary'>
+                    Free Sample (38 pages)
+                  </div>
                 </a>
               </div>
             </div>
+
             <img
               src="{{ 'corner_top-left.svg' | asset_url }}"
               loading='lazy'
@@ -377,6 +425,7 @@
               alt=''
               class='corner is-top-right'>
           </div>
+
           <div
             data-figma-id='8716:32159'
             id='w-node-_800511cb-9627-3b45-c46c-ee989d2a6188-8a18b800'

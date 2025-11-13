@@ -1,16 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Map of product-id -> deal-bar-id you want preselected
-  const kachingDefaults = {
-    // Apprentice pack widget
-    10252630786386: 'BQyD',
-    // Add more here if you need for other bundles:
-    // 'OTHER_PRODUCT_ID': 'KyG_',
-    // 'ANOTHER_PRODUCT_ID': 'LKTJ',
-  };
+  const cards = document.querySelectorAll('.js-select-bundle');
 
-  Object.entries(kachingDefaults).forEach(([productId, dealId]) => {
-    const bundleEl = document.querySelector(`kaching-bundle[product-id="${productId}"]`);
+  cards.forEach(card => {
+    const bundleEl = card.querySelector('kaching-bundle[product-id]');
     if (!bundleEl) return;
+
+    const defaultIndex = parseInt(card.dataset.kachingDefaultIndex, 10);
+    const index = Number.isNaN(defaultIndex) ? 0 : defaultIndex;
 
     let tries = 0;
     const maxTries = 30;
@@ -18,17 +14,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const timer = setInterval(() => {
       tries += 1;
 
-      // Look for the bar inside this widget
-      const barButton = bundleEl.querySelector(
-        `.kaching-bundles__bar[data-deal-bar-id="${dealId}"] .kaching-bundles__bar-main`
-      );
+      const bars = bundleEl.querySelectorAll('.kaching-bundles__bar');
+      if (!bars.length) {
+        if (tries >= maxTries) clearInterval(timer);
+        return;
+      }
 
-      if (barButton) {
-        // Simulate the exact thing a user does: click the bar
-        barButton.click();
+      const targetBar = bars[index] || bars[0];
+      if (!targetBar) {
         clearInterval(timer);
-      } else if (tries >= maxTries) {
-        // Give up after a few seconds if Kaching never renders
+        return;
+      }
+
+      // Prefer clicking the label so all Kaching logic runs
+      const label = targetBar.querySelector('label');
+      if (label) {
+        label.click();
+        clearInterval(timer);
+        return;
+      }
+
+      // Fallback if label not found
+      const main = targetBar.querySelector('.kaching-bundles__bar-main');
+      if (main) {
+        main.click();
+        clearInterval(timer);
+        return;
+      }
+
+      if (tries >= maxTries) {
         clearInterval(timer);
       }
     }, 200);
