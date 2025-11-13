@@ -1,0 +1,20 @@
+button.chat-toggle.chat-toggle--text-button {
+  border-radius: 0 !important;
+}
+
+/* ============== */
+/* KACHING BUNDLE */
+/* ============== */
+
+/* Visually hide the bundle widget but keep it in the DOM and working */
+.kaching-bundles {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -14,47 +14,54 @@
         <div class='spacer-large'></div>
         <div class='pricing_content is-pricing'>
           <div
-            data-figma-id='8716:32159'
-            id='w-node-ead3f6c4-d47d-e5d8-5acf-91d2a9eb5ba4-8a18b800'
-            class='pricing_plan-item'>
-            <div data-figma-id='8716:32160' class='pricing_content-wrapper'>
-              <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
-                <div data-figma-id='8716:32162' class='pricing_info-wrapper'>
-                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>The Apprentice Pack</h3>
-                  <div data-figma-id='8716:32164' class='pricing_cost-wrapper'>
-                    <div data-figma-id='8716:32166' class='pricing_cost-top'>
-                      <div data-figma-id='8716:32167' class='pricing_price'>
-                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>$38</p>
+            id="w-node-ead3f6c4-d47d-e5d8-5acf-91d2a9eb5ba4-8a18b800"
+            class="pricing_plan-item js-select-bundle"
+            data-deal-bar-id="BQyD">
+            <div data-figma-id="8716:32160" class="pricing_content-wrapper">
+              <div data-figma-id="8716:32161" class="pricing_assets-wrapper">
+                <div data-figma-id="8716:32162" class="pricing_info-wrapper">
+                  <h3 data-figma-id="8716:32163" class="heading-style-h6 is-pricing">
+                    The Apprentice Pack
+                  </h3>
+                  <div data-figma-id="8716:32164" class="pricing_cost-wrapper">
+                    <div data-figma-id="8716:32166" class="pricing_cost-top">
+                      <div data-figma-id="8716:32167" class="pricing_price">
+                        <p data-figma-id="8716:32168" class="heading-style-h5 is-pricing">
+                          $38
+                        </p>
                       </div>
                     </div>
-                    <p data-figma-id='8716:32173' class='text-size-small is-pricing'>SHIPS TO YOUR DOOR.</p>
+                    <p data-figma-id="8716:32173" class="text-size-small is-pricing">
+                      SHIPS TO YOUR DOOR.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div data-figma-id='8716:32160' class='pricing_content-wrapper is-content'>
-              <div class='pricing_content-top'>
-                <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
+
+            <div data-figma-id="8716:32160" class="pricing_content-wrapper is-content">
+              <div class="pricing_content-top">
+                <div data-figma-id="8716:32161" class="pricing_assets-wrapper">
                   <img
                     src="{{ 'pack-option-1.webp' | asset_url }}"
-                    loading='lazy'
-                    sizes='100vw'
+                    loading="lazy"
+                    sizes="100vw"
                     srcset="{{ 'pack-option-1-p-500.webp' | asset_url }} 500w, {{ 'pack-option-1-p-800.webp' | asset_url }} 800w, {{ 'pack-option-1.webp' | asset_url }} 909w"
                     alt="{{ section.settings.alt_pack_option_1 }}"
-                    class='pricing_asset'>
+                    class="pricing_asset">
                 </div>
-                <div class='pricing_divider'></div>
-                <div data-figma-id='8716:32183' class='pricing_feature-list'>
-                  <div data-figma-id='8716:32185' class='pricing_feature'>
+                <div class="pricing_divider"></div>
+                <div data-figma-id="8716:32183" class="pricing_feature-list">
+                  <div data-figma-id="8716:32185" class="pricing_feature">
                     <img
-                      class='icon_check'
+                      class="icon_check"
                       src="{{ 'pricing-check-circle.svg' | asset_url }}"
-                      data-figma-image-id='67c9c1a7c28acae30c9fd52f'
-                      alt=''
-                      data-figma-id='8924:7649'
-                      data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
-                    <p data-figma-id='8716:32190' class='text-size-regular'>
+                      data-figma-image-id="67c9c1a7c28acae30c9fd52f"
+                      alt=""
+                      data-figma-id="8924:7649"
+                      data-figma-image-hash="b8ef57f3e6b74588c85bc307fbf9d39e"
+                      loading="lazy">
+                    <p data-figma-id="8716:32190" class="text-size-regular">
                       Printed Book (
                       <strong>130+ pages</strong>
                       in physical form)
@@ -62,41 +69,57 @@
                   </div>
                 </div>
               </div>
-              <div data-figma-id='8716:32183' class='pricing_feature-list'></div>
-              <div class='pricing_button-group'>
-                <a href='https://0h2dg1-ed.myshopify.com/cart/51544497291602:1?channel=buy_button' class='button is-default is-pricing w-inline-block'>
-                  <div class='button_line is-top'></div>
-                  <div class='button_content'>
-                    <div class='text-size-regular is-primary'>Get Pack</div>
+
+              <div data-figma-id="8716:32183" class="pricing_feature-list"></div>
+
+              <div class="pricing_button-group">
+                <!-- Old hard coded cart link removed, design handled by the button below -->
+
+                <form
+                  action="/cart/add"
+                  method="post"
+                  data-bundle-option-index="0"
+                  class="js-kaching-form">
+                  <kaching-bundle product-id="10252630786386"></kaching-bundle>
+
+                  <button type="submit" class="button is-default is-pricing w-inline-block js-kaching-submit">
+                    <div class="button_line is-top"></div>
+                    <div class="button_content">
+                      <div class="text-size-regular is-primary">Get Pack</div>
+                    </div>
+                    <div class="button_line is-bottom"></div>
+                  </button>
+                </form>
+                <a href="#section-lead-gen" class="button is-secondary is-stretching w-inline-block">
+                  <div class="text-size-regular is-secondary">
+                    Free Sample (38 pages)
                   </div>
-                  <div class='button_line is-bottom'></div>
-                </a>
-                <a href='#section-lead-gen' class='button is-secondary is-stretching w-inline-block'>
-                  <div class='text-size-regular is-secondary'>Free Sample (38 pages)</div>
                 </a>
               </div>
             </div>
+
             <img
               src="{{ 'corner_top-left.svg' | asset_url }}"
-              loading='lazy'
-              alt=''
-              class='corner is-top-left'>
+              loading="lazy"
+              alt=""
+              class="corner is-top-left">
             <img
               src="{{ 'corner_bottom-left.svg' | asset_url }}"
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-left'>
+              loading="lazy"
+              alt=""
+              class="corner is-bottom-left">
             <img
               src="{{ 'corner_bottom-right.svg' | asset_url }}"
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-right'>
+              loading="lazy"
+              alt=""
+              class="corner is-bottom-right">
             <img
               src="{{ 'corner_top-right.svg' | asset_url }}"
-              loading='lazy'
-              alt=''
-              class='corner is-top-right'>
+              loading="lazy"
+              alt=""
+              class="corner is-top-right">
           </div>
+
           <div
             data-figma-id='8716:32159'
             id='w-node-_59fe5dc3-94be-4819-3830-ea130efd9605-8a18b800'
@@ -443,8 +466,13 @@
               Secure transactions with
               <strong>Shopify Payments</strong>
             </p>
+          <!-- Form that wraps Kaching Quantity Bundles snippet -->
+
+
           </div>
         </div>
+
+
         <div class='spacer-xhuge'></div>
       </div>
       <div class='mid-line'></div>

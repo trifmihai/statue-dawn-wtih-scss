@@ -1,270 +1,52 @@
 // ==============================
+// ? KACHING AUTO-SELECT
+// ==============================
+// document.addEventListener('DOMContentLoaded', () => {
+//   const cards = document.querySelectorAll('.js-select-bundle');
+//   const forms = document.querySelectorAll('.js-kaching-form');
+
+//   if (!cards.length || !forms.length) return;
+
+//   // helper: clear visual state
+//   function clearSelection() {
+//     cards.forEach(card => card.classList.remove('is-selected'));
+//   }
+
+//   cards.forEach(card => {
+//     card.addEventListener('click', event => {
+//       // ignore clicks on the free sample link
+//       if (event.target.closest('a') && !event.target.closest('.js-kaching-submit')) {
+//         return;
+//       }
+
+//       const dealBarId = card.getAttribute('data-deal-bar-id');
+//       if (!dealBarId) return;
+
+//       clearSelection();
+//       card.classList.add('is-selected');
+
+//       // sync all Kaching bundles with this dealBarId
+//       forms.forEach(form => {
+//         const bundle = form.querySelector('kaching-bundle');
+//         if (!bundle) return;
+
+//         // adjust this line if Kaching uses a different attribute name
+//         bundle.setAttribute('data-deal-bar-id', dealBarId);
+//       });
+//     });
+//   });
+
+//   // optional: pick first card as default selection on load
+//   const firstCard = cards[0];
+//   if (firstCard) {
+//     firstCard.click();
+//   }
+// });
+
+// ==============================
 // ? COPY TO CLIPBOARD
 // ==============================
 
-(function () {
-  const wrappers = document.querySelectorAll('.footer_copy-wrapper');
-  if (!wrappers || wrappers.length === 0) return;
-
-  wrappers.forEach(wrapper => {
-    // Find the closest container that holds the address text
-    const container = wrapper.closest('.footer_support-links') || wrapper.parentElement;
-
-    // Prefer an explicit data-copy attribute (either on the wrapper or a child)
-    const explicitCopyEl = wrapper.hasAttribute('data-copy') ? wrapper : wrapper.querySelector('[data-copy]');
-    const explicitCopy = explicitCopyEl
-      ? explicitCopyEl.getAttribute('data-copy') || explicitCopyEl.dataset.copy
-      : null;
-
-    // Try a few selectors for the copy source to be resilient to markup variations
-    const copySource =
-      container &&
-      (container.querySelector('.is-footer-link') ||
-        container.querySelector('.footer_address') ||
-        container.querySelector('.text-size-medium') ||
-        container.querySelector('.text-size-regular'));
-    const buttonState = wrapper.querySelector('.text-size-regular');
-    const clipDefaultIcon = wrapper.querySelector('.footer_clipboard-icon.is-default');
-    const clipSuccessIcon = wrapper.querySelector('.footer_clipboard-icon.is-copied');
-
-    if (!copySource || !buttonState || !clipDefaultIcon || !clipSuccessIcon) {
-      return; // Skip this wrapper if required elements are missing
-    }
-
-    // Make wrapper keyboard accessible if not already
-    if (!wrapper.hasAttribute('role')) wrapper.setAttribute('role', 'button');
-    if (!wrapper.hasAttribute('tabindex')) wrapper.setAttribute('tabindex', '0');
-    wrapper.setAttribute('aria-pressed', 'false');
-
-    let resetTimeout = null;
-
-    const updateUIOnCopy = () => {
-      buttonState.textContent = 'Successfully copied!';
-      wrapper.classList.add('copied');
-      clipDefaultIcon.classList.add('hidden');
-      clipSuccessIcon.classList.remove('hidden');
-      wrapper.setAttribute('aria-pressed', 'true');
-
-      // Reset previous timeout if any
-      if (resetTimeout) clearTimeout(resetTimeout);
-      resetTimeout = setTimeout(() => {
-        resetUI();
-      }, 10000);
-    };
-
-    const resetUI = () => {
-      buttonState.textContent = 'Copy address';
-      wrapper.classList.remove('copied');
-      clipDefaultIcon.classList.remove('hidden');
-      clipSuccessIcon.classList.add('hidden');
-      wrapper.setAttribute('aria-pressed', 'false');
-      if (resetTimeout) {
-        clearTimeout(resetTimeout);
-        resetTimeout = null;
-      }
-    };
-
-    // Fallback copy using a temporary textarea for older browsers
-    const fallbackCopyText = text => {
-      try {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        // Prevent page scroll to top on iOS
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        document.body.appendChild(textarea);
-        textarea.select();
-        const successful = document.execCommand('copy');
-        document.body.removeChild(textarea);
-        return successful;
-      } catch (err) {
-        return false;
-      }
-    };
-
-    const doCopy = text => {
-      if (!text) return Promise.reject(new Error('No text to copy'));
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(text);
-      }
-      // Fallback sync copy
-      return new Promise((resolve, reject) => {
-        const ok = fallbackCopyText(text);
-        ok ? resolve() : reject(new Error('Clipboard fallback failed'));
-      });
-    };
-
-    const handleActivation = e => {
-      // Accept click, touchend, Enter, or Space
-      if (e && e.type === 'keydown') {
-        const key = e.key || e.keyCode;
-        if (!(key === 'Enter' || key === ' ' || key === 'Spacebar' || key === 13 || key === 32)) return;
-        e.preventDefault();
-      }
-      e && e.preventDefault && e.preventDefault();
-
-      // If an explicit data-copy is present, use it (this ensures only the email is copied)
-      const text = explicitCopy ? String(explicitCopy).trim() : copySource.textContent && copySource.textContent.trim();
-      if (!text) return;
-
-      doCopy(text)
-        .then(() => {
-          updateUIOnCopy();
-        })
-        .catch(err => {
-          console.error('❗️ Failed to copy:', err);
-          // Try fallback once more synchronously
-          if (fallbackCopyText(text)) {
-            updateUIOnCopy();
-          }
-        });
-    };
-
-    wrapper.addEventListener('click', handleActivation);
-    wrapper.addEventListener(
-      'touchend',
-      e => {
-        // touchend may fire along with click; prevent double-handling by using a tiny delay
-        e.preventDefault();
-        handleActivation(e);
-      },
-      { passive: false }
-    );
-    wrapper.addEventListener('keydown', handleActivation);
-  });
-})();
-
-// ==============================
-// CART DATA SYNC HELPERS
-// ==============================
-(function () {
-  if (typeof window === 'undefined') return;
-
-  const CART_MUTATION_REGEX = /\/cart\/(add|change|update|clear|lines|set|adjust|modify)/;
-  let syncTimeout = null;
-
-  const getMoneyFormat = () => {
-    if (window.theme && window.theme.moneyFormat) return window.theme.moneyFormat;
-    if (window.Shopify && window.Shopify.money_format) return window.Shopify.money_format;
-    return '${{amount}}';
-  };
-
-  const formatMoney = cents => {
-    if (typeof cents !== 'number') return '';
-    if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
-      return window.Shopify.formatMoney(cents, getMoneyFormat());
-    }
-    return (cents / 100).toFixed(2);
-  };
-
-  const updateCartUI = cart => {
-    if (!cart || typeof cart.item_count !== 'number') return;
-
-    document.querySelectorAll('[data-cart-count]').forEach(el => {
-      el.textContent = cart.item_count;
-      el.setAttribute('data-cart-count', String(cart.item_count));
-    });
-
-    const formattedTotal = formatMoney(cart.total_price);
-    document.querySelectorAll('[data-cart-total]').forEach(el => {
-      el.textContent = formattedTotal;
-      el.setAttribute('data-cart-total', formattedTotal);
-    });
-
-    if (typeof cart.items_subtotal_price === 'number') {
-      const formattedSubtotal = formatMoney(cart.items_subtotal_price);
-      document.querySelectorAll('[data-cart-subtotal]').forEach(el => {
-        el.textContent = formattedSubtotal;
-        el.setAttribute('data-cart-subtotal', formattedSubtotal);
-      });
-    }
-
-    document.documentElement.setAttribute('data-cart-count', String(cart.item_count));
-    document.documentElement.setAttribute('data-cart-has-items', cart.item_count > 0 ? 'true' : 'false');
-  };
-
-  const runSync = () => {
-    syncTimeout = null;
-    fetch('/cart.js', { credentials: 'same-origin' })
-      .then(response => (response.ok ? response.json() : null))
-      .then(cart => {
-        if (!cart) return;
-        updateCartUI(cart);
-        window.dispatchEvent(new CustomEvent('statue:cart:updated', { detail: cart }));
-      })
-      .catch(error => {
-        if (window.console && console.error) {
-          console.error('Cart sync failed', error);
-        }
-      });
-  };
-
-  const scheduleSync = () => {
-    if (syncTimeout) window.clearTimeout(syncTimeout);
-    syncTimeout = window.setTimeout(runSync, 120);
-  };
-
-  const shouldTrack = urlLike => {
-    if (!urlLike) return false;
-    try {
-      const parsed = new URL(urlLike, window.location.origin);
-      if (parsed.origin !== window.location.origin) return false;
-      return CART_MUTATION_REGEX.test(parsed.pathname);
-    } catch (error) {
-      return CART_MUTATION_REGEX.test(String(urlLike));
-    }
-  };
-
-  if (typeof window.fetch === 'function') {
-    const originalFetch = window.fetch;
-    window.fetch = function (...args) {
-      const [resource] = args;
-      const url = typeof resource === 'string' ? resource : resource && resource.url;
-      const track = shouldTrack(url);
-      return originalFetch.apply(this, args).then(
-        response => {
-          if (track) scheduleSync();
-          return response;
-        },
-        error => {
-          if (track) scheduleSync();
-          throw error;
-        }
-      );
-    };
-  }
-
-  if (typeof window.XMLHttpRequest === 'function') {
-    const open = XMLHttpRequest.prototype.open;
-    const send = XMLHttpRequest.prototype.send;
-
-    XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
-      this.__statueShouldSyncCart = shouldTrack(url);
-      return open.call(this, method, url, async, user, password);
-    };
-
-    XMLHttpRequest.prototype.send = function (...args) {
-      if (this.__statueShouldSyncCart) {
-        this.addEventListener(
-          'loadend',
-          () => {
-            scheduleSync();
-          },
-          { once: true }
-        );
-      }
-      return send.apply(this, args);
-    };
-  }
-})();
-
-// ==============================
-// COPY TO CLIPBOARD (robust, accessible)
-// - Works with multiple `.footer_copy-wrapper` instances
-// - Finds the nearest address text within `.footer_support-links`
-// - Uses navigator.clipboard with a textarea fallback
-// - Adds keyboard support (Enter / Space) and ARIA attributes
-// ==============================
 (function () {
   const wrappers = document.querySelectorAll('.footer_copy-wrapper');
   if (!wrappers || wrappers.length === 0) return;
