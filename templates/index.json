@@ -77,6 +77,21 @@
         "alt_lock_icon": "Lock icon representing secure transactions"
       }
     },
+    "1763049919f2b92b23": {
+      "type": "apps",
+      "blocks": {
+        "kaching_bundles_app_block_iQMxLU": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_iQMxLU"
+      ],
+      "settings": {}
+    },
     "faq": {
       "type": "section-7_faq",
       "settings": {
@@ -108,6 +123,7 @@
     "plan",
     "testimonials",
     "pricing",
+    "1763049919f2b92b23",
     "faq",
     "lead_gen",
     "footer"
