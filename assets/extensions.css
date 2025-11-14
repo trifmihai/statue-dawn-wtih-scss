@@ -20,8 +20,11 @@ button.chat-toggle.chat-toggle--text-button {
 }
 
 /* ============== */
-/* KACHING DRAWER */
+/* COOKIE BANNER */
 /* ============== */
+.shopify-pc__banner__dialog {
+  bottom: 1.5rem !important;
+}
 
 /* ============== */
 /* CHAT */
