@@ -1,49 +1,4 @@
 // ==============================
-// ? KACHING AUTO-SELECT
-// ==============================
-// document.addEventListener('DOMContentLoaded', () => {
-//   const cards = document.querySelectorAll('.js-select-bundle');
-//   const forms = document.querySelectorAll('.js-kaching-form');
-
-//   if (!cards.length || !forms.length) return;
-
-//   // helper: clear visual state
-//   function clearSelection() {
-//     cards.forEach(card => card.classList.remove('is-selected'));
-//   }
-
-//   cards.forEach(card => {
-//     card.addEventListener('click', event => {
-//       // ignore clicks on the free sample link
-//       if (event.target.closest('a') && !event.target.closest('.js-kaching-submit')) {
-//         return;
-//       }
-
-//       const dealBarId = card.getAttribute('data-deal-bar-id');
-//       if (!dealBarId) return;
-
-//       clearSelection();
-//       card.classList.add('is-selected');
-
-//       // sync all Kaching bundles with this dealBarId
-//       forms.forEach(form => {
-//         const bundle = form.querySelector('kaching-bundle');
-//         if (!bundle) return;
-
-//         // adjust this line if Kaching uses a different attribute name
-//         bundle.setAttribute('data-deal-bar-id', dealBarId);
-//       });
-//     });
-//   });
-
-//   // optional: pick first card as default selection on load
-//   const firstCard = cards[0];
-//   if (firstCard) {
-//     firstCard.click();
-//   }
-// });
-
-// ==============================
 // ? COPY TO CLIPBOARD
 // ==============================
 
@@ -296,7 +251,7 @@ window.addEventListener('scroll', function () {
 })();
 
 // ==============================
-// ? BLUR HIDE
+// ? NAVIGATION SHOW/HIDE ON SCROLL
 // ==============================
 (function () {
   const navSection = document.getElementById('shopify-section-nav');
@@ -305,35 +260,24 @@ window.addEventListener('scroll', function () {
   const nav = navSection.querySelector('.navbar_component');
   if (!nav) return;
 
-  const DESKTOP_MIN_WIDTH = 992;
   let lastScrollY = window.scrollY;
   let ticking = false;
 
   function updateNav() {
     const currentScrollY = window.scrollY;
-    const isDesktop = window.innerWidth >= DESKTOP_MIN_WIDTH;
-
-    if (!isDesktop) {
-      // Reset for mobile and tablet
-      nav.classList.remove('is-hidden');
-      document.body.classList.remove('has-sticky-nav');
-      ticking = false;
-      lastScrollY = currentScrollY;
-      return;
-    }
 
     // Mark that sticky nav is active and set padding top
     document.body.classList.add('has-sticky-nav');
     document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 'px');
 
     if (currentScrollY <= 0) {
-      // At top of page always show
+      // At the very top, always show
       nav.classList.remove('is-hidden');
-    } else if (currentScrollY > lastScrollY) {
-      // Scrolling down hide
+    } else if (currentScrollY > lastScrollY + 2) {
+      // Scrolling down a bit, hide
       nav.classList.add('is-hidden');
-    } else {
-      // Scrolling up show
+    } else if (currentScrollY < lastScrollY - 2) {
+      // Scrolling up a bit, show
       nav.classList.remove('is-hidden');
     }
 
