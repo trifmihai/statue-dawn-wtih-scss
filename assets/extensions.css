@@ -20,6 +20,37 @@ button.chat-toggle.chat-toggle--text-button {
 }
 
 /* ============== */
+/* KACHING DRAWER */
+/* ============== */
+
+.kaching-cart .kaching-product-upsell-item-container {
+  background-color: var(--neutral--200) !important;
+}
+
+.kaching-cart__carousel-item {
+  border-radius: 0 !important;
+  padding: 1.25rem !important;
+}
+
+.kaching-cart__continue-shopping {
+  display: none !important;
+}
+
+shop-pay-wallet-button {
+  border-radius: 0 !important;
+}
+
+.kaching-product-upsell-item__add-to-cart,
+.kaching-cart__checkout-button {
+  background-color: var(--brand--500) !important;
+  border-radius: 0 !important;
+}
+
+.kaching-cart__overlay {
+  backdrop-filter: blur(2px) !important;
+}
+
+/* ============== */
 /* COOKIE BANNER */
 /* ============== */
 .shopify-pc__banner__dialog {

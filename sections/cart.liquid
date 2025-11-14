@@ -15,9 +15,6 @@
 
   .cart_intro {
     width: 100%;
-    gap: var(--_spacing---size--16);
-    margin-bottom: var(--_spacing---size--48);
-    max-width: 48rem;
   }
 
   .cart_intro-subheading {
@@ -499,9 +496,10 @@
 
       <div class="content-wrapper is-cart">
         <div class="cart_intro">
-          <div class="spacer-xhuge"></div>
-          <h2 class="heading-style-h3 text-align-center">{{ heading }}</h2>
+          <div class="spacer-huge"></div>
+          <h2 class="heading-style-h3">{{ heading }}</h2>
         </div>
+        <div class="spacer-medium"></div>
 
         {% if cart.item_count == 0 %}
           <div class="cart_empty">
@@ -619,11 +617,11 @@
                       {% endif %}
 
                       <div class="cart_line-item-pricing">
-                        <div class="text-size-large">
+                        <div class="cart_line-item-price">
                           {% if item.original_line_price != item.final_line_price %}
-                            <span class="text-size-large">{{ item.original_line_price | money }}</span>
+                            <span class="cart_line-item-price--compare text-size-regular">{{ item.original_line_price | money }}</span>
                           {% endif %}
-                          <span class="text-size-large">{{ item.final_line_price | money }}</span>
+                          <span class="cart_line-item-price--current text-size-large">{{ item.final_line_price | money }}</span>
                         </div>
 
                         {% if item.line_level_discount_allocations.size > 0 %}

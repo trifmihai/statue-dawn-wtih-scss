@@ -365,7 +365,7 @@ input[type='file']:focus-visible {
 body {
   background-color: var(--neutral--0);
   color: var(--color--text--dark--primary);
-  font-family: Plus Jakarta Sans;
+  font-family: var(--_typography---h-root_size--secondary-font);
   font-size: 1rem;
   line-height: 1.5;
 }
