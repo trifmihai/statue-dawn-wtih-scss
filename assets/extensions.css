@@ -2,35 +2,34 @@
 /* SHOPIFY NAVBAR */
 /* ============== */
 /* Desktop only */
-@media (min-width: 992px) {
-  #shopify-section-nav .navbar_component {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
 
-    /* Start visible */
-    transform: translateY(0);
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-  }
+#shopify-section-nav .navbar_component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 
-  /* When hidden on scroll down */
-  #shopify-section-nav .navbar_component.is-hidden {
-    transform: translateY(-110%);
-  }
+  /* Start visible */
+  transform: translateY(0);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
 
-  /* Optional shadow when stuck */
-  body.has-sticky-nav #shopify-section-nav .navbar_component {
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-  }
+/* When hidden on scroll down */
+#shopify-section-nav .navbar_component.is-hidden {
+  transform: translateY(-110%);
+}
 
-  /* Push page content down so it does not jump */
-  body.has-sticky-nav {
-    padding-top: var(--nav-height, 80px);
-  }
+/* Optional shadow when stuck */
+body.has-sticky-nav #shopify-section-nav .navbar_component {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* Push page content down so it does not jump */
+body.has-sticky-nav {
+  padding-top: var(--nav-height, 80px);
 }
 
 /* BUTTON */
