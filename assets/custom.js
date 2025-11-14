@@ -294,3 +294,63 @@ window.addEventListener('scroll', function () {
     window.addEventListener('load', begin, { once: true });
   }
 })();
+
+// ==============================
+// ? BLUR HIDE
+// ==============================
+(function () {
+  const navSection = document.getElementById('shopify-section-nav');
+  if (!navSection) return;
+
+  const nav = navSection.querySelector('.navbar_component');
+  if (!nav) return;
+
+  const DESKTOP_MIN_WIDTH = 992;
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateNav() {
+    const currentScrollY = window.scrollY;
+    const isDesktop = window.innerWidth >= DESKTOP_MIN_WIDTH;
+
+    if (!isDesktop) {
+      // Reset for mobile and tablet
+      nav.classList.remove('is-hidden');
+      document.body.classList.remove('has-sticky-nav');
+      ticking = false;
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    // Mark that sticky nav is active and set padding top
+    document.body.classList.add('has-sticky-nav');
+    document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 'px');
+
+    if (currentScrollY <= 0) {
+      // At top of page always show
+      nav.classList.remove('is-hidden');
+    } else if (currentScrollY > lastScrollY) {
+      // Scrolling down hide
+      nav.classList.add('is-hidden');
+    } else {
+      // Scrolling up show
+      nav.classList.remove('is-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateNav);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateNav);
+
+  // Initial run
+  updateNav();
+})();
