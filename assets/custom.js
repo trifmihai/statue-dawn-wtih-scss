@@ -1,4 +1,49 @@
 // ==============================
+// ? KACHING AUTO-SELECT
+// ==============================
+// document.addEventListener('DOMContentLoaded', () => {
+//   const cards = document.querySelectorAll('.js-select-bundle');
+//   const forms = document.querySelectorAll('.js-kaching-form');
+
+//   if (!cards.length || !forms.length) return;
+
+//   // helper: clear visual state
+//   function clearSelection() {
+//     cards.forEach(card => card.classList.remove('is-selected'));
+//   }
+
+//   cards.forEach(card => {
+//     card.addEventListener('click', event => {
+//       // ignore clicks on the free sample link
+//       if (event.target.closest('a') && !event.target.closest('.js-kaching-submit')) {
+//         return;
+//       }
+
+//       const dealBarId = card.getAttribute('data-deal-bar-id');
+//       if (!dealBarId) return;
+
+//       clearSelection();
+//       card.classList.add('is-selected');
+
+//       // sync all Kaching bundles with this dealBarId
+//       forms.forEach(form => {
+//         const bundle = form.querySelector('kaching-bundle');
+//         if (!bundle) return;
+
+//         // adjust this line if Kaching uses a different attribute name
+//         bundle.setAttribute('data-deal-bar-id', dealBarId);
+//       });
+//     });
+//   });
+
+//   // optional: pick first card as default selection on load
+//   const firstCard = cards[0];
+//   if (firstCard) {
+//     firstCard.click();
+//   }
+// });
+
+// ==============================
 // ? COPY TO CLIPBOARD
 // ==============================
 
