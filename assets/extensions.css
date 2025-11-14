@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 999;
 
   transform: translateY(0);
   transition:
@@ -80,8 +80,27 @@ shop-pay-wallet-button {
   backdrop-filter: blur(2px) !important;
 }
 
+.kaching-cart .kaching-cart-item__image-container .kaching-cart-item__image,
+.kaching-cart
+  .kaching-product-upsell-item-container
+  .kaching-product-upsell-item
+  .kaching-product-upsell-item__image-container
+  .kaching-product-upsell-item__image,
+.kaching-cart .kaching-cart-selector,
+.kaching-cart .kaching-cart-item__quantity-controls {
+  border-radius: 0 !important;
+}
+
+.kaching-cart-item__link,
+.kaching-cart-item__title,
+.kaching-product-upsell-item__image-container > a,
+.kaching-product-upsell-item__title {
+  pointer-events: none;
+  cursor: default;
+}
+
 /* ============== */
-/* COOKIE BANNER */
+/*? COOKIE BANNER */
 /* ============== */
 .shopify-pc__banner__dialog {
   bottom: 1.5rem !important;
