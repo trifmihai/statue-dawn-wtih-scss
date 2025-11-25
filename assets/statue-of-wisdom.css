@@ -2586,16 +2586,17 @@ figcaption {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color--text--dark--primary);
+  color: var(--color--text--dark--tertiary);
   text-decoration: none;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.navbar_cart-link:hover {
+  color: var(--color--text--dark--primary);
 }
 
 .navbar_cart-link svg {
-  /* width: 1.5rem;
-  height: 1.5rem; */
-  padding: 0;
-}
-.navbar_cart-link {
   padding: 0;
 }
 
@@ -2608,8 +2609,8 @@ figcaption {
   color: var(--color--text--dark--primary);
   font-size: 0.75rem;
   font-weight: bold;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
