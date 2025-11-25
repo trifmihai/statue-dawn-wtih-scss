@@ -38,6 +38,15 @@
             </div>
           </div>
           <div class='navbar_cta-group'>
+            <div class='navbar_cart-wrapper'>
+              <a href="{{ routes.cart_url }}" class="navbar_cart-link w-nav-link" id="cart-icon-bubble">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <div class="cart-count-bubble" data-cart-count="{{ cart.item_count }}" style="{% if cart.item_count == 0 %}display: none;{% endif %}">
+                  <span aria-hidden="true">{{ cart.item_count }}</span>
+                  <span class="visually-hidden">items in cart</span>
+                </div>
+              </a>
+            </div>
             <div class='navbar_button-wrapper'>
               <a href='#section-pricing' class='button is-default w-inline-block'>
                 <div class='button_line is-top'></div>
@@ -53,3 +62,48 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Update cart bubble count dynamically
+  function updateCartBubble(count) {
+    const bubble = document.querySelector('.cart-count-bubble');
+    if (!bubble) return;
+    
+    const countSpan = bubble.querySelector('span[aria-hidden="true"]');
+    if (countSpan) {
+      countSpan.textContent = count;
+    }
+    
+    // Show/hide based on count
+    if (count > 0) {
+      bubble.style.display = 'flex';
+    } else {
+      bubble.style.display = 'none';
+    }
+  }
+
+  // Listen for Shopify cart events
+  document.addEventListener('cart:updated', function(event) {
+    const count = event.detail?.cart?.item_count ?? event.detail?.item_count ?? 0;
+    updateCartBubble(count);
+  });
+
+  // Fallback: Poll cart API for changes (for apps that don't fire events)
+  let lastCartCount = {{ cart.item_count }};
+  
+  async function checkCartCount() {
+    try {
+      const response = await fetch('/cart.js');
+      const cart = await response.json();
+      if (cart.item_count !== lastCartCount) {
+        lastCartCount = cart.item_count;
+        updateCartBubble(cart.item_count);
+      }
+    } catch (e) {
+      // Silently fail
+    }
+  }
+
+  // Check every 2 seconds for cart changes
+  setInterval(checkCartCount, 2000);
+</script>
