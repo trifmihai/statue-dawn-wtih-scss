@@ -309,7 +309,8 @@ button,
   display: none;
   padding: 20px;
   text-align: center;
-  background-color: #dddddd;
+  background-color: #fff;
+  border: 1px solid var(--neutral--400);
 }
 .w-form-fail {
   display: none;

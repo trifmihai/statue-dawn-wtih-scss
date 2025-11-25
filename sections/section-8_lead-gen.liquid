@@ -76,52 +76,58 @@
             <div class='form w-form'>
               <form
                 id='email-form'
-                name='email-form'
+                name='mc-embedded-subscribe-form'
                 data-name='Email Form'
-                method='get'
+                method='post'
+                action='https://shelbymedialtd.us20.list-manage.com/subscribe/post?u=5097958bce3377c0c230d6991&amp;id=1e11c3eda5&amp;f_id=003330eef0'
                 class='lead-gen_form'
                 data-wf-page-id='67e1854c2284fc148a18b800'
                 data-wf-element-id='30205ab1-eee6-c5c5-d96f-5a2695e0f0a9'>
                 <div class='form_fields-container'>
                   <div class='form_name-wrapper'>
                     <div class='form_field-wrapper'>
-                      <label for='first-name' class='field-label'>First Name</label>
+                      <label for='mce-FNAME' class='field-label'>First Name</label>
                       <input
                         class='form-input w-input'
                         maxlength='256'
-                        name='name'
-                        data-name='Name'
+                        name='FNAME'
+                        data-name='First Name'
                         placeholder=''
                         type='text'
-                        id='first-name'
+                        id='mce-FNAME'
                         required=''>
                     </div>
                     <div class='form_field-wrapper'>
-                      <label for='last-name' class='field-label'>Last Name</label>
+                      <label for='mce-LNAME' class='field-label'>Last Name</label>
                       <input
                         class='form-input w-input'
                         maxlength='256'
-                        name='name'
-                        data-name='Name'
+                        name='LNAME'
+                        data-name='Last Name'
                         placeholder=''
                         type='text'
-                        id='last-name'
+                        id='mce-LNAME'
                         required=''>
                     </div>
                   </div>
                   <div class='form_field-wrapper'>
-                    <label for='email-address' class='field-label'>Email Address</label>
+                    <label for='mce-EMAIL' class='field-label'>Email Address</label>
                     <input
                       class='form-input w-input'
                       maxlength='256'
-                      name='name'
-                      data-name='Name'
+                      name='EMAIL'
+                      data-name='Email'
                       placeholder=''
                       type='email'
-                      id='email-address'
+                      id='mce-EMAIL'
                       required=''>
                   </div>
                 </div>
+                <div aria-hidden="true" style="position: absolute; left: -5000px;"><input
+                    type="text"
+                    name="b_5097958bce3377c0c230d6991_1e11c3eda5"
+                    tabindex="-1"
+                    value=""></div>
                 <div class='button is-default'>
                   <div class='button_line is-bottom'></div>
                   <input
@@ -133,7 +139,16 @@
                 </div>
               </form>
               <div class='success-message w-form-done'>
-                <div>Thank you! Your submission has been received!</div>
+                <div class='success-message_container'>
+                  <div class='success-message_item'>
+                    <div class='success-message_item-content'>
+                      <p class='text-size-medium'>
+                        <strong>Success!</strong>
+                        Your free sample is on the way. If it&apos;s missing, check Promotions or Spam.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class='error-message w-form-fail'>
                 <div>Oops! Something went wrong while submitting the form.</div>
@@ -180,23 +195,88 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('email-form');
+    if (!form) return;
+    
+    var successMessage = form.parentElement.querySelector('.w-form-done');
+    var errorMessage = form.parentElement.querySelector('.w-form-fail');
+    var submitButton = form.querySelector('input[type="submit"]');
+    var originalButtonText = submitButton ? submitButton.value : 'Submit';
+    var waitText = submitButton ? (submitButton.getAttribute('data-wait') || 'Please wait...') : 'Please wait...';
+  
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+  
+      // Update button state
+      if (submitButton) {
+        submitButton.value = waitText;
+        submitButton.disabled = true;
+      }
+  
+      // Create JSONP URL
+      var url = form.action.replace('/post?', '/post-json?');
+      url += "&c=?";
+  
+      // Serialize data
+      var params = [];
+      var elements = form.elements;
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        if (element.name && element.value) {
+           params.push(encodeURIComponent(element.name) + "=" + encodeURIComponent(element.value));
+        }
+      }
+      url += "&" + params.join("&");
+  
+      // JSONP Callback
+      var callbackName = 'mailchimpCallback_' + new Date().getTime();
+      url = url.replace('&c=?', '&c=' + callbackName);
+  
+      window[callbackName] = function(response) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        
+        if (response.result === 'success') {
+          form.style.display = 'none';
+          if (successMessage) successMessage.style.display = 'block';
+        } else {
+          // Reset button state on error
+          if (submitButton) {
+            submitButton.value = originalButtonText;
+            submitButton.disabled = false;
+          }
+          if (errorMessage) errorMessage.style.display = 'block';
+          console.error('Mailchimp error:', response.msg);
+        }
+      };
+  
+      var script = document.createElement('script');
+      script.src = url;
+      document.body.appendChild(script);
+    });
+  });
+</script>
+
 {% schema %}
-{
-  "name": "Section: Lead Gen",
-  "settings": [
+  {
+    "name": "Section: Lead Gen",
+    "settings": [
 
-    {
-      "type": "text",
-      "id": "alt_lead_generator_mockup",
-      "label": "Alt Text: lead-generator-mockup",
-      "default": "Two pages from a the book, featuring what's inside the free pack. Includes a Notion app icon and text reading 'Secret Bonus Inside'."
-    },
+      {
+        "type": "text",
+        "id": "alt_lead_generator_mockup",
+        "label": "Alt Text: lead-generator-mockup",
+        "default": "Two pages from a the book, featuring what's inside the free pack. Includes a Notion app icon and text reading 'Secret Bonus Inside'."
+      }
 
-  ],
-  "presets": [
-    {
-      "name": "Section: Lead Gen"
-    }
-  ]
-}
+    ],
+    "presets": [
+      {
+        "name": "Section: Lead Gen"
+      }
+    ]
+  }
 {% endschema %}

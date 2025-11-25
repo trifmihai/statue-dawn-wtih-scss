@@ -1448,7 +1448,7 @@ figcaption {
 .form-input {
   border: 1px solid var(--neutral--400);
   background-color: var(--color--text--light--primary);
-  color: var(--color--text--light--primary);
+  color: var(--color--text--dark--primary);
   height: auto;
   min-height: 2.75rem;
   margin-bottom: 0;
@@ -1476,6 +1476,15 @@ figcaption {
   padding-top: 1rem;
   padding-bottom: 1rem;
   overflow: auto;
+}
+
+/* Change Autocomplete styles in Chrome*/
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus,
+.form-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--neutral--100) inset !important;
+  -webkit-text-fill-color: var(--color--text--dark--primary) !important;
 }
 
 .form-input.is-text-area::placeholder {
