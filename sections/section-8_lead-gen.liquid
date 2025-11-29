@@ -7,13 +7,20 @@
         <div class='lead-gen_container'>
           <div class='lead-gen_header'>
             <div class='lead-gen_description'>
-              <div class='max-width-xsmall'>
-                <h2 class='heading-style-h3 is-cta-headline'>
-                  <span>Want a sneak peek at no cost?</span>
-                </h2>
+              <div class="lead-gen_title">
+                <div class='max-width-medium'>
+                  <h2 class='heading-style-h3 is-cta-headline'>
+                    <span>Still on the fence?</span>
+                  </h2>
+                </div>
+                <div class="max-width-small">
+                  <p class="text-size-medium is-lead-gen-subtitle">
+                    Test the it first. Download the first 38 pages of The Digital Protocol for free.
+                  </p>
+                </div>
               </div>
               <div class='lead-gen_item-group'>
-                <div data-figma-id='8716:32185' class='lead-gen_items'>
+                <div class='lead-gen_items'>
                   <img
                     class='lead-gen_icon-check is-centered'
                     src="{{ 'pricing-check-circle.svg' | asset_url }}"
@@ -23,11 +30,25 @@
                     data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
                     loading='lazy'>
                   <p data-figma-id='8716:32190' class='text-size-medium'>
-                    <strong>38 starter pages</strong>
-                    of the eBook (PDF format)
+                    <strong>The Purge Phase:</strong>
+                    Cut your distractions
                   </p>
                 </div>
-                <div data-figma-id='8716:32185' class='lead-gen_items'>
+                <div class='lead-gen_items'>
+                  <img
+                    class='lead-gen_icon-check is-centered'
+                    src="{{ 'pricing-check-circle.svg' | asset_url }}"
+                    data-figma-image-id='67c9c1a7c28acae30c9fd52f'
+                    alt=''
+                    data-figma-id='8924:7649'
+                    data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
+                    loading='lazy'>
+                  <p data-figma-id='8716:32190' class='text-size-medium'>
+                    <strong>The Earth Ring Intro:</strong>
+                    Start building discipline
+                  </p>
+                </div>
+                <div class='lead-gen_items'>
                   <img
                     class='lead-gen_icon-check'
                     src="{{ 'pricing-check-circle.svg' | asset_url }}"
@@ -37,7 +58,8 @@
                     data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
                     loading='lazy'>
                   <p data-figma-id='8716:32190' class='text-size-medium'>
-                    The matching Notion Pocket Journal chapters to start applying what you learn right away
+                    <strong>The Discipline Tracker:</strong>
+                    A ready-to-use Notion template to log your first victory.
                   </p>
                 </div>
               </div>
@@ -84,32 +106,34 @@
                 data-wf-page-id='67e1854c2284fc148a18b800'
                 data-wf-element-id='30205ab1-eee6-c5c5-d96f-5a2695e0f0a9'>
                 <div class='form_fields-container'>
-                  <div class='form_name-wrapper'>
-                    <div class='form_field-wrapper'>
-                      <label for='mce-FNAME' class='field-label'>First Name</label>
-                      <input
-                        class='form-input w-input'
-                        maxlength='256'
-                        name='FNAME'
-                        data-name='First Name'
-                        placeholder=''
-                        type='text'
-                        id='mce-FNAME'
-                        required=''>
-                    </div>
-                    <div class='form_field-wrapper'>
-                      <label for='mce-LNAME' class='field-label'>Last Name</label>
-                      <input
-                        class='form-input w-input'
-                        maxlength='256'
-                        name='LNAME'
-                        data-name='Last Name'
-                        placeholder=''
-                        type='text'
-                        id='mce-LNAME'
-                        required=''>
-                    </div>
+                  {% comment %} <div class='form_name-wrapper'>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                           <div class='form_field-wrapper'>
+                                                                                                                                                                                                                                                                                                                                                                                            <label for='mce-LNAME' class='field-label'>Last Name</label>
+                                                                                                                                                                                                                                                                                                                                                                                            <input
+                                                                                                                                                                                                                                                                                                                                                                                              class='form-input w-input'
+                                                                                                                                                                                                                                                                                                                                                                                              maxlength='256'
+                                                                                                                                                                                                                                                                                                                                                                                              name='LNAME'
+                                                                                                                                                                                                                                                                                                                                                                                              data-name='Last Name'
+                                                                                                                                                                                                                                                                                                                                                                                              placeholder=''
+                                                                                                                                                                                                                                                                                                                                                                                              type='text'
+                                                                                                                                                                                                                                                                                                                                                                                              id='mce-LNAME'
+                                                                                                                                                                                                                                                                                                                                                                                              required=''>
+                                                                                                                                                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div> {% endcomment %}
+
+                  <div class='form_field-wrapper'>
+                    <label for='mce-FNAME' class='field-label'>Name</label>
+                    <input
+                      class='form-input w-input'
+                      maxlength='256'
+                      name='FNAME'
+                      data-name='First Name'
+                      placeholder=''
+                      type='text'
+                      id='mce-FNAME'
+                      required=''>
                   </div>
+
                   <div class='form_field-wrapper'>
                     <label for='mce-EMAIL' class='field-label'>Email Address</label>
                     <input
@@ -134,7 +158,7 @@
                     type='submit'
                     data-wait='Please wait...'
                     class='button is-form w-button'
-                    value='Get Free Sample (38 pages)'>
+                    value='Send My FREE Protocol'>
                   <div class='button_line is-top'></div>
                 </div>
               </form>
@@ -144,7 +168,7 @@
                     <div class='success-message_item-content'>
                       <p class='text-size-medium'>
                         <strong>Success!</strong>
-                        Your free sample is on the way. If it&apos;s missing, check Promotions or Spam.
+                        {{ settings.lead_gen_success }}
                       </p>
                     </div>
                   </div>

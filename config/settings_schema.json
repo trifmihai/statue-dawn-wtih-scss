@@ -8,6 +8,59 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Brand Copy",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero Section"
+      },
+      {
+        "type": "text",
+        "id": "hero_title",
+        "label": "Hero Title",
+        "default": "The 5-Week Musashi Protocol To Forge An Unbreakable Mind"
+      },
+      {
+        "type": "header",
+        "content": "Call-to-Action Buttons"
+      },
+      {
+        "type": "text",
+        "id": "cta_primary",
+        "label": "Primary CTA (Buy Button)",
+        "default": "Start Protocol"
+      },
+      {
+        "type": "text",
+        "id": "cta_primary_pricing",
+        "label": "Primary CTA (Pricing Cards)",
+        "default": "Start Protocol Today"
+      },
+      {
+        "type": "text",
+        "id": "cta_secondary",
+        "label": "Secondary CTA (Free Sample)",
+        "default": "Free Sample (38 pages)"
+      },
+      {
+        "type": "header",
+        "content": "Lead Generation"
+      },
+      {
+        "type": "text",
+        "id": "lead_gen_button",
+        "label": "Lead Gen Submit Button",
+        "default": "Get Free Sample (38 pages)"
+      },
+      {
+        "type": "text",
+        "id": "lead_gen_success",
+        "label": "Lead Gen Success Message",
+        "default": "Your free sample is on the way. If it's missing, check Promotions or Spam."
+      }
+    ]
+  },
+  {
     "name": "t:general.typography",
     "settings": [
       {

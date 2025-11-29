@@ -1,0 +1,61 @@
+{% comment %} 
+  ============================================================
+  CENTRALIZED CONTENT SNIPPET
+  ============================================================
+  Use this snippet to manage hardcoded copy from one place.
+   
+  Usage: {% render '_content', key: 'hero_description' %}
+   
+  For admin-editable content, use settings instead:
+  {{ settings.hero_title }}
+  {{ settings.cta_primary }}
+  ============================================================ 
+{% endcomment %}
+
+{% case key %}
+
+  {% comment %} ===== HERO SECTION ===== {% endcomment %}
+
+  {% when 'hero_description' %}
+    <strong>Install the protocol</strong>
+    inspired by history&apos;s greatest swordsman to
+    <strong>automate your discipline</strong>
+    and
+    <strong>destroy procrastination.</strong>
+
+  {% when 'hero_badge' %}
+    LIMITED
+
+  {% when 'hero_shipping' %}
+    <strong>FREE</strong>
+    SHIPPING
+    <strong>OVER $50</strong>
+
+  {% comment %} ===== VALUE PROPOSITIONS ===== {% endcomment %}
+
+  {% when 'value_prop_1' %}
+    5-Week Structured Protocol
+
+  {% when 'value_prop_2' %}
+    Daily Action Steps
+
+  {% when 'value_prop_3' %}
+    AI-Powered Coaching
+
+  {% comment %} ===== SUPPORT/FOOTER ===== {% endcomment %}
+
+  {% when 'support_email' %}
+    support@musashichallenge.com
+
+  {% when 'footer_tagline' %}
+    The 5-Week Challenge built to help you stay consistent, focused, and in control.
+
+  {% when 'youtube_cta' %}
+    Watch updates with 350K+ subscribers on our YouTube channel.
+
+  {% comment %} ===== FALLBACK ===== {% endcomment %}
+
+    {% else %}
+<!-- Content key "{{ key }}" not found -->
+
+{% endcase %}

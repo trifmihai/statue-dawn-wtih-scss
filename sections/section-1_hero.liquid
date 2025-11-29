@@ -26,7 +26,7 @@
             </div>
             <div class='max-width-xlarge is-hero-heading'>
               <h1 class='heading-style-h2 text-align-center'>
-                <span>{{ section.settings.hero_title }}</span>
+                <span>{{ settings.hero_title }}</span>
               </h1>
             </div>
           </div>
@@ -41,18 +41,11 @@
             <div class='max-width-small'>
               <div data-figma-id='8779:19265' class='hero_description text-align-center'>
                 <p class='text-size-medium'>
-                  <strong>The life you want</strong>
-                  depends on the discipline you build. This is
- 
- 
- 
-                  the plan you can
-                  <strong>start today</strong>
-                  to
-                  <strong>make it lasts</strong>
+                  <strong>Install the system</strong>
+                  inspired by history&apos;s greatest swordsman to
+                  <strong>automate your discipline</strong>
                   and
-                  <strong>gain control over your life.</strong>
-
+                  <strong>destroy procrastination.</strong>
                 </p>
               </div>
             </div>
@@ -60,12 +53,12 @@
               <a href='#section-pricing' class='button is-default w-inline-block'>
                 <div class='button_line is-top'></div>
                 <div class='button_content'>
-                  <div class='text-size-regular is-primary'>Get Pack</div>
+                  <div class='text-size-regular is-primary'>{{ settings.cta_primary }}</div>
                 </div>
                 <div class='button_line is-bottom'></div>
               </a>
               <a href='#section-lead-gen' class='button is-secondary w-inline-block'>
-                <div class='text-size-regular is-secondary'>Free Sample (38 pages)</div>
+                <div class='text-size-regular is-secondary'>{{ settings.cta_secondary }}</div>
               </a>
             </div>
           </div>
@@ -101,20 +94,8 @@
     "settings": [
       {
         "type": "header",
-        "content": "Main Content"
-      },
-      {
-        "type": "text",
-        "id": "hero_title",
-        "label": "Hero Title",
-        "default": "The 5-week Musashi Challenge to Build Unbreakable Discipline"
-      },
-
-      {
-        "type": "header",
         "content": "Accessibility (Alt Text)"
-      },
-      {
+      }, {
         "type": "text",
         "id": "hero_image_mobile_alt",
         "label": "Alt Text: mobile_hero-image",

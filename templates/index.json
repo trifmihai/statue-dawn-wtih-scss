@@ -12,7 +12,6 @@
     "hero": {
       "type": "section-1_hero",
       "settings": {
-        "hero_title": "The 5-week Musashi Challenge to Build Unbreakable Discipline",
         "hero_image_mobile_alt": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration.",
         "hero_image_alt": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration."
       }
@@ -100,16 +99,5 @@
       }
     }
   },
-  "order": [
-    "hero",
-    "value_stack",
-    "stakes",
-    "summary",
-    "plan",
-    "testimonials",
-    "pricing",
-    "faq",
-    "lead_gen",
-    "footer"
-  ]
+  "order": ["hero", "value_stack", "stakes", "summary", "plan", "testimonials", "pricing", "faq", "lead_gen", "footer"]
 }
