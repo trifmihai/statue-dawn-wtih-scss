@@ -18,7 +18,7 @@
         "type": "text",
         "id": "hero_title",
         "label": "Hero Title",
-        "default": "The 5-Week Musashi Protocol To Forge An Unbreakable Mind"
+        "default": "The Musashi Protocol to Automate Discipline & Destroy Procrastination"
       },
       {
         "type": "header",

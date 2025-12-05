@@ -24,7 +24,7 @@
 
 /* Soft shadow when sticky */
 body.has-sticky-nav #shopify-section-nav .navbar_component {
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.025);
 }
 
 /* Reserve space for the nav so the page does not jump */
@@ -36,8 +36,22 @@ body.has-sticky-nav {
 /* KACHING BUNDLE */
 /* ============== */
 
+/* Hide the shared kaching widget container */
+.kaching-shared-widget {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Old styles - commented out */
 /* Visually hide the bundle widget but keep it in the DOM and working */
-.kaching-bundles {
+/* .kaching-bundles {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -47,7 +61,7 @@ body.has-sticky-nav {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
-}
+} */
 
 /* ============== */
 /* KACHING DRAWER */

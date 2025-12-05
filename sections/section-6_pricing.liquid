@@ -12,56 +12,56 @@
           </div>
         </div>
         <div class='spacer-large'></div>
+        <!-- Single shared Kaching widget (hidden) - all buttons reference this -->
+        <div class='kaching-shared-widget' aria-hidden='true'>
+          <form id='kaching-shared-form' action='/cart/add' method='post'>
+            <kaching-bundle id='shared-kaching-bundle' product-id='10252630786386'></kaching-bundle>
+            <button type='submit' id='kaching-shared-submit'>Add to cart</button>
+          </form>
+        </div>
         <div class='pricing_content is-pricing'>
           <div
-            id="w-node-ead3f6c4-d47d-e5d8-5acf-91d2a9eb5ba4-8a18b800"
-            class="pricing_plan-item js-select-bundle"
-            data-kaching-default-index="0">
-            <div data-figma-id="8716:32160" class="pricing_content-wrapper">
-              <div data-figma-id="8716:32161" class="pricing_assets-wrapper">
-                <div data-figma-id="8716:32162" class="pricing_info-wrapper">
-                  <h3 data-figma-id="8716:32163" class="heading-style-h6 is-pricing">
-                    The Apprentice Pack
-                  </h3>
-                  <div data-figma-id="8716:32164" class="pricing_cost-wrapper">
-                    <div data-figma-id="8716:32166" class="pricing_cost-top">
-                      <div data-figma-id="8716:32167" class="pricing_price">
-                        <p data-figma-id="8716:32168" class="heading-style-h5 is-pricing">
-                          $38
-                        </p>
+            class='pricing_plan-item js-select-bundle'
+            data-kaching-bundle-index='0'
+          >
+            <div class='pricing_content-wrapper'>
+              <div class='pricing_assets-wrapper'>
+                <div class='pricing_info-wrapper'>
+                  <h3 class='heading-style-h6 is-pricing'>The Apprentice Pack</h3>
+                  <div class='pricing_cost-wrapper'>
+                    <div class='pricing_cost-top'>
+                      <div class='pricing_price'>
+                        <p class='heading-style-h5 is-pricing'>$38</p>
                       </div>
                     </div>
-                    <p data-figma-id="8716:32173" class="text-size-small is-pricing">
-                      NO DIGITAL BONUSES
-                    </p>
+                    <p class='text-size-small is-pricing'>NO DIGITAL BONUSES</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div data-figma-id="8716:32160" class="pricing_content-wrapper is-content">
-              <div class="pricing_content-top">
-                <div data-figma-id="8716:32161" class="pricing_assets-wrapper">
+            <div class='pricing_content-wrapper is-content'>
+              <div class='pricing_content-top'>
+                <div class='pricing_assets-wrapper'>
                   <img
-                    src="{{ 'pack-option-1.webp' | asset_url }}"
-                    loading="lazy"
-                    sizes="100vw"
-                    srcset="{{ 'pack-option-1-p-500.webp' | asset_url }} 500w, {{ 'pack-option-1-p-800.webp' | asset_url }} 800w, {{ 'pack-option-1.webp' | asset_url }} 909w"
-                    alt="{{ section.settings.alt_pack_option_1 }}"
-                    class="pricing_asset">
+                    src='{{ 'pack-option-1.webp' | asset_url }}'
+                    loading='lazy'
+                    sizes='100vw'
+                    srcset='{{ 'pack-option-1-p-500.webp' | asset_url }} 500w, {{ 'pack-option-1-p-800.webp' | asset_url }} 800w, {{ 'pack-option-1.webp' | asset_url }} 909w'
+                    alt='{{ section.settings.alt_pack_option_1 }}'
+                    class='pricing_asset'
+                  >
                 </div>
-                <div class="pricing_divider"></div>
-                <div data-figma-id="8716:32183" class="pricing_feature-list">
-                  <div data-figma-id="8716:32185" class="pricing_feature">
+                <div class='pricing_divider'></div>
+                <div class='pricing_feature-list'>
+                  <div class='pricing_feature'>
                     <img
-                      class="icon_check"
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
-                      data-figma-image-id="67c9c1a7c28acae30c9fd52f"
-                      alt=""
-                      data-figma-id="8924:7649"
-                      data-figma-image-hash="b8ef57f3e6b74588c85bc307fbf9d39e"
-                      loading="lazy">
-                    <p data-figma-id="8716:32190" class="text-size-regular">
+                      class='icon_check'
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
+                      alt=''
+                      loading='lazy'
+                    >
+                    <p class='text-size-regular'>
                       The Musashi manual (
                       <strong>130+ pages</strong>
                       in physical form)
@@ -70,74 +70,65 @@
                 </div>
               </div>
 
-              <div data-figma-id="8716:32183" class="pricing_feature-list"></div>
+              <div class='pricing_feature-list'></div>
 
-              <div class="pricing_button-group">
-                <form
-                  action="/cart/add"
-                  method="post"
-                  data-bundle-option-index="0"
-                  class="js-kaching-form">
-                  <kaching-bundle product-id="10252630786386"></kaching-bundle>
-
-                  <button type="submit" class="button is-default is-pricing w-inline-block js-kaching-submit">
-                    <div class="button_line is-top"></div>
-                    <div class="button_content">
-                      <div class="text-size-regular is-primary">{{ settings.cta_primary_pricing }}</div>
-                    </div>
-                    <div class="button_line is-bottom"></div>
-                  </button>
-                </form>
-
-
+              <div class='pricing_button-group'>
+                <button
+                  type='button'
+                  class='button is-default is-pricing w-inline-block js-kaching-submit'
+                  data-bundle-index='0'
+                >
+                  <div class='button_line is-top'></div>
+                  <div class='button_content'>
+                    <div class='text-size-regular is-primary'>Start Protocol Today</div>
+                  </div>
+                  <div class='button_line is-bottom'></div>
+                </button>
               </div>
             </div>
 
             <img
-              src="{{ 'corner_top-left.svg' | asset_url }}"
-              loading="lazy"
-              alt=""
-              class="corner is-top-left">
+              src='{{ 'corner_top-left.svg' | asset_url }}'
+              loading='lazy'
+              alt=''
+              class='corner is-top-left'
+            >
             <img
-              src="{{ 'corner_bottom-left.svg' | asset_url }}"
-              loading="lazy"
-              alt=""
-              class="corner is-bottom-left">
+              src='{{ 'corner_bottom-left.svg' | asset_url }}'
+              loading='lazy'
+              alt=''
+              class='corner is-bottom-left'
+            >
             <img
-              src="{{ 'corner_bottom-right.svg' | asset_url }}"
-              loading="lazy"
-              alt=""
-              class="corner is-bottom-right">
+              src='{{ 'corner_bottom-right.svg' | asset_url }}'
+              loading='lazy'
+              alt=''
+              class='corner is-bottom-right'
+            >
             <img
-              src="{{ 'corner_top-right.svg' | asset_url }}"
-              loading="lazy"
-              alt=""
-              class="corner is-top-right">
+              src='{{ 'corner_top-right.svg' | asset_url }}'
+              loading='lazy'
+              alt=''
+              class='corner is-top-right'
+            >
           </div>
 
           <div
-            data-figma-id='8716:32159'
-            id='w-node-_59fe5dc3-94be-4819-3830-ea130efd9605-8a18b800'
             class='pricing_plan-item is-main-option js-select-bundle'
-            data-kaching-default-index='1'>
-            <div data-figma-id='8716:32160' class='pricing_content-wrapper'>
-              <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
-                <div data-figma-id='8716:32162' class='pricing_info-wrapper'>
-                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>
-                    The Practitioner Pack
-                  </h3>
-                  <div data-figma-id='8716:32164' class='pricing_cost-wrapper'>
-                    <div data-figma-id='8716:32166' class='pricing_cost-top'>
-                      <div data-figma-id='8716:32167' class='pricing_price'>
-                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>
-                          $39
-                        </p>
+            data-kaching-bundle-index='1'
+          >
+            <div class='pricing_content-wrapper'>
+              <div class='pricing_assets-wrapper'>
+                <div class='pricing_info-wrapper'>
+                  <h3 class='heading-style-h6 is-pricing'>The Practitioner Pack</h3>
+                  <div class='pricing_cost-wrapper'>
+                    <div class='pricing_cost-top'>
+                      <div class='pricing_price'>
+                        <p class='heading-style-h5 is-pricing'>$39</p>
                       </div>
                       <div class='pricing_discount-wrapper'>
                         <div class='pricing_discount'>
-                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>
-                            $52
-                          </p>
+                          <p class='text-size-xlarge is-pricing-discoun'>$52</p>
                           <div class='pricing-strikethrough'></div>
                         </div>
                         <div class='pricing_badge is-main-option'>
@@ -145,37 +136,34 @@
                         </div>
                       </div>
                     </div>
-                    <p data-figma-id='8716:32173' class='text-size-small is-pricing'>
-                      INSTANT PDF DOWNLOAD
-                    </p>
+                    <p class='text-size-small is-pricing'>INSTANT PDF DOWNLOAD</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div data-figma-id='8716:32160' class='pricing_content-wrapper is-content'>
+            <div class='pricing_content-wrapper is-content'>
               <div class='pricing_content-top'>
-                <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
+                <div class='pricing_assets-wrapper'>
                   <img
-                    src="{{ 'pack-option-2.webp' | asset_url }}"
+                    src='{{ 'pack-option-2.webp' | asset_url }}'
                     loading='lazy'
                     sizes='100vw'
-                    srcset="{{ 'pack-option-2-p-500.webp' | asset_url }} 500w, {{ 'pack-option-2-p-800.webp' | asset_url }} 800w, {{ 'pack-option-2.webp' | asset_url }} 909w"
-                    alt="{{ section.settings.alt_pack_option_2 }}"
-                    class='pricing_asset'>
+                    srcset='{{ 'pack-option-2-p-500.webp' | asset_url }} 500w, {{ 'pack-option-2-p-800.webp' | asset_url }} 800w, {{ 'pack-option-2.webp' | asset_url }} 909w'
+                    alt='{{ section.settings.alt_pack_option_2 }}'
+                    class='pricing_asset'
+                  >
                 </div>
                 <div class='pricing_divider'></div>
                 <div data-figma-id='8716:32183' class='pricing_feature-list'>
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
-                      data-figma-image-id='67c9c1a7c28acae30c9fd52f'
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       alt=''
-                      data-figma-id='8924:7649'
-                      data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
-                    <p data-figma-id="8716:32190" class="text-size-regular">
+                      loading='lazy'
+                    >
+                    <p data-figma-id='8716:32190' class='text-size-regular'>
                       The Musashi manual (
                       <strong>130+ pages</strong>
                       in physical form)
@@ -184,12 +172,10 @@
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
-                      data-figma-image-id='67c9c1a7c28acae30c9fd52f'
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       alt=''
-                      data-figma-id='8924:7649'
-                      data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
+                      loading='lazy'
+                    >
                     <p data-figma-id='8716:32190' class='text-size-regular'>
                       The Digital Protocol (
                       <strong>130+ pages</strong>
@@ -200,46 +186,44 @@
               </div>
 
               <div class='pricing_button-group'>
-                <form
-                  action='/cart/add'
-                  method='post'
-                  data-bundle-option-index='0'
-                  class='js-kaching-form'>
-                  <!-- If Practitioner has a different Kaching product, change this ID -->
-                  <kaching-bundle product-id='10252630786386'></kaching-bundle>
-
-                  <button type='submit' class='button is-default is-pricing w-inline-block js-kaching-submit'>
-                    <div class='button_line is-top'></div>
-                    <div class='button_content'>
-                      <div class='text-size-regular is-primary'>{{ settings.cta_primary_pricing }}</div>
-                    </div>
-                    <div class='button_line is-bottom'></div>
-                  </button>
-                </form>
-
+                <button
+                  type='button'
+                  class='button is-default is-pricing w-inline-block js-kaching-submit'
+                  data-bundle-index='1'
+                >
+                  <div class='button_line is-top'></div>
+                  <div class='button_content'>
+                    <div class='text-size-regular is-primary'>Start Protocol Today</div>
+                  </div>
+                  <div class='button_line is-bottom'></div>
+                </button>
               </div>
             </div>
 
             <img
-              src="{{ 'corner_top-left.svg' | asset_url }}"
+              src='{{ 'corner_top-left.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-top-left'>
+              class='corner is-top-left'
+            >
             <img
-              src="{{ 'corner_bottom-left.svg' | asset_url }}"
+              src='{{ 'corner_bottom-left.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-bottom-left'>
+              class='corner is-bottom-left'
+            >
             <img
-              src="{{ 'corner_bottom-right.svg' | asset_url }}"
+              src='{{ 'corner_bottom-right.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-bottom-right'>
+              class='corner is-bottom-right'
+            >
             <img
-              src="{{ 'corner_top-right.svg' | asset_url }}"
+              src='{{ 'corner_top-right.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-top-right'>
+              class='corner is-top-right'
+            >
 
             <div class='pricing_tag'>
               <div class='pricing_tag-line is-top'></div>
@@ -255,25 +239,20 @@
           <div
             data-figma-id='8716:32159'
             class='pricing_plan-item is-extended-top js-select-bundle'
-            data-kaching-default-index='2'>
+            data-kaching-bundle-index='2'
+          >
             <div data-figma-id='8716:32160' class='pricing_content-wrapper'>
               <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
                 <div data-figma-id='8716:32162' class='pricing_info-wrapper'>
-                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>
-                    The Samurai Pack
-                  </h3>
+                  <h3 data-figma-id='8716:32163' class='heading-style-h6 is-pricing'>The Samurai Pack</h3>
                   <div data-figma-id='8716:32164' class='pricing_cost-wrapper'>
                     <div data-figma-id='8716:32166' class='pricing_cost-top'>
                       <div data-figma-id='8716:32167' class='pricing_price'>
-                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>
-                          $78
-                        </p>
+                        <p data-figma-id='8716:32168' class='heading-style-h5 is-pricing'>$78</p>
                       </div>
                       <div class='pricing_discount-wrapper'>
                         <div class='pricing_discount'>
-                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>
-                            $92
-                          </p>
+                          <p data-figma-id='8716:32168' class='text-size-xlarge is-pricing-discoun'>$92</p>
                           <div class='pricing-strikethrough'></div>
                         </div>
                         <div class='pricing_badge'>
@@ -281,9 +260,7 @@
                         </div>
                       </div>
                     </div>
-                    <p data-figma-id='8716:32173' class='text-size-small is-pricing'>
-                      COMPLETE PROTOCOL TOOLKIT
-                    </p>
+                    <p data-figma-id='8716:32173' class='text-size-small is-pricing'>COMPLETE PROTOCOL TOOLKIT</p>
                   </div>
                 </div>
               </div>
@@ -293,25 +270,27 @@
               <div class='pricing_content-top'>
                 <div data-figma-id='8716:32161' class='pricing_assets-wrapper'>
                   <img
-                    src="{{ 'pack-option-3.webp' | asset_url }}"
+                    src='{{ 'pack-option-3.webp' | asset_url }}'
                     loading='lazy'
                     sizes='100vw'
-                    srcset="{{ 'pack-option-3-p-500.webp' | asset_url }} 500w, {{ 'pack-option-3-p-800.webp' | asset_url }} 800w, {{ 'pack-option-3.webp' | asset_url }} 909w"
-                    alt="{{ section.settings.alt_pack_option_3 }}"
-                    class='pricing_asset'>
+                    srcset='{{ 'pack-option-3-p-500.webp' | asset_url }} 500w, {{ 'pack-option-3-p-800.webp' | asset_url }} 800w, {{ 'pack-option-3.webp' | asset_url }} 909w'
+                    alt='{{ section.settings.alt_pack_option_3 }}'
+                    class='pricing_asset'
+                  >
                 </div>
                 <div class='pricing_divider'></div>
                 <div data-figma-id='8716:32183' class='pricing_feature-list'>
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       data-figma-image-id='67c9c1a7c28acae30c9fd52f'
                       alt=''
                       data-figma-id='8924:7649'
                       data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
-                    <p data-figma-id="8716:32190" class="text-size-regular">
+                      loading='lazy'
+                    >
+                    <p data-figma-id='8716:32190' class='text-size-regular'>
                       The Musashi manual (
                       <strong>130+ pages</strong>
                       in physical form)
@@ -320,12 +299,13 @@
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       data-figma-image-id='67c9c1a7c28acae30c9fd52f'
                       alt=''
                       data-figma-id='8924:7649'
                       data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
+                      loading='lazy'
+                    >
                     <p data-figma-id='8716:32190' class='text-size-regular'>
                       The Digital Protocol (
                       <strong>130+ pages</strong>
@@ -335,54 +315,45 @@
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       data-figma-image-id='67c9c1a7c28acae30c9fd52f'
                       alt=''
                       data-figma-id='8924:7649'
                       data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
+                      loading='lazy'
+                    >
                     <p data-figma-id='8716:32190' class='text-size-regular'>
-                      The Discipline Tracker
- 
- 
- 
- 
-                      (Notion
-                      <strong>lifetime updates</strong>)
+                      The Discipline Tracker (Notion
+                      <strong>lifetime updates</strong>
+                      )
                     </p>
                   </div>
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       data-figma-image-id='67c9c1a7c28acae30c9fd52f'
                       alt=''
                       data-figma-id='8924:7649'
                       data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
+                      loading='lazy'
+                    >
                     <p data-figma-id='8716:32190' class='text-size-regular'>
-                      The Audio Guide (54 min
- 
- 
- 
- 
- 
- 
- 
- 
-                      of
-                      <strong>mindset conditioning</strong>)
+                      The Audio Guide (54 min of
+                      <strong>mindset conditioning</strong>
+                      )
                     </p>
                   </div>
                   <div data-figma-id='8716:32185' class='pricing_feature'>
                     <img
                       class='icon_check'
-                      src="{{ 'pricing-check-circle.svg' | asset_url }}"
+                      src='{{ 'pricing-check-circle.svg' | asset_url }}'
                       data-figma-image-id='67c9c1a7c28acae30c9fd52f'
                       alt=''
                       data-figma-id='8924:7649'
                       data-figma-image-hash='b8ef57f3e6b74588c85bc307fbf9d39e'
-                      loading='lazy'>
+                      loading='lazy'
+                    >
                     <p data-figma-id='8716:32190' class='text-size-regular'>
                       Access to
                       <strong>Musashi AI Coach</strong>
@@ -392,54 +363,50 @@
               </div>
 
               <div class='pricing_button-group'>
-                <form
-                  action='/cart/add'
-                  method='post'
-                  data-bundle-option-index='0'
-                  class='js-kaching-form'>
-                  <!-- Same Kaching product as the other packs.
-                    If Samurai uses a different one, replace the ID below. -->
-                  <kaching-bundle product-id='10252630786386'></kaching-bundle>
-
-                  <button type='submit' class='button is-default is-pricing w-inline-block js-kaching-submit'>
-                    <div class='button_line is-top'></div>
-                    <div class='button_content'>
-                      <div class='text-size-regular is-primary'>{{ settings.cta_primary_pricing }}</div>
-                    </div>
-                    <div class='button_line is-bottom'></div>
-                  </button>
-                </form>
-
-
+                <button
+                  type='button'
+                  class='button is-default is-pricing w-inline-block js-kaching-submit'
+                  data-bundle-index='2'
+                >
+                  <div class='button_line is-top'></div>
+                  <div class='button_content'>
+                    <div class='text-size-regular is-primary'>Start Protocol Today</div>
+                  </div>
+                  <div class='button_line is-bottom'></div>
+                </button>
               </div>
             </div>
 
             <img
-              src="{{ 'corner_top-left.svg' | asset_url }}"
+              src='{{ 'corner_top-left.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-top-left'>
+              class='corner is-top-left'
+            >
             <img
-              src="{{ 'corner_top-right.svg' | asset_url }}"
+              src='{{ 'corner_top-right.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-top-right'>
+              class='corner is-top-right'
+            >
           </div>
 
           <div
             data-figma-id='8716:32159'
             id='w-node-_800511cb-9627-3b45-c46c-ee989d2a6188-8a18b800'
-            class='pricing_plan-item is-extended-bottom'>
+            class='pricing_plan-item is-extended-bottom'
+          >
             <div data-figma-id='8716:32160' class='pricing_content-wrapper'>
               <div data-figma-id='8716:32228' class='pricing_offer-content'>
                 <div data-figma-id='8716:32229' class='pricing_offer-top'>
                   <div data-figma-id='8814:23482' class='pricing_offer'>
                     <div data-figma-id='8814:23483' class='pricing_offer-icon'>
                       <img
-                        src="{{ 'check-circle.svg' | asset_url }}"
+                        src='{{ 'check-circle.svg' | asset_url }}'
                         loading='lazy'
                         alt=''
-                        class='stakes_icon-info'>
+                        class='stakes_icon-info'
+                      >
                     </div>
                     <p data-figma-id='8716:32230' class='text-size-medium is-pricing'>Free Shipping</p>
                   </div>
@@ -450,77 +417,85 @@
               </div>
             </div>
             <img
-              src="{{ 'corner_bottom-left.svg' | asset_url }}"
+              src='{{ 'corner_bottom-left.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-bottom-left'>
+              class='corner is-bottom-left'
+            >
             <img
-              src="{{ 'corner_bottom-right.svg' | asset_url }}"
+              src='{{ 'corner_bottom-right.svg' | asset_url }}'
               loading='lazy'
               alt=''
-              class='corner is-bottom-right'>
+              class='corner is-bottom-right'
+            >
           </div>
         </div>
         <div class='spacer-xlarge'></div>
         <div class='pricing_social-proof'>
           <div class='pricing_payment-logos'>
             <img
-              src="{{ 'visa.svg' | asset_url }}"
+              src='{{ 'visa.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_visa }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_visa }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'mastercard.svg' | asset_url }}"
+              src='{{ 'mastercard.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_mastercard }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_mastercard }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'maestro.svg' | asset_url }}"
+              src='{{ 'maestro.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_maestro }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_maestro }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'google-pay.svg' | asset_url }}"
+              src='{{ 'google-pay.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_google_pay }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_google_pay }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'apple-pay.svg' | asset_url }}"
+              src='{{ 'apple-pay.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_apple_pay }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_apple_pay }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'paypal.svg' | asset_url }}"
+              src='{{ 'paypal.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_paypal }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_paypal }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'apple-pay.svg' | asset_url }}"
+              src='{{ 'apple-pay.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_apple_pay }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_apple_pay }}'
+              class='pricing_payment-logo'
+            >
             <img
-              src="{{ 'shop-pay.svg' | asset_url }}"
+              src='{{ 'shop-pay.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_shop_pay }}"
-              class='pricing_payment-logo'>
+              alt='{{ section.settings.alt_shop_pay }}'
+              class='pricing_payment-logo'
+            >
           </div>
           <div class='pricing_social-proof-body'>
             <img
-              src="{{ 'lock-icon.svg' | asset_url }}"
+              src='{{ 'lock-icon.svg' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.alt_lock_icon }}"
-              class='pricing_social-proof-icon'>
+              alt='{{ section.settings.alt_lock_icon }}'
+              class='pricing_social-proof-icon'
+            >
             <p class='text-size-regular is-proof-copy'>
               Secure transactions with
               <strong>Shopify Payments</strong>
             </p>
-          <!-- Form that wraps Kaching Quantity Bundles snippet -->
-
-
+            <!-- Form that wraps Kaching Quantity Bundles snippet -->
           </div>
         </div>
-
 
         <div class='spacer-xhuge'></div>
       </div>
@@ -530,73 +505,80 @@
 </section>
 
 {% schema %}
-  {
-    "name": "Section: Pricing",
-    "settings": [
-      {
-        "type": "text",
-        "id": "alt_pack_option_1",
-        "label": "Alt Text: pack-option-1",
-        "default": "Apprentice pack containing only the printed book"
-      },
-      {
-        "type": "text",
-        "id": "alt_pack_option_2",
-        "label": "Alt Text: pack-option-2",
-        "default": "Practitioner pack containing the printed book and the ebook"
-      },
-      {
-        "type": "text",
-        "id": "alt_pack_option_3",
-        "label": "Alt Text: pack-option-3",
-        "default": "Samurai pack cotaining all products"
-      },
-      {
-        "type": "text",
-        "id": "alt_visa",
-        "label": "Alt Text: visa",
-        "default": "Visa payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_mastercard",
-        "label": "Alt Text: mastercard",
-        "default": "Mastercard payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_maestro",
-        "label": "Alt Text: maestro",
-        "default": "Maestro payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_google_pay",
-        "label": "Alt Text: google-pay",
-        "default": "Google Pay payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_apple_pay",
-        "label": "Alt Text: apple-pay",
-        "default": "Apple Pay payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_paypal",
-        "label": "Alt Text: paypal",
-        "default": "PayPal payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_shop_pay",
-        "label": "Alt Text: shop-pay",
-        "default": "Shop Pay payment logo"
-      }, {
-        "type": "text",
-        "id": "alt_lock_icon",
-        "label": "Alt Text: lock-icon",
-        "default": "Lock icon representing secure transactions"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Section: Pricing"
-      }
-    ]
-  }
+{
+  "name": "Section: Pricing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "alt_pack_option_1",
+      "label": "Alt Text: pack-option-1",
+      "default": "Apprentice pack containing only the printed book"
+    },
+    {
+      "type": "text",
+      "id": "alt_pack_option_2",
+      "label": "Alt Text: pack-option-2",
+      "default": "Practitioner pack containing the printed book and the ebook"
+    },
+    {
+      "type": "text",
+      "id": "alt_pack_option_3",
+      "label": "Alt Text: pack-option-3",
+      "default": "Samurai pack cotaining all products"
+    },
+    {
+      "type": "text",
+      "id": "alt_visa",
+      "label": "Alt Text: visa",
+      "default": "Visa payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_mastercard",
+      "label": "Alt Text: mastercard",
+      "default": "Mastercard payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_maestro",
+      "label": "Alt Text: maestro",
+      "default": "Maestro payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_google_pay",
+      "label": "Alt Text: google-pay",
+      "default": "Google Pay payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_apple_pay",
+      "label": "Alt Text: apple-pay",
+      "default": "Apple Pay payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_paypal",
+      "label": "Alt Text: paypal",
+      "default": "PayPal payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_shop_pay",
+      "label": "Alt Text: shop-pay",
+      "default": "Shop Pay payment logo"
+    },
+    {
+      "type": "text",
+      "id": "alt_lock_icon",
+      "label": "Alt Text: lock-icon",
+      "default": "Lock icon representing secure transactions"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section: Pricing"
+    }
+  ]
+}
 {% endschema %}

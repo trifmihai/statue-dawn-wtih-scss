@@ -35,9 +35,9 @@
   --_spacing---spacing--xxhuge: var(--_spacing---size--160);
   --_responsive---p-size--p-medium: var(--_typography---p-root_size--rp-medium);
   --_responsive---p-line-height--p-medium: var(--_typography---p-root_line-height--rp-medium);
-  --color--text--dark--secondary: #43413d;
+  --color--text--dark--secondary: #474541;
   --color--text--light--primary: white;
-  --color--text--dark--tertiary: #85827a;
+  --color--text--dark--tertiary: #75736c;
   --brand--800: #5b4926;
   --brand--500: #b29757;
   --_typography---h-root_size--primary-font: Playfair-Display, Georgia, sans-serif;
@@ -987,8 +987,9 @@ figcaption {
 
 .heading-style-h6.is-plan-heading,
 .heading-style-h6.is-benefit-heading,
-.heading-style-h6.is-stakes {
-  font-weight: 500;
+.heading-style-h6.is-stakes,
+.text-size-xlarge.is-stakes {
+  font-weight: 600;
 }
 
 .heading-style-h6.is-pricing {
@@ -1904,6 +1905,7 @@ figcaption {
 
 .text-size-large.is-stakes {
   color: var(--color--text--dark--tertiary);
+  font-family: var(--_typography---h-root_size--primary-font);
 }
 
 .text-size-large.is-plan {
@@ -2552,9 +2554,13 @@ figcaption {
 .navbar_links {
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   display: flex;
+  /* True center positioning */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Custom Success Message Styling */
@@ -2788,6 +2794,7 @@ figcaption {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
   display: flex;
+  position: relative;
 }
 
 .hero_product {
@@ -3518,6 +3525,10 @@ figcaption {
 
 .text-size-regular.text-weight-semibold.is-plan {
   text-transform: uppercase;
+}
+
+.button-wrapper.is-plan {
+  z-index: 99;
 }
 
 .plan_step-background {
@@ -5266,11 +5277,11 @@ figcaption {
 
 .wing.left-wing {
   position: absolute;
-  inset: 50% auto 0% -16px;
+  inset: 52% auto 2% -18px;
 }
 
 .wing.right-wing {
-  inset: 50% -16px 0% auto;
+  inset: 52% -18px 2% auto;
 }
 
 .value-stack_main-text-wrapper {

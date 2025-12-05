@@ -1,57 +1,111 @@
 //
-//? KHACHING PRESELECT BUNDLE OPTION
+//? KACHING BUNDLE SELECTION
+//?
+//? This script enables custom pricing cards to add specific bundle options to cart.
+//? It uses a single shared Kaching widget (hidden) that contains all bundle options,
+//? and programmatically selects the correct option when a custom button is clicked.
 //
 
 document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.js-select-bundle');
+  const sharedWidget = document.querySelector('#shared-kaching-bundle');
+  const sharedSubmit = document.querySelector('#kaching-shared-submit');
+  const buttons = document.querySelectorAll('.js-kaching-submit[data-bundle-index]');
 
-  cards.forEach(card => {
-    const bundleEl = card.querySelector('kaching-bundle[product-id]');
-    if (!bundleEl) return;
+  // Silently exit if elements not found (might be on a different page)
+  if (!sharedWidget || !sharedSubmit || !buttons.length) {
+    return;
+  }
 
-    const defaultIndex = parseInt(card.dataset.kachingDefaultIndex, 10);
-    const index = Number.isNaN(defaultIndex) ? 0 : defaultIndex;
+  // Wait for Kaching widget to fully render
+  let tries = 0;
+  const maxTries = 50; // 10 seconds max wait time
+  const pollInterval = 200;
 
-    let tries = 0;
-    const maxTries = 30;
+  const waitForWidget = setInterval(() => {
+    tries += 1;
+    const bars = sharedWidget.querySelectorAll('.kaching-bundles__bar');
 
-    const timer = setInterval(() => {
-      tries += 1;
-
-      const bars = bundleEl.querySelectorAll('.kaching-bundles__bar');
-      if (!bars.length) {
-        if (tries >= maxTries) clearInterval(timer);
-        return;
-      }
-
-      const targetBar = bars[index] || bars[0];
-      if (!targetBar) {
-        clearInterval(timer);
-        return;
-      }
-
-      // Prefer clicking the label so all Kaching logic runs
-      const label = targetBar.querySelector('label');
-      if (label) {
-        label.click();
-        clearInterval(timer);
-        return;
-      }
-
-      // Fallback if label not found
-      const main = targetBar.querySelector('.kaching-bundles__bar-main');
-      if (main) {
-        main.click();
-        clearInterval(timer);
-        return;
-      }
-
-      if (tries >= maxTries) {
-        clearInterval(timer);
-      }
-    }, 200);
-  });
+    if (bars.length >= 3) {
+      clearInterval(waitForWidget);
+      initBundleButtons(sharedWidget, sharedSubmit, buttons);
+    } else if (tries >= maxTries) {
+      clearInterval(waitForWidget);
+      console.warn('[Kaching] Widget did not load expected bundle options');
+    }
+  }, pollInterval);
 });
+
+/**
+ * Initialize click handlers for custom bundle buttons
+ */
+function initBundleButtons(widget, submitBtn, buttons) {
+  buttons.forEach(btn => {
+    btn.addEventListener('click', handleBundleButtonClick.bind(null, widget, submitBtn));
+  });
+}
+
+/**
+ * Handle click on a custom bundle button
+ * 1. Select the correct bundle option in the shared widget
+ * 2. Reset quantity to 1
+ * 3. Trigger the add-to-cart action
+ */
+function handleBundleButtonClick(widget, submitBtn, event) {
+  event.preventDefault();
+
+  const button = event.currentTarget;
+  const bundleIndex = parseInt(button.dataset.bundleIndex, 10);
+
+  if (isNaN(bundleIndex) || bundleIndex < 0) {
+    console.warn('[Kaching] Invalid bundle index');
+    return;
+  }
+
+  const bars = widget.querySelectorAll('.kaching-bundles__bar');
+  const targetBar = bars[bundleIndex];
+
+  if (!targetBar) {
+    console.warn(`[Kaching] Bundle option ${bundleIndex} not found`);
+    return;
+  }
+
+  // Select the bundle option via its radio input
+  const radio = targetBar.querySelector('input[type="radio"]');
+  if (radio) {
+    radio.checked = true;
+    // Dispatch change event so Kaching updates its internal state
+    radio.dispatchEvent(new Event('change', { bubbles: true }));
+  } else {
+    // Fallback: click the label
+    const label = targetBar.querySelector('label');
+    if (label) {
+      label.click();
+    }
+  }
+
+  // Reset quantity to 1 for this bundle option
+  const quantityInput = targetBar.querySelector(
+    'input[type="number"], .kaching-bundles__quantity-input, [name*="quantity"]'
+  );
+  if (quantityInput) {
+    quantityInput.value = '1';
+    quantityInput.dispatchEvent(new Event('input', { bubbles: true }));
+    quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  // Also check for a global quantity input in the widget
+  const globalQuantity = widget.querySelector('input[type="number"], .kaching-bundles__quantity-input');
+  if (globalQuantity && globalQuantity !== quantityInput) {
+    globalQuantity.value = '1';
+    globalQuantity.dispatchEvent(new Event('input', { bubbles: true }));
+    globalQuantity.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  // Small delay to allow Kaching to process the selection change
+  setTimeout(() => {
+    submitBtn.click();
+  }, 150);
+}
 
 //
 //? CHAT STYLING
