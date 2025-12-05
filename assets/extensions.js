@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Wait for Kaching widget to fully render
   let tries = 0;
-  const maxTries = 50; // 10 seconds max wait time
+  const maxTries = 50;
   const pollInterval = 200;
 
   const waitForWidget = setInterval(() => {
@@ -45,66 +45,89 @@ function initBundleButtons(widget, submitBtn, buttons) {
 }
 
 /**
- * Handle click on a custom bundle button
- * 1. Select the correct bundle option in the shared widget
- * 2. Reset quantity to 1
- * 3. Trigger the add-to-cart action
+ * Select a bundle option and ensure dropdown is set to first option
+ * Returns a Promise that resolves to true if successful
  */
-function handleBundleButtonClick(widget, submitBtn, event) {
+function selectBundleOption(widget, bundleIndex) {
+  return new Promise(resolve => {
+    const bars = widget.querySelectorAll('.kaching-bundles__bar');
+    const targetBar = bars[bundleIndex];
+
+    if (!targetBar) {
+      resolve(false);
+      return;
+    }
+
+    // Select the bundle option via its radio input
+    const radio = targetBar.querySelector('input[type="radio"]');
+
+    if (radio && !radio.checked) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    // Wait for Kaching to render the dropdown (it appears after radio selection)
+    let attempts = 0;
+    const maxAttempts = 30;
+
+    const waitForDropdown = setInterval(() => {
+      attempts++;
+      const dropdowns = targetBar.querySelectorAll('select');
+
+      if (dropdowns.length > 0) {
+        clearInterval(waitForDropdown);
+
+        // Force dropdown to first option (1 Book)
+        dropdowns.forEach(select => {
+          select.selectedIndex = 0;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+
+        resolve(true);
+      } else if (attempts >= maxAttempts) {
+        clearInterval(waitForDropdown);
+        resolve(true);
+      }
+    }, 50);
+  });
+}
+
+// Prevent double-clicks
+let isProcessing = false;
+
+/**
+ * Handle click on a custom bundle button
+ */
+async function handleBundleButtonClick(widget, submitBtn, event) {
   event.preventDefault();
+  event.stopPropagation();
+
+  if (isProcessing) return;
+  isProcessing = true;
 
   const button = event.currentTarget;
   const bundleIndex = parseInt(button.dataset.bundleIndex, 10);
 
   if (isNaN(bundleIndex) || bundleIndex < 0) {
-    console.warn('[Kaching] Invalid bundle index');
+    isProcessing = false;
     return;
   }
 
-  const bars = widget.querySelectorAll('.kaching-bundles__bar');
-  const targetBar = bars[bundleIndex];
+  // Select the bundle option and wait for dropdown to be ready
+  const success = await selectBundleOption(widget, bundleIndex);
 
-  if (!targetBar) {
-    console.warn(`[Kaching] Bundle option ${bundleIndex} not found`);
+  if (!success) {
+    isProcessing = false;
     return;
   }
 
-  // Select the bundle option via its radio input
-  const radio = targetBar.querySelector('input[type="radio"]');
-  if (radio) {
-    radio.checked = true;
-    // Dispatch change event so Kaching updates its internal state
-    radio.dispatchEvent(new Event('change', { bubbles: true }));
-  } else {
-    // Fallback: click the label
-    const label = targetBar.querySelector('label');
-    if (label) {
-      label.click();
-    }
-  }
-
-  // Reset quantity to 1 for this bundle option
-  const quantityInput = targetBar.querySelector(
-    'input[type="number"], .kaching-bundles__quantity-input, [name*="quantity"]'
-  );
-  if (quantityInput) {
-    quantityInput.value = '1';
-    quantityInput.dispatchEvent(new Event('input', { bubbles: true }));
-    quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
-  }
-
-  // Also check for a global quantity input in the widget
-  const globalQuantity = widget.querySelector('input[type="number"], .kaching-bundles__quantity-input');
-  if (globalQuantity && globalQuantity !== quantityInput) {
-    globalQuantity.value = '1';
-    globalQuantity.dispatchEvent(new Event('input', { bubbles: true }));
-    globalQuantity.dispatchEvent(new Event('change', { bubbles: true }));
-  }
-
-  // Small delay to allow Kaching to process the selection change
+  // Small delay to ensure Kaching has processed everything, then submit
   setTimeout(() => {
     submitBtn.click();
-  }, 150);
+    setTimeout(() => {
+      isProcessing = false;
+    }, 1000);
+  }, 100);
 }
 
 //
