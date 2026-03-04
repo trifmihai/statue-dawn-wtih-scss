@@ -486,6 +486,315 @@ figcaption {
   margin-top: 0.25rem;
 }
 
+/*?-----------?*/
+/*? START - INTERACTIVE SECTION - ?*/
+/*?-----------?*/
+
+.text-size-medium.is-uppercase {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.heading-style-h6.is-benefit-heading,
+.heading-style-h6.is-interactive,
+.text-size-xlarge.is-interactive {
+  font-weight: 600;
+}
+
+.text-size-large.is-interactive {
+  color: var(--color--text--dark--tertiary);
+  font-family: var(--_typography---h-root_size--primary-font);
+}
+
+.interactive_header {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.interactive_manual-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center; /* ← add this */
+}
+
+.interactive_content {
+  flex-flow: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.interactive_ .interactive_item {
+  z-index: 1;
+  grid-row-gap: 1rem;
+  border: 1px solid var(--neutral--400);
+  background-color: #fafafa;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  width: 100%;
+  max-width: 25rem;
+  padding: 0.75rem;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+}
+
+.interactive_item.is-last {
+  border-left-width: 0;
+  flex: auto;
+}
+
+.interactive_item-content {
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  border: 1px solid var(--neutral--300);
+  background-color: #fff;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  text-decoration: none;
+  display: flex;
+}
+
+.interactive_item-headline {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.interactive_list {
+  grid-row-gap: 0.75rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+}
+
+.interactive_list-item {
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+}
+
+.interactive_icon {
+  grid-column-gap: 10px;
+  flex: none;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 4px;
+  text-decoration: none;
+  display: flex;
+}
+
+.interactive_icon-info {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 1.25rem;
+  overflow: hidden;
+}
+
+.interactive_background {
+  z-index: -1;
+  object-fit: cover;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+
+.content-wrapper.is-interactive {
+  border-bottom: 1px solid var(--neutral--400);
+}
+
+.interactive_body {
+  grid-row-gap: 1rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  display: flex;
+}
+
+.interactive_container {
+  flex-flow: row;
+  /* justify-content: center; */
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+  position: relative;
+  padding: 0.75rem;
+  border: 1px solid var(--neutral--400);
+  background: var(--neutral--150);
+}
+
+@media screen and (max-width: 991px) {
+  .interactive_item.is-first {
+    flex: auto;
+    align-self: stretch;
+  }
+
+  .mid-line.is-interactive,
+  .summary_image-wrapper {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .interactive_container {
+    flex: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .interactive_content {
+    flex-flow: column;
+  }
+
+  .interactive_item.is-last {
+    border-width: 1px;
+  }
+
+  .interactive_item.is-first {
+    border-bottom-width: 0;
+    align-self: center;
+  }
+
+  .interactive_container {
+    flex-flow: column;
+    align-self: center;
+  }
+
+  .interactive_header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .interactive_item.is-last,
+  .interactive_item.is-first {
+    border-left-width: 0;
+    border-right-width: 0;
+    flex: 1;
+    align-self: stretch;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  .content-wrapper.is-interactive {
+    border-bottom-width: 0;
+    align-items: stretch;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .interactive_container {
+    align-items: stretch;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .hero_top,
+  .hero_bottom,
+  .stakes_header,
+  .plan_header {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* Toggle switch */
+.interactive_toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.interactive_toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.interactive_toggle-track {
+  display: flex;
+  align-items: center;
+  width: 49px;
+  height: 28px;
+  background-color: var(--neutral--400);
+  border-radius: 14px;
+  padding: 0 2.5px;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.interactive_toggle-input:checked + .interactive_toggle-track {
+  background-color: #B09450;
+}
+
+.interactive_toggle:hover .interactive_toggle-input:checked + .interactive_toggle-track {
+  background-color: #B09450;
+}
+
+.interactive_toggle-thumb {
+  width: 23px;
+  height: 23px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4.67px 7px -1.17px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.interactive_toggle-input:checked + .interactive_toggle-track .interactive_toggle-thumb {
+  transform: translateX(21px);
+}
+
+/* Manual image overlay */
+.interactive_manual-images {
+  position: relative;
+  width: 100%;
+}
+
+.interactive_manual-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.interactive_manual-fill.is-active {
+  opacity: 1;
+}
+
+/*?-----------?*/
+/*? END - INTERACTIVE SECTION - ?*/
+/*?-----------?*/
+
 .z-index-2 {
   z-index: 2;
   position: relative;
@@ -5341,7 +5650,7 @@ figcaption {
   height: 1px;
   position: absolute;
   inset: -1px 0% auto 50%;
-  transform: translate(-50%);
+  transform: translateX(-50%) translateZ(0);
 }
 
 .button_line.is-top {

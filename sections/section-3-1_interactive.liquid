@@ -1,0 +1,120 @@
+<section class='section_interactive'>
+  <div class='padding-global'>
+    <div class='container-large is-line'>
+      <div class='line-wrapper'>
+        <div class='line-long'></div>
+      </div>
+      <div class='content-wrapper is-interactive'>
+        <div class='spacer-xhuge'></div>
+        <div class='interactive_header'>
+          <div class='max-width-medium'>
+            <h2 class='heading-style-h3 text-align-center'>
+              <span>See What’s Inside The Musashi Manual</span>
+            </h2>
+          </div>
+          <div class='interactive_body'>
+            <div class='max-width-small'>
+              <p class='text-size-medium text-align-center'>
+                Simple to log. Designed to stack wins and build proof you’re changing.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class='spacer-medium'></div>
+        <div class='interactive_manual-wrapper'>
+          <div class='interactive_container'>
+            <div class='interactive_item'>
+              <div class='interactive_item-content'>
+                <div class='interactive_item-headline'>
+                  <p class='text-size-medium is-uppercase'>Fill in the pages</p>
+                </div>
+                <label class='interactive_toggle'>
+                  <input type='checkbox' class='interactive_toggle-input'>
+                  <span class='interactive_toggle-track'>
+                    <span class='interactive_toggle-thumb'></span>
+                  </span>
+                </label>
+              </div>
+              <img
+                src='{{ 'corner_top-left.svg' | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-top-left'
+              >
+              <img
+                src='{{ 'corner_bottom-left.svg' | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-bottom-left hide-on-mobile'
+              >
+              <img
+                src='{{ 'corner_top-right.svg' | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-top-right'
+              >
+
+              <img
+                src='{{ 'corner_bottom-right.svg' | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-bottom-right'
+              >
+            </div>
+          </div>
+          <div
+            class='max-width-large'
+          >
+            <div class='interactive_manual-images'>
+              <img
+                src='{{ 'open-manual-empty.webp' | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='interactive_manual'
+              >
+              <img
+                src='{{ 'open-manual-fill.webp' | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='interactive_manual interactive_manual-fill'
+              >
+            </div>
+          </div>
+        </div>
+        <div class='spacer-medium'></div>
+        <div class='button-group'>
+          <div class='button-wrapper'>
+            <a href='#section-pricing' class='button is-default w-inline-block'>
+              <div class='button_line is-top'></div>
+              <div class='button_content'>
+                <div class='text-size-regular is-primary'>{{ settings.cta_primary }}</div>
+              </div>
+              <div class='button_line is-bottom'></div>
+            </a>
+          </div>
+        </div>
+        <div class='spacer-xhuge'></div>
+      </div>
+      <div class='line-wrapper'>
+        <div class='line-long'></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    var toggle = document.querySelector('.interactive_toggle-input');
+    var fillImage = document.querySelector('.interactive_manual-fill');
+
+    if (toggle && fillImage) {
+      toggle.addEventListener('change', function () {
+        if (this.checked) {
+          fillImage.classList.add('is-active');
+        } else {
+          fillImage.classList.remove('is-active');
+        }
+      });
+    }
+  });
+{% endjavascript %}
