@@ -670,6 +670,11 @@ figcaption {
     flex-flow: column;
   }
 
+  .interactive_manual-wrapper {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+  
   .interactive_item.is-last {
     border-width: 1px;
   }
@@ -739,8 +744,8 @@ figcaption {
 .interactive_toggle-track {
   display: flex;
   align-items: center;
-  width: 49px;
-  height: 28px;
+  width: 46px;
+  height: 25px;
   background-color: var(--neutral--400);
   border-radius: 14px;
   padding: 0 2.5px;
@@ -758,8 +763,8 @@ figcaption {
 }
 
 .interactive_toggle-thumb {
-  width: 23px;
-  height: 23px;
+  width: 19px;
+  height: 19px;
   background-color: #fff;
   border-radius: 50%;
   box-shadow: 0 4.67px 7px -1.17px rgba(0, 0, 0, 0.05);
@@ -774,6 +779,7 @@ figcaption {
 .interactive_manual-images {
   position: relative;
   width: 100%;
+  cursor: pointer;
 }
 
 .interactive_manual-fill {
@@ -784,11 +790,67 @@ figcaption {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: transform 0.2s ease;
+  -webkit-mask-image: radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, black 40%, transparent 100%);
+  mask-image: radial-gradient(circle 150px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, black 40%, transparent 100%);
 }
 
+.interactive_manual-fill.is-hover {
+  opacity: 1;
+}
+
+/* Toggle fallback: used on tablet/mobile only */
 .interactive_manual-fill.is-active {
   opacity: 1;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Hide toggle container on desktop, show on tablet/mobile */
+.interactive_container {
+  display: none;
+}
+
+@media screen and (min-width: 992px) {
+  .interactive_manual-hit-area {
+    position: relative;
+  }
+
+  .interactive_manual-hit-area::before {
+    content: '';
+    position: absolute;
+    inset: -1.5rem;
+  }
+
+  .interactive_manual-hit-area > .interactive_manual-images {
+    position: relative;
+    z-index: 1;
+  }
+
+  .interactive_manual-fill {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .interactive_container {
+    display: flex;
+    width: 100%;
+  }
+
+  .interactive_item {
+    width: 100%;
+  }
+
+  .interactive_manual-images {
+    cursor: default;
+  }
+
+  .interactive_manual-fill {
+    -webkit-mask-image: none;
+    mask-image: none;
+    transition: opacity 0.35s ease;
+  }
 }
 
 /*?-----------?*/

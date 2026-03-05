@@ -45,7 +45,7 @@
                 src='{{ 'corner_bottom-left.svg' | asset_url }}'
                 loading='lazy'
                 alt=''
-                class='corner is-bottom-left hide-on-mobile'
+                class='corner is-bottom-left'
               >
               <img
                 src='{{ 'corner_top-right.svg' | asset_url }}'
@@ -63,21 +63,33 @@
             </div>
           </div>
           <div
-            class='max-width-large'
+            class='max-width-large interactive_manual-hit-area'
           >
             <div class='interactive_manual-images'>
-              <img
-                src='{{ 'open-manual-empty.webp' | asset_url }}'
-                loading='lazy'
-                alt=''
-                class='interactive_manual'
-              >
-              <img
-                src='{{ 'open-manual-fill.webp' | asset_url }}'
-                loading='lazy'
-                alt=''
-                class='interactive_manual interactive_manual-fill'
-              >
+              <picture>
+                <source
+                  media='(max-width: 991px)'
+                  srcset='{{ 'open-manual-empty-mobile.webp' | asset_url }}'
+                >
+                <img
+                  src='{{ 'open-manual-empty.webp' | asset_url }}'
+                  loading='lazy'
+                  alt=''
+                  class='interactive_manual'
+                >
+              </picture>
+              <picture>
+                <source
+                  media='(max-width: 991px)'
+                  srcset='{{ 'open-manual-fill-mobile.webp' | asset_url }}'
+                >
+                <img
+                  src='{{ 'open-manual-fill.webp' | asset_url }}'
+                  loading='lazy'
+                  alt=''
+                  class='interactive_manual interactive_manual-fill'
+                >
+              </picture>
             </div>
           </div>
         </div>
@@ -104,10 +116,38 @@
 
 {% javascript %}
   document.addEventListener('DOMContentLoaded', function () {
-    var toggle = document.querySelector('.interactive_toggle-input');
+    var container = document.querySelector('.interactive_manual-images');
+    var hoverZone = document.querySelector('.interactive_manual-hit-area');
     var fillImage = document.querySelector('.interactive_manual-fill');
+    var toggle = document.querySelector('.interactive_toggle-input');
 
-    if (toggle && fillImage) {
+    if (!container || !hoverZone || !fillImage) return;
+
+    /* Desktop: hover reveal with radial gradient following mouse */
+    hoverZone.addEventListener('mouseenter', function () {
+      fillImage.classList.add('is-hover');
+    });
+
+    hoverZone.addEventListener('mouseleave', function () {
+      fillImage.classList.remove('is-hover');
+    });
+
+    hoverZone.addEventListener('mousemove', function (e) {
+      var rect = container.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+
+      if (x < 0) x = 0;
+      if (x > rect.width) x = rect.width;
+      if (y < 0) y = 0;
+      if (y > rect.height) y = rect.height;
+
+      fillImage.style.setProperty('--mouse-x', x + 'px');
+      fillImage.style.setProperty('--mouse-y', y + 'px');
+    });
+
+    /* Tablet/Mobile: toggle fallback */
+    if (toggle) {
       toggle.addEventListener('change', function () {
         if (this.checked) {
           fillImage.classList.add('is-active');
