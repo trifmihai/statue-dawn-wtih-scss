@@ -40,7 +40,7 @@
         "type": "text",
         "id": "cta_secondary",
         "label": "Secondary CTA (Free Sample)",
-        "default": "Free Sample (38 pages)"
+        "default": "Free Sample (33 pages)"
       },
       {
         "type": "header",
@@ -50,7 +50,7 @@
         "type": "text",
         "id": "lead_gen_button",
         "label": "Lead Gen Submit Button",
-        "default": "Get Free Sample (38 pages)"
+        "default": "Get Free Sample (33 pages)"
       },
       {
         "type": "text",

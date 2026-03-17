@@ -2878,7 +2878,7 @@ figcaption {
 
 .navbar_link:hover {
   color: var(--color--text--dark--primary);
-  border: 0 solid #000;
+  border: none;
 }
 
 .navbar_link.w--current {

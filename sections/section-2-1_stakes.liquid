@@ -1,3 +1,542 @@
+<style>
+  /* =============================================
+     Section: Stakes Narrative (section-2-1)
+     Layout-only CSS — typography via global utility classes
+     ============================================= */
+
+  /* ---------- Old Way Card ---------- */
+  .sn_old-way {
+    background-color: var(--neutral--100);
+    border: 1px solid var(--neutral--400);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 0.75rem 0.75rem;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+  }
+
+  /* heading-style-h6.is-stakes gives Playfair + 1.75rem + w600;
+     override font-size to h5-scale for the 2rem Figma spec */
+  .sn_card-title {
+    font-size: var(--_responsive---heading-size--h5);
+    line-height: var(--_responsive---heading-line-height--h5);
+    margin: 0;
+  }
+
+  .sn_old-way-inner {
+    background-color: white;
+    border: 1px solid var(--neutral--300);
+    padding: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* ---------- Highlight Mark ---------- */
+  .sn_highlight-mark {
+    background-color: #fdc6c2;
+    padding: 0 0.25rem;
+    font-weight: 600;
+  }
+
+  /* ---------- Speech Bubble Row ---------- */
+  .sn_speech-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .sn_you-tag {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  /* text-weight-medium + text-align-center on element;
+     only custom font-size (0.66rem) kept here */
+  .sn_you-tag-text {
+    font-size: 0.66rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sn_tag-line {
+    position: absolute;
+    background-color: var(--brand--500);
+  }
+
+  .sn_tag-line.is-top {
+    top: 0;
+    left: -4px;
+    right: -4px;
+    height: 1px;
+  }
+
+  .sn_tag-line.is-bottom {
+    bottom: 0;
+    left: -4px;
+    right: -4px;
+    height: 1px;
+  }
+
+  .sn_tag-line.is-left {
+    left: 0;
+    top: -4px;
+    bottom: -4px;
+    width: 1px;
+  }
+
+  .sn_tag-line.is-right {
+    right: 0;
+    top: -4px;
+    bottom: -4px;
+    width: 1px;
+  }
+
+  .sn_speech-bubble {
+    background-color: white;
+    border: 1px solid var(--neutral--400);
+    padding: 0.75rem 1.5rem;
+    width: 241px;
+    text-align: center;
+  }
+
+  .sn_speech-bubble.is-left-aligned {
+    text-align: left;
+  }
+
+  /* ---------- Cycle / Warning Box ---------- */
+  .sn_cycle-box {
+    background-color: white;
+    border: 1px solid var(--neutral--300);
+    padding: 1.5rem 2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* text-size-medium text-weight-bold text-align-center on element;
+     only custom color kept here */
+  .sn_cycle-text {
+    color: #9c4a44;
+  }
+
+  /* ---------- Vertical Connectors ---------- */
+  .sn_vline {
+    width: 1px;
+    height: 64px;
+    background-color: var(--neutral--400);
+    flex-shrink: 0;
+  }
+
+  /* ---------- Transition Card ---------- */
+  .sn_transition {
+    background-color: white;
+    border: 1px solid var(--neutral--400);
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  /* ---------- Musashi Way ---------- */
+  .sn_musashi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 1086px;
+  }
+
+  .sn_musashi-title-card {
+    background-color: var(--brand--50);
+    border: 1px solid var(--brand--300);
+    padding: 0.75rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: max-content;
+    box-shadow: 0 1px 2px rgba(34, 34, 34, 0.05);
+  }
+
+  .sn_musashi-title-inner {
+    background-color: white;
+    border: 1px solid var(--brand--500);
+    padding: 2rem;
+  }
+
+  /* ---------- Steps Area ---------- */
+  .sn_steps-area {
+    position: relative;
+    width: 100%;
+    padding: 2rem 0;
+  }
+
+  .sn_steps-bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 74%;
+    height: 100%;
+    background-color: #fdfdfb;
+    border: 1px solid var(--brand--300);
+    z-index: 0;
+  }
+
+  .sn_curves-svg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 74%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ---------- Step Row ---------- */
+  .sn_step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2.5rem 0;
+    justify-content: center;
+  }
+
+  .sn_step.is-step-2 {
+    flex-direction: row-reverse;
+  }
+
+  /* ---------- Step Content ---------- */
+  .sn_step-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 387px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .sn_step-badge {
+    background-color: var(--brand--50);
+    border: 1px solid var(--neutral--400);
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .sn_step-badge span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .sn_badge-line {
+    position: absolute;
+    background-color: var(--brand--500);
+  }
+
+  .sn_badge-line.is-top {
+    top: -1px;
+    left: -7px;
+    right: -7px;
+    height: 1px;
+  }
+
+  .sn_badge-line.is-bottom {
+    bottom: -1px;
+    left: -7px;
+    right: -7px;
+    height: 1px;
+  }
+
+  .sn_badge-line.is-left {
+    left: -1px;
+    top: -1px;
+    bottom: -1px;
+    width: 1px;
+  }
+
+  .sn_badge-line.is-right {
+    right: -1px;
+    top: -1px;
+    bottom: -1px;
+    width: 1px;
+  }
+
+  .sn_step-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  /* text-size-large on element provides Satoshi 1.25rem/1.4;
+     override to Playfair + dark-primary + w600 for this section */
+  .sn_step-heading {
+    font-family: var(--_typography---h-root_size--primary-font);
+    font-weight: 600;
+    color: var(--color--text--dark--primary);
+    margin: 0;
+  }
+
+  /* ---------- Polaroid Photo ---------- */
+  .sn_polaroid {
+    background-color: var(--brand--50);
+    padding: 0.75rem 0.75rem 2rem;
+    width: 15rem;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow:
+      1px 4px 10px rgba(90, 86, 43, 0.1),
+      5px 17px 18px rgba(90, 86, 43, 0.09),
+      12px 39px 24px rgba(90, 86, 43, 0.05);
+  }
+
+  .sn_polaroid.is-tilt-left {
+    transform: rotate(-11deg);
+  }
+
+  .sn_polaroid.is-tilt-right {
+    transform: rotate(11deg);
+  }
+
+  .sn_polaroid-tape {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5rem;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .sn_polaroid-tape.is-step-1 {
+    top: -13.5%;
+    left: 52%;
+    z-index: -10;
+  }
+
+  .sn_polaroid-tape.is-step-2 {
+    top: -13.5%;
+    left: 57%;
+    z-index: -10;
+  }
+
+  .sn_polaroid-tape.is-step-3 {
+    top: -13.5%;
+    left: 59%;
+    z-index: -10;
+  }
+
+  .sn_polaroid-image {
+    background-color: white;
+    width: 100%;
+    height: 212px;
+    overflow: hidden;
+  }
+
+  .sn_polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- Desktop Step Layout ---------- */
+  @media screen and (min-width: 992px) {
+    .sn_steps-area {
+      min-height: 1050px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sn_step {
+      width: 100%;
+      max-width: 1086px;
+    }
+
+    .sn_step.is-step-1 {
+      padding-top: 10rem;
+    }
+
+    .sn_step.is-step-1 .sn_polaroid {
+      margin-right: 2rem;
+    }
+
+    .sn_step.is-step-2 .sn_polaroid {
+      margin-left: 2rem;
+    }
+
+    .sn_step.is-step-3 .sn_polaroid {
+      margin-right: 2rem;
+    }
+  }
+
+  /* ---------- Tablet (max-width: 991px) ---------- */
+  @media screen and (max-width: 991px) {
+    .sn_old-way {
+      max-width: 100%;
+    }
+
+    .sn_old-way-inner {
+      padding: 1.5rem;
+    }
+
+    .sn_speech-row {
+      flex-wrap: wrap;
+    }
+
+    .sn_speech-bubble {
+      width: auto;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .sn_transition {
+      max-width: 100%;
+    }
+
+    .sn_musashi {
+      max-width: 100%;
+    }
+
+    .sn_steps-area {
+      padding-top: 6rem;
+    }
+
+    .sn_steps-bg {
+      width: 90%;
+    }
+
+    .sn_curves-svg {
+      display: none;
+    }
+
+    .sn_step {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .sn_step.is-step-2 {
+      flex-direction: column;
+    }
+
+    .sn_step-text {
+      max-width: 100%;
+    }
+
+    .sn_step-copy {
+      align-items: center;
+    }
+
+    .sn_step-heading {
+      text-align: center;
+    }
+
+    .sn_polaroid {
+      width: 200px;
+    }
+
+    .sn_polaroid-image {
+      height: 170px;
+    }
+  }
+
+  /* ---------- Mobile Landscape (max-width: 767px) ---------- */
+  @media screen and (max-width: 767px) {
+    .sn_old-way-inner {
+      padding: 1.25rem;
+    }
+
+    .sn_polaroid {
+      width: 180px;
+    }
+
+    .sn_polaroid-image {
+      height: 150px;
+    }
+
+    .sn_steps-bg {
+      width: 95%;
+    }
+
+    .sn_vline {
+      height: 40px;
+    }
+  }
+
+  /* ---------- Mobile Portrait (max-width: 479px) ---------- */
+  @media screen and (max-width: 479px) {
+    .sn_old-way-inner {
+      padding: 1rem;
+      gap: 0.75rem;
+    }
+
+    .sn_speech-row {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sn_speech-bubble {
+      width: 100%;
+      min-width: unset;
+    }
+
+    .sn_cycle-box {
+      padding: 1rem;
+    }
+
+    .sn_step-text {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sn_polaroid {
+      width: 160px;
+    }
+
+    .sn_polaroid-image {
+      height: 130px;
+    }
+
+    .sn_steps-bg {
+      width: 100%;
+      left: 0;
+      transform: none;
+    }
+
+    .sn_step {
+      padding: 1.5rem 1rem;
+    }
+  }
+</style>
+
 <section class='section_stakes'>
   <div class='padding-global'>
     <div class='container-large is-line'>
@@ -6,157 +545,302 @@
       </div>
       <div class='content-wrapper is-stakes'>
         <div class='spacer-xhuge'></div>
+
+        {%- comment -%} ===== HEADING ===== {%- endcomment -%}
         <div class='stakes_header'>
           <div class='max-width-small'>
             <h2 class='heading-style-h3 text-align-center'>
-              <span>Motivation is a Lie. And You Know It.</span>
+              <span>
+                Motivation is a Lie.
+                <br>
+                And You Know It.
+              </span>
             </h2>
           </div>
-
         </div>
-        <div class='spacer-large'></div>
-        <div class='stakes_container'>
-          <div data-figma-id='8814:23461' class='stakes_item is-first'>
-            <div data-figma-id='8814:23462' class='stakes_item-content'>
-              <div class="stakes_item-headline">
-                <p class='text-size-large is-stakes'>Old Way</p>
-                <h3 data-figma-id='8814:23464' class='text-size-xlarge is-stakes'>
-                  The Motivation Trap
-                </h3>
-              </div>
-              <div data-figma-id='8814:23465' class='stakes_list'>
-                <div data-figma-id='8814:23466' class='stakes_list-item'>
-                  <div data-figma-id='8814:23467' class='stakes_icon'>
-                    <img
-                      src={{ 'red-x-icon.svg' | asset_url }}
-                      loading='lazy'
-                      alt=''
-                      class='stakes_icon-info'>
-                  </div>
-                  <p class='text-size-regular'>
-                    <strong>Dopamine Chasing:</strong>
-                    Most people watch a video, get pumped, grind for 3 days, and burn out by Wednesday.
-                  </p>
-                </div>
-                <div data-figma-id='8814:23474' class='stakes_list-item'>
-                  <div data-figma-id='8814:23475' class='stakes_icon'>
-                    <img
-                      src={{ 'red-x-icon.svg' | asset_url }}
-                      loading='lazy'
-                      alt=''
-                      class='stakes_icon-info'>
-                  </div>
-                  <p class='text-size-regular'>
 
-                    <strong>The Guilt Spiral:</strong>
-                    Most people think perfection is the only option. One missed day and they quit.
-                  </p>
-                </div>
-                <div data-figma-id='8814:23482' class='stakes_list-item'>
-                  <div data-figma-id='8814:23483' class='stakes_icon'>
-                    <img
-                      src={{ 'red-x-icon.svg' | asset_url }}
-                      loading='lazy'
-                      alt=''
-                      class='stakes_icon-info'>
-                  </div>
-                  <p class='text-size-regular'>
-                    <strong>Emotional Dependency:</strong>
-                    Most people wait to feel "inspired". If the mood isn't right, nothing gets done.
-                  </p>
-
-                </div>
-              </div>
-            </div>
-            <img
-              src={{ 'corner_top-left.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-top-left'>
-            <img
-              src={{ 'corner_bottom-left.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-left hide-on-mobile'>
-            <img
-              src={{ 'corner_top-right.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-top-right is-mobile'>
-          </div>
-          <div data-figma-id='8814:23461' class='stakes_item is-last'>
-            <div data-figma-id='8814:23462' class='stakes_item-content'>
-              <div class="stakes_item-headline">
-                <p class='text-size-large is-stakes'>Musashi Way</p>
-                <h3 data-figma-id='8814:23464' class='text-size-xlarge is-stakes'>
-                  The Disciplined Mind
-                </h3>
-              </div>
-              <div data-figma-id='8814:23465' class='stakes_list'>
-                <div data-figma-id='8814:23466' class='stakes_list-item'>
-                  <div data-figma-id='8814:23467' class='stakes_icon'>
-                    <img
-                      src={{ 'check-circle.svg' | asset_url }}
-                      loading='lazy'
-                      alt=''
-                      class='stakes_icon-info'>
-                  </div>
-                  <p class='text-size-regular'>
-                    <strong>Clarity:</strong>
-                    The protocol gives you a step-by-step roadmap. You never wake up wondering "what to do next?"
-                  </p>
-                </div>
-                <div data-figma-id='8814:23474' class='stakes_list-item'>
-                  <div data-figma-id='8814:23475' class='stakes_icon'>
-                    <img
-                      src={{ 'check-circle.svg' | asset_url }}
-                      loading='lazy'
-                      alt=''
-                      class='stakes_icon-info'>
-                  </div>
-                  <p class='text-size-regular'>
-                    <strong>Progress:</strong>
-                    The system is designed to keep you moving. You trade the "all-or-nothing" grind for stackable wins.
-                  </p>
-                </div>
-                <div data-figma-id='8814:23482' class='stakes_list-item'>
-                  <div data-figma-id='8814:23483' class='stakes_icon'>
-                    <img
-                      src={{ 'check-circle.svg' | asset_url }}
-                      loading='lazy'
-                      alt=''
-                      class='stakes_icon-info'>
-                  </div>
-                  <p class='text-size-regular'>
-                    <strong>Automatic Discipline:</strong>
-                    You stop negotiating with yourself and become the person who follows through.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <img
-              src={{ 'corner_bottom-left.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-left hide-desktop'>
-            <img
-              src={{ 'corner_bottom-right.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-right'>
-            <img
-              src={{ 'corner_top-right.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-top-right hide-on-mobile'>
-            <img
-              src={{ 'corner_bottom-left.svg' | asset_url }}
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-left is-mobile'>
-          </div>
-        </div>
         <div class='spacer-medium'></div>
+
+        {%- comment -%} ===== THE OLD WAY ===== {%- endcomment -%}
+        <div class='sn_old-way'>
+          <img
+            src='{{ "corner_top-left.svg" | asset_url }}'
+            loading='lazy'
+            alt=''
+            class='corner is-top-left'
+          >
+          <img
+            src='{{ "corner_top-right.svg" | asset_url }}'
+            loading='lazy'
+            alt=''
+            class='corner is-top-right'
+          >
+          <img
+            src='{{ "corner_bottom-left.svg" | asset_url }}'
+            loading='lazy'
+            alt=''
+            class='corner is-bottom-left'
+          >
+          <img
+            src='{{ "corner_bottom-right.svg" | asset_url }}'
+            loading='lazy'
+            alt=''
+            class='corner is-bottom-right'
+          >
+          <p class='heading-style-h6 is-stakes text-align-center sn_card-title'>The Old Way</p>
+          <div class='sn_old-way-inner'>
+            <p class='text-size-medium'>You've felt the fire before.</p>
+
+            <div>
+              <p class='text-size-medium'>You set the alarm. You write the goals. You told yourself:</p>
+            </div>
+
+            <div class='sn_speech-row'>
+              <div class='sn_you-tag'>
+                <span class='text-weight-medium text-align-center sn_you-tag-text'>YOU</span>
+                <div class='sn_tag-line is-top'></div>
+                <div class='sn_tag-line is-bottom'></div>
+                <div class='sn_tag-line is-left'></div>
+                <div class='sn_tag-line is-right'></div>
+              </div>
+              <div class='sn_speech-bubble'>
+                <p class='text-size-medium'>&ldquo;This time is real.&rdquo;</p>
+              </div>
+            </div>
+
+            <p class='text-size-medium'>
+              But by Day 4, it was over.
+              <mark class='sn_highlight-mark'>It didn't stick.</mark>
+            </p>
+
+            <p class='text-size-medium'>Not because something dramatic happened.</p>
+
+            <div>
+              <p class='text-size-medium'>
+                But because
+                <strong>old ways</strong>
+                depend on motivation to run:
+              </p>
+            </div>
+
+            <div class='sn_cycle-box'>
+              <p class='text-size-medium text-weight-bold text-align-center sn_cycle-text'>
+                No motivation &rarr; No action &rarr; Guilt
+              </p>
+            </div>
+
+            <div class='sn_speech-row'>
+              <div class='sn_you-tag'>
+                <span class='text-weight-medium text-align-center sn_you-tag-text'>YOU</span>
+                <div class='sn_tag-line is-top'></div>
+                <div class='sn_tag-line is-bottom'></div>
+                <div class='sn_tag-line is-left'></div>
+                <div class='sn_tag-line is-right'></div>
+              </div>
+              <div class='sn_speech-bubble is-left-aligned'>
+                <p class='text-size-medium'>&ldquo;I'll restart on Monday&rdquo;</p>
+              </div>
+            </div>
+
+            <p class='text-size-medium'>
+              And
+              <strong>Monday never happens</strong>
+              . Why?
+            </p>
+
+            <p class='text-size-medium'>
+              Nothing keeps you going
+              <mark class='sn_highlight-mark'>when motivation fades.</mark>
+            </p>
+          </div>
+        </div>
+
+        {%- comment -%} ===== CONNECTOR ===== {%- endcomment -%}
+        <div class='sn_vline'></div>
+
+        {%- comment -%} ===== TRANSITION CARD ===== {%- endcomment -%}
+        <div class='sn_transition'>
+          <p class='text-size-medium text-align-center'>But what if something did?</p>
+          <p class='text-size-medium text-align-center'>
+            <strong>A protocol</strong>
+            designed to
+            <strong>replace motivation.</strong>
+          </p>
+        </div>
+
+        {%- comment -%} ===== CONNECTOR ===== {%- endcomment -%}
+        <div class='sn_vline'></div>
+
+        {%- comment -%} ===== THE MUSASHI WAY ===== {%- endcomment -%}
+        <div class='sn_musashi'>
+          <div class='sn_steps-area'>
+            <div class='sn_musashi-title-card'>
+              <img
+                src='{{ "corner_top-left.svg" | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-top-left'
+              >
+              <img
+                src='{{ "corner_top-right.svg" | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-top-right'
+              >
+              <img
+                src='{{ "corner_bottom-left.svg" | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-bottom-left'
+              >
+              <img
+                src='{{ "corner_bottom-right.svg" | asset_url }}'
+                loading='lazy'
+                alt=''
+                class='corner is-bottom-right'
+              >
+              <div class='sn_musashi-title-inner'>
+                <p class='heading-style-h6 is-stakes text-align-center sn_card-title'>The Musashi Way</p>
+              </div>
+            </div>
+            <div class='sn_steps-bg'></div>
+
+            {%- comment -%} SVG connector curves (desktop only) {%- endcomment -%}
+            <svg
+              class='sn_curves-svg'
+              viewBox='0 0 803 1050'
+              preserveAspectRatio='none'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path d='M401 0 C401 80, 320 120, 250 200 C180 280, 140 300, 140 350' stroke='var(--neutral--400)' stroke-width='1' fill='none'/>
+              <path d='M140 350 C140 420, 200 480, 350 520 C500 560, 660 580, 660 650' stroke='var(--neutral--400)' stroke-width='1' fill='none'/>
+              <path d='M660 650 C660 720, 580 780, 400 830 C220 880, 140 920, 140 1000' stroke='var(--neutral--400)' stroke-width='1' fill='none'/>
+            </svg>
+
+            {%- comment -%} ===== STEP 1 ===== {%- endcomment -%}
+            <div class='sn_step is-step-1'>
+              <div class='sn_polaroid is-tilt-left'>
+                <img
+                  src='{{ "pin.webp" | asset_url }}'
+                  alt=''
+                  aria-hidden='true'
+                  class='sn_polaroid-tape is-step-1'
+                  loading='lazy'
+                >
+                <div class='sn_polaroid-image'>
+                  <img
+                    src='{{ "step_1_image.webp" | asset_url }}'
+                    loading='lazy'
+                    alt='Person standing outdoors with arms outstretched, symbolizing clarity and direction.'
+                  >
+                </div>
+              </div>
+              <div class='sn_step-text'>
+                <div class='sn_step-badge'>
+                  <span class='text-size-regular text-weight-semibold'>1</span>
+                  <div class='sn_badge-line is-top'></div>
+                  <div class='sn_badge-line is-bottom'></div>
+                  <div class='sn_badge-line is-left'></div>
+                  <div class='sn_badge-line is-right'></div>
+                </div>
+                <div class='sn_step-copy'>
+                  <p class='text-size-large sn_step-heading'>
+                    Replace &ldquo;figuring it out&rdquo;
+                    <br>
+                    with a clear 5-week roadmap
+                  </p>
+                  <p class='text-size-regular'>
+                    <strong>No guesswork.</strong>
+                    You turn the page and the protocol tells you what's next.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {%- comment -%} ===== STEP 2 ===== {%- endcomment -%}
+            <div class='sn_step is-step-2'>
+              <div class='sn_polaroid is-tilt-right'>
+                <img
+                  src='{{ "pin.webp" | asset_url }}'
+                  alt=''
+                  aria-hidden='true'
+                  class='sn_polaroid-tape is-step-2'
+                  loading='lazy'
+                >
+                <div class='sn_polaroid-image'>
+                  <img
+                    src='{{ "step_2_image.webp" | asset_url }}'
+                    loading='lazy'
+                    alt='Scenic landscape representing small daily progress and stacked wins.'
+                  >
+                </div>
+              </div>
+              <div class='sn_step-text'>
+                <div class='sn_step-badge'>
+                  <span class='text-size-regular text-weight-semibold'>2</span>
+                  <div class='sn_badge-line is-top'></div>
+                  <div class='sn_badge-line is-bottom'></div>
+                  <div class='sn_badge-line is-left'></div>
+                  <div class='sn_badge-line is-right'></div>
+                </div>
+                <div class='sn_step-copy'>
+                  <p class='text-size-large sn_step-heading'>
+                    Replace big commitments
+                    <br>
+                    with simple 5&ndash;10 minute logs
+                  </p>
+                  <p class='text-size-regular'>
+                    <strong>Stack wins.</strong>
+                    The logs are guided and designed to keep you moving even on bad days.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {%- comment -%} ===== STEP 3 ===== {%- endcomment -%}
+            <div class='sn_step is-step-3'>
+              <div class='sn_polaroid is-tilt-left'>
+                <img
+                  src='{{ "pin.webp" | asset_url }}'
+                  alt=''
+                  aria-hidden='true'
+                  class='sn_polaroid-tape is-step-3'
+                  loading='lazy'
+                >
+                <div class='sn_polaroid-image'>
+                  <img
+                    src='{{ "step_3_image.webp" | asset_url }}'
+                    loading='lazy'
+                    alt='Pathway through nature representing transformation from motivation to lasting discipline.'
+                  >
+                </div>
+              </div>
+              <div class='sn_step-text'>
+                <div class='sn_step-badge'>
+                  <span class='text-size-regular text-weight-semibold'>3</span>
+                  <div class='sn_badge-line is-top'></div>
+                  <div class='sn_badge-line is-bottom'></div>
+                  <div class='sn_badge-line is-left'></div>
+                  <div class='sn_badge-line is-right'></div>
+                </div>
+                <div class='sn_step-copy'>
+                  <p class='text-size-large sn_step-heading'>
+                    Become disciplined &amp; break free from the motivation trap
+                  </p>
+                  <p class='text-size-regular'>
+                    <strong>Not a feeling, but proof.</strong>
+                    Each week ends with a recap so you can see real evidence of change.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='spacer-medium'></div>
+
+        {%- comment -%} ===== CTA BUTTON ===== {%- endcomment -%}
         <div class='button-group'>
           <div class='button-wrapper'>
             <a href='#section-pricing' class='button is-default w-inline-block'>
@@ -168,6 +852,7 @@
             </a>
           </div>
         </div>
+
         <div class='spacer-xhuge'></div>
       </div>
       <div class='line-wrapper'>
@@ -176,3 +861,15 @@
     </div>
   </div>
 </section>
+
+{% schema %}
+{
+  "name": "Section: Stakes Narrative",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Section: Stakes Narrative"
+    }
+  ]
+}
+{% endschema %}
