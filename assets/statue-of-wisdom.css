@@ -497,7 +497,8 @@ figcaption {
 
 .heading-style-h6.is-benefit-heading,
 .heading-style-h6.is-interactive,
-.text-size-xlarge.is-interactive {
+.text-size-xlarge.is-interactive,
+.text-size-xlarge.is-medium {
   font-weight: 600;
 }
 
@@ -7473,8 +7474,8 @@ figcaption {
     --_responsive---p-size--p-regular: var(--_typography---p-root_size--rp-regular);
     --_responsive---p-size--p-small: var(--_typography---p-root_size--rp-small);
     --_responsive---p-line-height--p-small: var(--_typography---p-root_line-height--rp-small);
-    --_responsive---p-size--p-xlarge: var(--_typography---p-root_size--rp-xlarge);
-    --_responsive---p-line-height--p-xlarge: var(--_typography---p-root_line-height--rp-xlarge);
+    --_responsive---p-size--p-xlarge: var(--_typography---p-root_size--rp-large);
+    --_responsive---p-line-height--p-xlarge: var(--_typography---p-root_line-height--rp-large);
     --_spacing---spacing--tiny: var(--_spacing---size--4);
     --_spacing---spacing--xxsmall: var(--_spacing---size--8);
     --_spacing---spacing--xsmall: var(--_spacing---size--16);
@@ -8316,6 +8317,11 @@ figcaption {
 }
 
 @media screen and (max-width: 479px) {
+  /*? FOOTER */
+  .footer_inner-wrapper{
+    padding: 2rem 1.25rem;
+  }
+
   .hide-mobile-portrait {
     display: none;
   }

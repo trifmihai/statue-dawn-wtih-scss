@@ -38,11 +38,7 @@
         "alt_musashi_ai_coach": "Illustration of a chat interface with text boxes and a framed black-and-white portrait of a man with a beard and a bun."
       }
     },
-      "stakes-1": {
-      "type": "section-2-1_stakes",
-      "settings": {}
-    },
-      "interactive": {
+    "interactive": {
       "type": "section-3-1_interactive",
       "settings": {}
     },
@@ -107,5 +103,17 @@
       }
     }
   },
-  "order": ["hero", "value_stack", "stakes", "stakes-1", "interactive", "summary", "plan", "testimonials", "pricing", "faq", "lead_gen", "footer"]
+  "order": [
+    "hero",
+    "value_stack",
+    "stakes",
+    "interactive",
+    "summary",
+    "plan",
+    "testimonials",
+    "pricing",
+    "faq",
+    "lead_gen",
+    "footer"
+  ]
 }
