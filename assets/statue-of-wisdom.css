@@ -3101,6 +3101,77 @@ figcaption {
   position: relative;
 }
 
+/* Hero benefit callouts are anchored to the desktop hero image so they scale with it. */
+.hero_visual-wrapper {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  overflow: visible;
+}
+
+.hero_visual {
+  --hero-benefit-1-width: 24.04%;
+  --hero-benefit-1-top: 39.53%;
+  --hero-benefit-1-left: -15.17%;
+  --hero-benefit-2-width: 27.42%;
+  --hero-benefit-2-top: 21.81%;
+  --hero-benefit-2-right: -17.04%;
+  --hero-benefit-3-width: 26.49%;
+  --hero-benefit-3-top: 66.09%;
+  --hero-benefit-3-right: -16.10%;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: min(100%, 53.5625rem);
+  max-width: 100%;
+  display: inline-flex;
+  overflow: visible;
+}
+
+.hero_visual .main-image.is-hero {
+  width: 100%;
+  display: block;
+}
+
+.hero_benefits {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.hero_benefit {
+  position: absolute;
+  display: block;
+  height: auto;
+}
+
+.hero_benefit.is-benefit-1 {
+  width: var(--hero-benefit-1-width);
+  max-width: 12.875rem;
+  top: var(--hero-benefit-1-top);
+  left: var(--hero-benefit-1-left);
+}
+
+.hero_benefit.is-benefit-2 {
+  width: var(--hero-benefit-2-width);
+  max-width: 14.6875rem;
+  top: var(--hero-benefit-2-top);
+  right: var(--hero-benefit-2-right);
+}
+
+.hero_benefit.is-benefit-3 {
+  width: var(--hero-benefit-3-width);
+  max-width: 14.1875rem;
+  top: var(--hero-benefit-3-top);
+  right: var(--hero-benefit-3-right);
+}
+
+@media screen and (max-width: 1244px) {
+  .hero_benefits {
+    display: none;
+  }
+}
+
 .button__note {
   grid-column-gap: 8px;
   flex: 0 auto;
@@ -7096,8 +7167,11 @@ figcaption {
 
 .lead-gen_asset {
   aspect-ratio: 573 / 510;
-  width: 100%;
+  width: 90%;
+  max-width: 90%;
   height: auto;
+  margin: 0 auto;
+  display: block;
 }
 
 .lead-gen_items {
@@ -8516,7 +8590,11 @@ figcaption {
     height: 100%;
   }
 
-  .main-image.is-hero {
+  .hero_visual .main-image.is-hero {
+    display: none;
+  }
+
+  .hero_benefits {
     display: none;
   }
 

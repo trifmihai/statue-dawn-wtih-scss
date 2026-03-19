@@ -32,10 +32,11 @@
           </div>
           <div class='hero_image-wrapper'>
             <img
-              src="{{ 'hero-image_mobile-responsive.png' | asset_url }}"
+              src='{{ 'hero-image_mobile-responsive.webp' | asset_url }}'
               loading='lazy'
-              alt="{{ section.settings.hero_image_mobile_alt }}"
-              class='hero-image is-hide-on-desktop'>
+              alt='{{ section.settings.hero_image_mobile_alt }}'
+              class='hero-image is-hide-on-desktop'
+            >
           </div>
           <div data-figma-id='8779:19264' class='hero_bottom'>
             <div class='max-width-small'>
@@ -44,8 +45,6 @@
                   <strong>The life you want</strong>
                   depends on the discipline you build. Install this guided system to
                   <strong>make it permanent.</strong>
-
-
                 </p>
               </div>
             </div>
@@ -64,14 +63,48 @@
           </div>
         </div>
         <div class='spacer-xxlarge'></div>
-        <div class='image-wrapper'>
-          <img
-            src="{{ 'hero-image.webp' | asset_url }}"
-            loading='lazy'
-            sizes='(max-width: 2574px) 100vw, 2574px'
-            srcset="{{ 'hero-image-p-500.webp' | asset_url }} 500w, {{ 'hero-image-p-800.webp' | asset_url }} 800w, {{ 'hero-image-p-1080.webp' | asset_url }} 1080w, {{ 'hero-image-p-1600.webp' | asset_url }} 1600w, {{ 'hero-image-p-2000.webp' | asset_url }} 2000w, {{ 'hero-image.webp' | asset_url }} 2574w"
-            alt="{{ section.settings.hero_image_alt }}"
-            class='main-image is-hero'>
+        <div class='image-wrapper hero_visual-wrapper'>
+          <div class='hero_visual'>
+            <img
+              src='{{ 'hero-image.webp' | asset_url }}'
+              loading='lazy'
+              alt='{{ section.settings.hero_image_alt }}'
+              class='main-image is-hero'
+            >
+            <div class='hero_benefits' aria-hidden='true'>
+              <img
+                src='{{ 'hero_benefit-1.png' | asset_url }}'
+                alt=''
+                width='418'
+                height='165'
+                loading='eager'
+                fetchpriority='low'
+                decoding='async'
+                class='hero_benefit is-benefit-1'
+              >
+              <img
+                src='{{ 'hero_benefit-2.png' | asset_url }}'
+                alt=''
+                width='470'
+                height='161'
+                loading='eager'
+                fetchpriority='low'
+                decoding='async'
+                class='hero_benefit is-benefit-2'
+              >
+              <img
+                src='{{ 'hero_benefit-3.png' | asset_url }}'
+                alt=''
+                width='454'
+                height='160'
+                loading='eager'
+                fetchpriority='low'
+                decoding='async'
+                class='hero_benefit is-benefit-3'
+              >
+            </div>
+            <div class='visually-hidden'>Hero benefits: Sharpen Skills, See Progress, Build Proof.</div>
+          </div>
         </div>
         <div class='spacer-xxlarge hide-mobile-portrait'></div>
       </div>
@@ -89,28 +122,30 @@
 
 <!-- Your section's HTML and Liquid code here -->
 {% schema %}
-  {
-    "name": "Section: Hero",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Accessibility (Alt Text)"
-      }, {
-        "type": "text",
-        "id": "hero_image_mobile_alt",
-        "label": "Alt Text: mobile_hero-image",
-        "default": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration."
-      }, {
-        "type": "text",
-        "id": "hero_image_alt",
-        "label": "Alt Text: desktop_hero-image",
-        "default": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration."
-      }
-    ],
-    "presets": [
-      {
-        "name": "Section: Hero"
-      }
-    ]
-  }
+{
+  "name": "Section: Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Accessibility (Alt Text)"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_mobile_alt",
+      "label": "Alt Text: mobile_hero-image",
+      "default": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration."
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Alt Text: desktop_hero-image",
+      "default": "Cover of The Musashi Challenge book with subtitle '5 Weeks To Build Discipline That Doesn't Break' by Shelby CRC, shown in front of open pages with text and illustration."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Section: Hero"
+    }
+  ]
+}
 {% endschema %}
