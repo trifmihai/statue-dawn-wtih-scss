@@ -1,0 +1,59 @@
+{% comment %}
+  Shared CTA button markup for anchor-style buttons used across landing sections.
+
+  Accepts:
+  - href: destination URL
+  - text: button label
+  - variant: default | secondary
+  - button_classes: additional classes for the anchor
+  - content_classes: additional classes for .button_content
+  - text_classes: additional classes for the inner text element
+  - aria_label: optional aria-label value
+{% endcomment %}
+
+{%- liquid
+  assign variant = variant | default: 'default'
+
+  capture button_class_string
+    echo 'button'
+
+    if variant == 'secondary'
+      echo ' is-secondary'
+    else
+      echo ' is-default'
+    endif
+
+    if button_classes != blank
+      echo ' '
+      echo button_classes
+    endif
+
+    echo ' w-inline-block'
+  endcapture
+
+  if variant == 'secondary'
+    assign default_text_classes = 'text-size-regular is-secondary'
+  else
+    assign default_text_classes = 'text-size-regular is-primary'
+  endif
+
+  assign resolved_text_classes = text_classes | default: default_text_classes
+-%}
+
+<a
+  href='{{ href }}'
+  class='{{ button_class_string | strip }}'
+  {% if aria_label != blank %}
+    aria-label='{{ aria_label }}'
+  {% endif %}
+>
+  {%- if variant == 'secondary' -%}
+    <div class='{{ resolved_text_classes }}'>{{ text }}</div>
+  {%- else -%}
+    <div class='button_line is-top'></div>
+    <div class='button_content{% if content_classes != blank %} {{ content_classes }}{% endif %}'>
+      <div class='{{ resolved_text_classes }}'>{{ text }}</div>
+    </div>
+    <div class='button_line is-bottom'></div>
+  {%- endif -%}
+</a>

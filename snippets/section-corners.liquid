@@ -1,0 +1,32 @@
+{% comment %}
+  Shared decorative section corners used by card/frame wrappers across the theme.
+{% endcomment %}
+
+{%- liquid
+  assign loading = loading | default: 'lazy'
+-%}
+
+<img
+  src='{{ 'corner_top-left.svg' | asset_url }}'
+  loading='{{ loading }}'
+  alt=''
+  class='corner is-top-left'
+>
+<img
+  src='{{ 'corner_bottom-left.svg' | asset_url }}'
+  loading='{{ loading }}'
+  alt=''
+  class='corner is-bottom-left'
+>
+<img
+  src='{{ 'corner_top-right.svg' | asset_url }}'
+  loading='{{ loading }}'
+  alt=''
+  class='corner is-top-right'
+>
+<img
+  src='{{ 'corner_bottom-right.svg' | asset_url }}'
+  loading='{{ loading }}'
+  alt=''
+  class='corner is-bottom-right'
+>

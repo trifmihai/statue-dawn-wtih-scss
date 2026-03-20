@@ -1041,13 +1041,7 @@
         {%- comment -%} ===== CTA BUTTON ===== {%- endcomment -%}
         <div class='button-group'>
           <div class='button-wrapper'>
-            <a href='#section-pricing' class='button is-default w-inline-block'>
-              <div class='button_line is-top'></div>
-              <div class='button_content'>
-                <div class='text-size-regular is-primary'>{{ settings.cta_primary }}</div>
-              </div>
-              <div class='button_line is-bottom'></div>
-            </a>
+            {% render 'cta-button', href: '#section-pricing', text: settings.cta_primary %}
           </div>
         </div>
 
@@ -1059,53 +1053,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  (() => {
-    const sections = document.querySelectorAll('[data-sn-stakes-section]:not([data-sn-width-sync-initialized])');
-
-    if (!sections.length) return;
-
-    sections.forEach(section => {
-      section.dataset.snWidthSyncInitialized = 'true';
-
-      let frameId = 0;
-
-      const syncWidth = () => {
-        const source = section.querySelector('[data-sn-width-source]');
-
-        if (!source) return;
-
-        const { width } = source.getBoundingClientRect();
-
-        if (!width) return;
-
-        section.style.setProperty('--sn-path-title-width', `${width}px`);
-      };
-
-      const scheduleSync = () => {
-        if (frameId) cancelAnimationFrame(frameId);
-
-        frameId = requestAnimationFrame(() => {
-          frameId = 0;
-          syncWidth();
-        });
-      };
-
-      const source = section.querySelector('[data-sn-width-source]');
-
-      if (source && typeof ResizeObserver === 'function') {
-        const observer = new ResizeObserver(scheduleSync);
-        observer.observe(source);
-      } else {
-        window.addEventListener('resize', scheduleSync, { passive: true });
-      }
-
-      window.addEventListener('load', scheduleSync, { once: true });
-      scheduleSync();
-    });
-  })();
-</script>
 
 {% schema %}
 {

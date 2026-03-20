@@ -186,13 +186,7 @@
             </div>
           </div>
           <div class='button-wrapper is-plan'>
-            <a href='#section-pricing' class='button is-default w-inline-block'>
-              <div class='button_line is-top'></div>
-              <div class='button_content'>
-                <div class='text-size-regular is-primary'>{{ settings.cta_primary }}</div>
-              </div>
-              <div class='button_line is-bottom'></div>
-            </a>
+            {% render 'cta-button', href: '#section-pricing', text: settings.cta_primary %}
           </div>
         </div>
         <div class='plan_mountain-wrapper'>

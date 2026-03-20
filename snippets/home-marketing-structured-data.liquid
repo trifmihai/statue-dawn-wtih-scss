@@ -1,0 +1,140 @@
+{%- if request.page_type == 'index' -%}
+  <script type='application/ld+json'>
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The Musashi Challenge",
+      "description": "The 5-week Musashi Challenge to Build Unbreakable Discipline",
+      "brand": {
+        "@type": "Brand",
+        "name": "Musashi Challenge"
+      },
+      "image": [
+        {{ 'hero-image_mobile-responsive.png' | asset_url | json }},
+        {{ 'hero-image.webp' | asset_url | json }}
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "The Apprentice Pack",
+          "price": "38",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "The Apprentice Pack",
+            "description": "Printed book with 130+ pages"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "The Practitioner Pack",
+          "price": "39",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "The Practitioner Pack",
+            "description": "Printed book and eBook with 130+ pages, instant digital access"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "The Samurai Pack",
+          "price": "78",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "The Samurai Pack",
+            "description": "Complete pack with printed book, eBook, Notion Pocket Journal, 54-minute audio guide, and Musashi AI Coach with lifetime updates"
+          }
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "6"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "David Langford"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "the first one that actually stuck with me."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Ryan Carter"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "I didn't always have the book with me, so the audio guide and Notion journal on my phone really did it for me."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Claudia Criss"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "so much space to breathe."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Emma Ciurea"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "I had to write down so many great quotes."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Diana Muresan"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "My mind feels sooooo much better"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Nicholas Andronessi"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          },
+          "reviewBody": "If you keep starting over and over again, this is for you."
+        }
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Shelby CRC"
+      },
+      "category": "Self-Help & Personal Development"
+    }
+  </script>
+{%- endif -%}

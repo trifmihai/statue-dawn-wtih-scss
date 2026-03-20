@@ -1,28 +1,43 @@
+{% comment %}
+  SECTION: Navigation
+  PURPOSE: Render the persistent landing-page navigation, cart access, and primary CTA.
+  CMS DEPENDENCIES: Global theme setting `settings.cta_primary`, Shopify cart object, Shopify routes.
+  SNIPPETS USED: cta-button
+  LAST UPDATED: 2026-03-20
+  NOTES: Cart bubble behavior is initialized from `assets/custom.js` via data attributes.
+{% endcomment %}
+
 <div
   data-collapse='medium'
   data-animation='over-right'
   data-duration='400'
-  fs-scrolldisable-element='smart-nav'
   data-easing='ease'
   data-easing2='ease'
+  data-nav-root
+  fs-scrolldisable-element='smart-nav'
   role='banner'
-  class='navbar_component w-nav'>
+  class='navbar_component w-nav'
+>
   <div class='container-large'>
     <div class='nav_component'>
       <div class='nav_wrapper'>
         <div class='nav-content'>
           <a
-            href="{{ routes.root_url }}"
+            href='{{ routes.root_url }}'
             aria-current='page'
-            class='navbar_logo-link w-nav-brand w--current'>
+            aria-label='Musashi Challenge home'
+            class='navbar_logo-link w-nav-brand w--current'
+          >
             <img
-              width="132"
-              height="30"
-              alt=""
-              src="{{ 'statue-logo.svg' | asset_url }}"
-              loading="lazy"
-              class="navbar_logo" />
+              width='132'
+              height='30'
+              alt=''
+              src='{{ 'statue-logo.svg' | asset_url }}'
+              loading='lazy'
+              class='navbar_logo'
+            >
           </a>
+
           <div class='navbar_links'>
             <div class='navbar_link-wrapper'>
               <a href='#section-hero' class='navbar_link w-nav-link'>Home</a>
@@ -37,35 +52,43 @@
               <a href='#section-faq' class='navbar_link w-nav-link'>FAQ</a>
             </div>
           </div>
+
           <div class='navbar_cta-group'>
             <div class='navbar_cart-wrapper'>
               <a
-                href="{{ routes.cart_url }}"
-                class="navbar_cart-link w-nav-link"
-                id="cart-icon-bubble">
+                href='{{ routes.cart_url }}'
+                class='navbar_cart-link w-nav-link'
+                id='cart-icon-bubble'
+                aria-label='Open cart'
+              >
                 <img
-                  src="{{ 'shopping-bag.svg' | asset_url }}"
-                  alt="Shopping cart"
-                  width="28"
-                  height="28"
-                  class="navbar_cart-icon" />
+                  src='{{ 'shopping-bag.svg' | asset_url }}'
+                  alt='Shopping cart'
+                  width='28'
+                  height='28'
+                  class='navbar_cart-icon'
+                >
                 <div
-                  class="cart-count-bubble"
-                  data-cart-count="{{ cart.item_count }}"
-                  style="{% if cart.item_count == 0 %}display: none;{% endif %}">
-                  <span aria-hidden="true">{{ cart.item_count }}</span>
-                  <span class="visually-hidden">items in cart</span>
+                  class='cart-count-bubble'
+                  data-cart-count='{{ cart.item_count }}'
+                  data-cart-count-bubble
+                  {% if cart.item_count == 0 %}
+                    hidden
+                  {% endif %}
+                >
+                  <span aria-hidden='true' data-cart-count-value>{{ cart.item_count }}</span>
+                  <span class='visually-hidden'>items in cart</span>
                 </div>
               </a>
             </div>
+
             <div class='navbar_button-wrapper'>
-              <a href='#section-pricing' class='button is-default w-inline-block'>
-                <div class='button_line is-top'></div>
-                <div class='button_content is-nav'>
-                  <div class='text-size-regular is-primary'>{{ settings.cta_primary }}</div>
-                </div>
-                <div class='button_line is-bottom'></div>
-              </a>
+              {% render 'cta-button',
+                href: '#section-pricing',
+                text: settings.cta_primary,
+                button_classes: '',
+                content_classes: 'is-nav'
+              %}
             </div>
           </div>
         </div>
@@ -73,48 +96,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  // Update cart bubble count dynamically
-  function updateCartBubble(count) {
-    const bubble = document.querySelector('.cart-count-bubble');
-    if (!bubble) return;
-    
-    const countSpan = bubble.querySelector('span[aria-hidden="true"]');
-    if (countSpan) {
-      countSpan.textContent = count;
-    }
-    
-    // Show/hide based on count
-    if (count > 0) {
-      bubble.style.display = 'flex';
-    } else {
-      bubble.style.display = 'none';
-    }
-  }
-  
-  // Listen for Shopify cart events
-  document.addEventListener('cart:updated', function(event) {
-    const count = event.detail?.cart?.item_count ?? event.detail?.item_count ?? 0;
-    updateCartBubble(count);
-  });
-  
-  // Fallback: Poll cart API for changes (for apps that don't fire events)
-  let lastCartCount = {{ cart.item_count }};
-  
-  async function checkCartCount() {
-    try {
-      const response = await fetch('/cart.js');
-      const cart = await response.json();
-      if (cart.item_count !== lastCartCount) {
-        lastCartCount = cart.item_count;
-        updateCartBubble(cart.item_count);
-      }
-    } catch (e) {
-      // Silently fail
-    }
-  }
-  
-  // Check every 2 seconds for cart changes
-  setInterval(checkCartCount, 2000);
-</script>

@@ -78,36 +78,14 @@
                   class='lead-gen_asset'
                 >
               </div>
-              <img
-                src='{{ 'corner_bottom-left.svg' | asset_url }}'
-                loading='lazy'
-                alt=''
-                class='corner is-bottom-left'
-              >
-              <img
-                src='{{ 'corner_top-left.svg' | asset_url }}'
-                loading='lazy'
-                alt=''
-                class='corner is-top-left'
-              >
-              <img
-                src='{{ 'corner_top-right.svg' | asset_url }}'
-                loading='lazy'
-                alt=''
-                class='corner is-top-right'
-              >
-              <img
-                src='{{ 'corner_bottom-right.svg' | asset_url }}'
-                loading='lazy'
-                alt=''
-                class='corner is-bottom-right'
-              >
+              {% render 'section-corners' %}
             </div>
             <div class='form w-form'>
               <form
                 id='email-form'
                 name='mc-embedded-subscribe-form'
                 data-name='Email Form'
+                data-mailchimp-form
                 method='post'
                 action='https://shelbymedialtd.us20.list-manage.com/subscribe/post?u=5097958bce3377c0c230d6991&amp;id=1e11c3eda5&amp;f_id=003330eef0'
                 class='lead-gen_form'
@@ -160,7 +138,7 @@
                     >
                   </div>
                 </div>
-                <div aria-hidden='true' style='position: absolute; left: -5000px;'>
+                <div aria-hidden='true' class='visually-hidden'>
                   <input
                     type='text'
                     name='b_5097958bce3377c0c230d6991_1e11c3eda5'
@@ -207,30 +185,7 @@
                 class='lead-gen_asset'
               >
             </div>
-            <img
-              src='{{ 'corner_bottom-left.svg' | asset_url }}'
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-left'
-            >
-            <img
-              src='{{ 'corner_top-left.svg' | asset_url }}'
-              loading='lazy'
-              alt=''
-              class='corner is-top-left'
-            >
-            <img
-              src='{{ 'corner_top-right.svg' | asset_url }}'
-              loading='lazy'
-              alt=''
-              class='corner is-top-right'
-            >
-            <img
-              src='{{ 'corner_bottom-right.svg' | asset_url }}'
-              loading='lazy'
-              alt=''
-              class='corner is-bottom-right'
-            >
+            {% render 'section-corners' %}
           </div>
         </div>
         <div class='spacer-medium'></div>
@@ -240,71 +195,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('email-form');
-    if (!form) return;
-
-    var successMessage = form.parentElement.querySelector('.w-form-done');
-    var errorMessage = form.parentElement.querySelector('.w-form-fail');
-    var submitButton = form.querySelector('input[type="submit"]');
-    var originalButtonText = submitButton ? submitButton.value : 'Submit';
-    var waitText = submitButton ? submitButton.getAttribute('data-wait') || 'Please wait...' : 'Please wait...';
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
-      // Update button state
-      if (submitButton) {
-        submitButton.value = waitText;
-        submitButton.disabled = true;
-      }
-
-      // Create JSONP URL
-      var url = form.action.replace('/post?', '/post-json?');
-      url += '&c=?';
-
-      // Serialize data
-      var params = [];
-      var elements = form.elements;
-      for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        if (element.name && element.value) {
-          params.push(encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value));
-        }
-      }
-      url += '&' + params.join('&');
-
-      // JSONP Callback
-      var callbackName = 'mailchimpCallback_' + new Date().getTime();
-      url = url.replace('&c=?', '&c=' + callbackName);
-
-      window[callbackName] = function (response) {
-        delete window[callbackName];
-        document.body.removeChild(script);
-
-        if (response.result === 'success') {
-          form.style.display = 'none';
-          if (successMessage) successMessage.style.display = 'block';
-        } else {
-          // Reset button state on error
-          if (submitButton) {
-            submitButton.value = originalButtonText;
-            submitButton.disabled = false;
-          }
-          if (errorMessage) errorMessage.style.display = 'block';
-          console.error('Mailchimp error:', response.msg);
-        }
-      };
-
-      var script = document.createElement('script');
-      script.src = url;
-      document.body.appendChild(script);
-    });
-  });
-</script>
 
 {% schema %}
 {
