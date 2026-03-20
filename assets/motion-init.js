@@ -1,4 +1,6 @@
 import {
+  animate,
+  hover,
   mapValue,
   motionValue,
   scroll,
@@ -33,6 +35,88 @@ const SVG_PATH_MOTION = {
   // Raise the first percentage if you want the dotted path to begin earlier.
   // Lower the second percentage if you want it to finish sooner.
   offsets: ['start 30%', 'end 60%'],
+};
+
+/* =============================
+   PLAN LINES MOTION
+   Progressively reveals each plan connector stack on scroll.
+   ============================= */
+
+const PLAN_LINES_MOTION = {
+  wrapperSelector: '[data-sn-plan-lines-wrapper]',
+  lineSelector: '[data-sn-plan-line]',
+  readyFlag: 'planLinesMotionReady',
+  cleanupKey: 'planLinesMotionCleanup',
+
+  // Raise the first percentage if you want the plan lines to start appearing earlier.
+  // Lower the second percentage if you want each stack to finish drawing sooner.
+  offsets: ['start 80%', 'end 45%'],
+
+  // These control how hidden each short line is before its turn begins.
+  hiddenOpacity: 0,
+  hiddenScaleX: 0.2,
+};
+
+/* =============================
+   PLAN SWORDS MOTION
+   Hover float lives on the inner image.
+   Drag and spring-back live on the outer shell.
+   ============================= */
+
+const PLAN_SWORDS_MOTION = {
+  shellSelector: '[data-sn-plan-sword-shell]',
+  imageSelector: '[data-sn-plan-sword-image]',
+  readyFlag: 'planSwordMotionReady',
+  cleanupKey: 'planSwordMotionCleanup',
+  draggingFlag: 'snPlanSwordDragging',
+
+  // Hover float is decorative and should stay subtle across all swords.
+  hoverFloatYKeyframes: [0, -8, 0, -5, 0],
+  hoverFloatRotateKeyframes: [0, -1.5, 0.8, -0.5, 0],
+  hoverFloatDuration: 2.2,
+  hoverScaleBoost: 0.02,
+  dragScaleBoost: 0.04,
+
+  // Week 1 is the baseline. Each later sword roughly doubles the
+  // allowed movement area as the sequence progresses toward "beyond".
+  defaultConfig: {
+    dragPerimeterX: 32,
+    dragPerimeterY: 22,
+    dragRotateRange: 5,
+  },
+  swordConfigs: {
+    'day-1': {
+      dragPerimeterX: 23,
+      dragPerimeterY: 16,
+      dragRotateRange: 4,
+    },
+    'week-1': {
+      dragPerimeterX: 46,
+      dragPerimeterY: 32,
+      dragRotateRange: 5,
+    },
+    'week-5': {
+      dragPerimeterX: 92,
+      dragPerimeterY: 46,
+      dragRotateRange: 6,
+    },
+    beyond: {
+      dragPerimeterX: 184,
+      dragPerimeterY: 92,
+      dragRotateRange: 7,
+    },
+  },
+
+  shellSpring: {
+    stiffness: 260,
+    damping: 22,
+    mass: 0.85,
+  },
+  hoverReturnSpring: {
+    type: 'spring',
+    stiffness: 320,
+    damping: 26,
+  },
 };
 
 /* =============================
@@ -157,6 +241,43 @@ function bindMediaQueryChange(mediaQueryList, handler) {
   }
 }
 
+function clampPointToEllipse(x, y, maxX, maxY) {
+  const safeMaxX = Math.max(maxX, 1);
+  const safeMaxY = Math.max(maxY, 1);
+  const ellipseRatio = (x * x) / (safeMaxX * safeMaxX) + (y * y) / (safeMaxY * safeMaxY);
+
+  if (ellipseRatio <= 1) {
+    return { x, y };
+  }
+
+  const clampScale = 1 / Math.sqrt(ellipseRatio);
+
+  return {
+    x: x * clampScale,
+    y: y * clampScale,
+  };
+}
+
+function read2dTransformSnapshot(element) {
+  const transform = window.getComputedStyle(element).transform;
+  if (!transform || transform === 'none') {
+    return { rotate: 0, scale: 1 };
+  }
+
+  const matrixMatch = transform.match(/matrix(3d)?\((.+)\)/);
+  if (!matrixMatch) {
+    return { rotate: 0, scale: 1 };
+  }
+
+  const values = matrixMatch[2].split(',').map(value => Number.parseFloat(value.trim()));
+  const a = values[0];
+  const b = values[1];
+  const scale = Math.sqrt(a * a + b * b) || 1;
+  const rotate = (Math.atan2(b, a) * 180) / Math.PI;
+
+  return { rotate, scale };
+}
+
 /* =============================
    SVG PATH MOTION
    ============================= */
@@ -210,6 +331,360 @@ function initSvgPathMotion(root = document) {
 
       delete motionRoot.dataset[SVG_PATH_MOTION.readyFlag];
       delete motionRoot[SVG_PATH_MOTION.cleanupKey];
+    };
+  });
+}
+
+/* =============================
+   PLAN LINES MOTION
+   ============================= */
+
+function getPlanLineWrappers(root) {
+  return getTargets(root, PLAN_LINES_MOTION.wrapperSelector);
+}
+
+function resetPlanLineStyles(lines) {
+  lines.forEach(line => {
+    line.style.opacity = '';
+    line.style.transform = '';
+    line.style.transformOrigin = '';
+  });
+}
+
+function applyPlanLineProgress(lines, progress) {
+  const lineCount = lines.length;
+  if (!lineCount) return;
+
+  const clampedProgress = clampNumber(progress, 0, 1);
+
+  lines.forEach((line, index) => {
+    const lineStart = index / lineCount;
+    const lineEnd = (index + 1) / lineCount;
+    const lineProgress = clampNumber(mapNumberRange(clampedProgress, lineStart, lineEnd, 0, 1), 0, 1);
+    const opacity = mapNumberRange(lineProgress, 0, 1, PLAN_LINES_MOTION.hiddenOpacity, 1);
+    const scaleX = mapNumberRange(lineProgress, 0, 1, PLAN_LINES_MOTION.hiddenScaleX, 1);
+
+    line.style.transformOrigin = 'center center';
+    line.style.opacity = `${opacity}`;
+    line.style.transform = `scaleX(${scaleX})`;
+  });
+}
+
+function destroyPlanLinesMotion(root = document) {
+  getPlanLineWrappers(root).forEach(wrapper => {
+    if (typeof wrapper[PLAN_LINES_MOTION.cleanupKey] === 'function') {
+      wrapper[PLAN_LINES_MOTION.cleanupKey]();
+      return;
+    }
+
+    resetPlanLineStyles(Array.from(wrapper.querySelectorAll(PLAN_LINES_MOTION.lineSelector)));
+    delete wrapper.dataset[PLAN_LINES_MOTION.readyFlag];
+    delete wrapper[PLAN_LINES_MOTION.cleanupKey];
+  });
+}
+
+function initPlanLinesMotion(root = document) {
+  const prefersReducedMotion = reducedMotionMedia.matches;
+
+  getPlanLineWrappers(root).forEach(wrapper => {
+    if (wrapper.dataset[PLAN_LINES_MOTION.readyFlag]) return;
+
+    const lines = Array.from(wrapper.querySelectorAll(PLAN_LINES_MOTION.lineSelector));
+    if (!lines.length) return;
+
+    wrapper.dataset[PLAN_LINES_MOTION.readyFlag] = 'true';
+
+    if (prefersReducedMotion) return;
+
+    applyPlanLineProgress(lines, 0);
+
+    const stopScrollTracking = scroll(
+      progress => {
+        applyPlanLineProgress(lines, progress);
+      },
+      {
+        target: wrapper,
+        offset: PLAN_LINES_MOTION.offsets,
+      }
+    );
+
+    wrapper[PLAN_LINES_MOTION.cleanupKey] = () => {
+      stopScrollTracking();
+      resetPlanLineStyles(lines);
+
+      delete wrapper.dataset[PLAN_LINES_MOTION.readyFlag];
+      delete wrapper[PLAN_LINES_MOTION.cleanupKey];
+    };
+  });
+}
+
+/* =============================
+   PLAN SWORDS MOTION
+   ============================= */
+
+function getPlanSwordShells(root) {
+  return getTargets(root, PLAN_SWORDS_MOTION.shellSelector);
+}
+
+function getPlanSwordConfig(shell) {
+  const swordId = shell.dataset.snPlanSwordId;
+
+  return {
+    ...PLAN_SWORDS_MOTION.defaultConfig,
+    ...(PLAN_SWORDS_MOTION.swordConfigs[swordId] || {}),
+  };
+}
+
+function stopPlanSwordHoverAnimations(context) {
+  context.hoverAnimations.forEach(animation => {
+    animation?.stop?.();
+  });
+  context.hoverAnimations = [];
+}
+
+function setPlanSwordHoverAnimations(context, animations) {
+  stopPlanSwordHoverAnimations(context);
+  context.hoverAnimations = animations.filter(Boolean);
+}
+
+function settlePlanSwordHover(context) {
+  setPlanSwordHoverAnimations(context, [
+    animate(context.hoverYOffset, 0, PLAN_SWORDS_MOTION.hoverReturnSpring),
+    animate(context.hoverRotateOffset, 0, PLAN_SWORDS_MOTION.hoverReturnSpring),
+  ]);
+}
+
+function startPlanSwordHover(context) {
+  if (context.isDragging || !context.isHovered) return;
+
+  context.scaleTarget.set(context.baseScale + PLAN_SWORDS_MOTION.hoverScaleBoost);
+  setPlanSwordHoverAnimations(context, [
+    animate(context.hoverYOffset, PLAN_SWORDS_MOTION.hoverFloatYKeyframes, {
+      duration: PLAN_SWORDS_MOTION.hoverFloatDuration,
+      ease: 'easeInOut',
+      repeat: Infinity,
+    }),
+    animate(context.hoverRotateOffset, PLAN_SWORDS_MOTION.hoverFloatRotateKeyframes, {
+      duration: PLAN_SWORDS_MOTION.hoverFloatDuration,
+      ease: 'easeInOut',
+      repeat: Infinity,
+    }),
+  ]);
+}
+
+function releasePlanSword(context) {
+  if (!context.isDragging) return;
+
+  context.isDragging = false;
+  context.pointerId = null;
+  delete context.shell.dataset[PLAN_SWORDS_MOTION.draggingFlag];
+
+  context.xTarget.set(0);
+  context.yTarget.set(0);
+  context.rotateTarget.set(context.baseRotate);
+  context.scaleTarget.set(
+    context.isHovered ? context.baseScale + PLAN_SWORDS_MOTION.hoverScaleBoost : context.baseScale
+  );
+
+  if (context.isHovered) {
+    startPlanSwordHover(context);
+    return;
+  }
+
+  settlePlanSwordHover(context);
+}
+
+function destroyPlanSwordMotion(root = document) {
+  getPlanSwordShells(root).forEach(shell => {
+    if (typeof shell[PLAN_SWORDS_MOTION.cleanupKey] === 'function') {
+      shell[PLAN_SWORDS_MOTION.cleanupKey]();
+      return;
+    }
+
+    delete shell.dataset[PLAN_SWORDS_MOTION.readyFlag];
+    delete shell.dataset[PLAN_SWORDS_MOTION.draggingFlag];
+    delete shell[PLAN_SWORDS_MOTION.cleanupKey];
+  });
+}
+
+function initPlanSwordMotion(root = document) {
+  const prefersReducedMotion = reducedMotionMedia.matches;
+
+  getPlanSwordShells(root).forEach(shell => {
+    if (shell.dataset[PLAN_SWORDS_MOTION.readyFlag]) return;
+
+    const swordImage = shell.querySelector(PLAN_SWORDS_MOTION.imageSelector);
+    if (!swordImage) return;
+
+    shell.dataset[PLAN_SWORDS_MOTION.readyFlag] = 'true';
+
+    if (prefersReducedMotion) return;
+
+    const swordConfig = getPlanSwordConfig(shell);
+    const baseTransform = read2dTransformSnapshot(shell);
+    const xTarget = motionValue(0);
+    const yTarget = motionValue(0);
+    const rotateTarget = motionValue(baseTransform.rotate);
+    const scaleTarget = motionValue(baseTransform.scale);
+    const hoverYOffset = motionValue(0);
+    const hoverRotateOffset = motionValue(0);
+
+    const x = springValue(xTarget, PLAN_SWORDS_MOTION.shellSpring);
+    const y = springValue(yTarget, PLAN_SWORDS_MOTION.shellSpring);
+    const rotate = springValue(rotateTarget, PLAN_SWORDS_MOTION.shellSpring);
+    const scale = springValue(scaleTarget, PLAN_SWORDS_MOTION.shellSpring);
+
+    shell.style.willChange = 'transform';
+    swordImage.style.willChange = 'transform';
+
+    const stopShellEffect = styleEffect(shell, {
+      x,
+      y,
+      rotate,
+      scale,
+    });
+    const stopImageEffect = styleEffect(swordImage, {
+      y: hoverYOffset,
+      rotate: hoverRotateOffset,
+    });
+
+    const context = {
+      shell,
+      swordImage,
+      config: swordConfig,
+      xTarget,
+      yTarget,
+      rotateTarget,
+      scaleTarget,
+      hoverYOffset,
+      hoverRotateOffset,
+      x,
+      y,
+      rotate,
+      scale,
+      baseRotate: baseTransform.rotate,
+      baseScale: baseTransform.scale,
+      hoverAnimations: [],
+      isDragging: false,
+      isHovered: false,
+      pointerId: null,
+      dragStartPointerX: 0,
+      dragStartPointerY: 0,
+      dragStartX: 0,
+      dragStartY: 0,
+    };
+
+    const onPointerDown = event => {
+      if (event.button !== undefined && event.button !== 0) return;
+
+      event.preventDefault();
+
+      context.isDragging = true;
+      context.pointerId = event.pointerId;
+      context.shell.dataset[PLAN_SWORDS_MOTION.draggingFlag] = 'true';
+
+      stopPlanSwordHoverAnimations(context);
+      settlePlanSwordHover(context);
+
+      const currentX = context.x.get();
+      const currentY = context.y.get();
+      const currentRotate = context.rotate.get();
+
+      context.xTarget.set(currentX);
+      context.yTarget.set(currentY);
+      context.rotateTarget.set(currentRotate);
+
+      context.dragStartPointerX = event.clientX;
+      context.dragStartPointerY = event.clientY;
+      context.dragStartX = currentX;
+      context.dragStartY = currentY;
+
+      context.scaleTarget.set(context.baseScale + PLAN_SWORDS_MOTION.dragScaleBoost);
+
+      shell.setPointerCapture?.(event.pointerId);
+    };
+
+    const onPointerMove = event => {
+      if (!context.isDragging || event.pointerId !== context.pointerId) return;
+
+      event.preventDefault();
+
+      const dragOffset = clampPointToEllipse(
+        context.dragStartX + (event.clientX - context.dragStartPointerX),
+        context.dragStartY + (event.clientY - context.dragStartPointerY),
+        context.config.dragPerimeterX,
+        context.config.dragPerimeterY
+      );
+
+      context.xTarget.set(dragOffset.x);
+      context.yTarget.set(dragOffset.y);
+      context.rotateTarget.set(
+        context.baseRotate +
+          mapNumberRange(
+            dragOffset.x,
+            -context.config.dragPerimeterX,
+            context.config.dragPerimeterX,
+            -context.config.dragRotateRange,
+            context.config.dragRotateRange
+          )
+      );
+    };
+
+    const onPointerEnd = event => {
+      if (context.pointerId !== null && event.pointerId !== context.pointerId) return;
+      releasePlanSword(context);
+    };
+
+    const preventNativeDrag = event => {
+      event.preventDefault();
+    };
+
+    const stopHoverGesture = hover(shell, () => {
+      context.isHovered = true;
+      startPlanSwordHover(context);
+
+      return () => {
+        context.isHovered = false;
+        if (context.isDragging) return;
+
+        context.scaleTarget.set(context.baseScale);
+        settlePlanSwordHover(context);
+      };
+    });
+
+    shell.addEventListener('pointerdown', onPointerDown);
+    shell.addEventListener('pointermove', onPointerMove);
+    shell.addEventListener('pointerup', onPointerEnd);
+    shell.addEventListener('pointercancel', onPointerEnd);
+    shell.addEventListener('lostpointercapture', onPointerEnd);
+    swordImage.addEventListener('dragstart', preventNativeDrag);
+
+    shell[PLAN_SWORDS_MOTION.cleanupKey] = () => {
+      stopHoverGesture?.();
+      stopPlanSwordHoverAnimations(context);
+
+      shell.removeEventListener('pointerdown', onPointerDown);
+      shell.removeEventListener('pointermove', onPointerMove);
+      shell.removeEventListener('pointerup', onPointerEnd);
+      shell.removeEventListener('pointercancel', onPointerEnd);
+      shell.removeEventListener('lostpointercapture', onPointerEnd);
+      swordImage.removeEventListener('dragstart', preventNativeDrag);
+
+      stopShellEffect();
+      stopImageEffect();
+
+      [x, y, rotate, scale, xTarget, yTarget, rotateTarget, scaleTarget, hoverYOffset, hoverRotateOffset].forEach(
+        destroyMotionValue
+      );
+
+      shell.style.transform = '';
+      shell.style.willChange = '';
+      swordImage.style.transform = '';
+      swordImage.style.willChange = '';
+
+      delete shell.dataset[PLAN_SWORDS_MOTION.readyFlag];
+      delete shell.dataset[PLAN_SWORDS_MOTION.draggingFlag];
+      delete shell[PLAN_SWORDS_MOTION.cleanupKey];
     };
   });
 }
@@ -546,24 +1021,28 @@ function syncAnswerBridgeMotionForViewportChange() {
    Boot / Shopify Theme Editor
    ============================= */
 
-function initStakesMotions(root = document) {
+function initThemeMotions(root = document) {
   initSvgPathMotion(root);
+  initPlanLinesMotion(root);
+  initPlanSwordMotion(root);
   initAnswerBridgeMotion(root);
 }
 
-function destroyStakesMotions(root = document) {
+function destroyThemeMotions(root = document) {
   destroySvgPathMotion(root);
+  destroyPlanLinesMotion(root);
+  destroyPlanSwordMotion(root);
   destroyAnswerBridgeMotion(root);
 }
 
-initStakesMotions();
+initThemeMotions();
 
 document.addEventListener('shopify:section:load', event => {
-  initStakesMotions(event.target);
+  initThemeMotions(event.target);
 });
 
 document.addEventListener('shopify:section:unload', event => {
-  destroyStakesMotions(event.target);
+  destroyThemeMotions(event.target);
 });
 
 bindMediaQueryChange(answerBridgeDesktopMedia, syncAnswerBridgeMotionForViewportChange);
