@@ -8,6 +8,10 @@
     --sn-path-title-width: min(calc(100% - 4rem), 37.5rem);
   }
 
+  .section_stakes .content-wrapper.is-stakes {
+    position: relative;
+  }
+
   .sn_trap-card,
   .sn_path-title {
     box-sizing: border-box;
@@ -26,6 +30,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    z-index: 2;
   }
 
   /* heading-style-h6.is-stakes gives Playfair + 1.75rem + w600;
@@ -182,6 +187,45 @@
     overflow: visible;
   }
 
+  .sn_answer-connector-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  .sn_answer-card-range {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sn_answer-connector-reveal {
+    width: 1px;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .sn_answer-connector-svg {
+    display: block;
+    width: 1px;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .sn_answer-connector-svg .sn_vline-path {
+    stroke-linecap: round;
+  }
+
   /* ---------- Transition Card ---------- */
   .sn_answer-card {
     background-color: white;
@@ -193,6 +237,10 @@
     gap: 0.5rem;
     max-width: 28.875rem;
     width: 100%;
+    position: relative;
+    z-index: 1;
+    will-change: transform, opacity;
+    transform-origin: center center;
   }
 
   .sn_answer-body {
@@ -258,7 +306,7 @@
     background-color: #fdfdfb;
     border: 1px solid var(--brand--300);
     box-sizing: border-box;
-    z-index: 0;
+    z-index: 2;
     display: flex;
     justify-content: center;
   }
@@ -266,9 +314,10 @@
   .sn_curves-svg {
     position: absolute;
     inset: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
-    top: -10%;
+    top: -9.45%;
+    left: 5%;
     display: block;
   }
 
@@ -494,6 +543,10 @@
       padding-top: 10rem;
       gap: 4rem;
     }
+
+    .content-wrapper.is-stakes[data-sn-answer-card-motion-active='true'] [data-sn-answer-connector-lower] {
+      display: none;
+    }
   }
 
   /* ---------- Tablet (max-width: 991px) ---------- */
@@ -718,6 +771,25 @@
         <div class='line-long'></div>
       </div>
       <div class='content-wrapper is-stakes'>
+        <div class='sn_answer-connector-overlay' data-sn-answer-connector-overlay aria-hidden='true'>
+          <div class='sn_answer-connector-reveal' data-sn-answer-connector-reveal>
+            <svg
+              class='sn_answer-connector-svg'
+              data-sn-answer-connector-svg
+              viewBox='0 0 1 64'
+              fill='none'
+              preserveAspectRatio='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                class='sn_vline-path'
+                data-sn-answer-connector-visible-path
+                d='M0.5 0V64'
+              />
+            </svg>
+          </div>
+        </div>
+        <div class='sn_answer-card-range' data-sn-answer-card-range aria-hidden='true'></div>
         <div class='spacer-xhuge'></div>
 
         {%- comment -%} ===== HEADING ===== {%- endcomment -%}
@@ -736,7 +808,7 @@
         <div class='spacer-medium'></div>
 
         {%- comment -%} ===== THE OLD WAY ===== {%- endcomment -%}
-        <div class='sn_trap-card' data-sn-width-target>
+        <div class='sn_trap-card' data-sn-width-target data-sn-answer-origin>
           <img
             src='{{ "corner_top-left.svg" | asset_url }}'
             loading='lazy'
@@ -762,7 +834,7 @@
             class='corner is-bottom-right'
           >
           <h3 class='heading-style-h6 is-stakes'>The Motivation Trap</h3>
-          <div class='sn_trap-inner'>
+          <div class='sn_trap-inner' data-sn-answer-card-range-start>
             <p class='text-size-medium'>It always starts with the same promise.</p>
 
             <div class='stakes_list sn_trap-list'>
@@ -832,6 +904,7 @@
         {%- comment -%} ===== CONNECTOR ===== {%- endcomment -%}
         <svg
           class='sn_vline'
+          data-sn-answer-connector-spacer
           viewBox='0 0 1 64'
           fill='none'
           preserveAspectRatio='none'
@@ -842,7 +915,7 @@
         </svg>
 
         {%- comment -%} ===== TRANSITION CARD ===== {%- endcomment -%}
-        <div class='sn_answer-card'>
+        <div class='sn_answer-card' data-sn-answer-card-scroll>
           <p class='text-size-medium text-weight-semibold text-align-center'>The answer is not more motivation.</p>
           <p class='text-size-medium text-align-center sn_answer-body'>
             It&rsquo;s a
@@ -852,6 +925,7 @@
         </div>
         <svg
           class='sn_vline'
+          data-sn-answer-connector-lower
           viewBox='0 0 1 64'
           fill='none'
           preserveAspectRatio='none'
@@ -863,6 +937,7 @@
         {%- comment -%} ===== CONNECTOR ===== {%- endcomment -%}
         <svg
           class='sn_vline'
+          data-sn-answer-connector-lower
           viewBox='0 0 1 64'
           fill='none'
           preserveAspectRatio='none'
@@ -874,8 +949,8 @@
 
         {%- comment -%} ===== THE MUSASHI WAY ===== {%- endcomment -%}
 
-        <div class='sn_steps-bg'>
-          <div class='sn_path-title' data-sn-width-source>
+        <div class='sn_steps-bg' data-sn-scroll-root>
+          <div class='sn_path-title' data-sn-width-source data-sn-answer-destination>
             <img
               src='{{ "corner_top-left.svg" | asset_url }}'
               loading='lazy'
@@ -918,8 +993,24 @@
               preserveAspectRatio='none'
               xmlns='http://www.w3.org/2000/svg'
             >
+              <defs>
+                <mask id='sn-stakes-curve-mask-{{ section.id }}' maskUnits='userSpaceOnUse'>
+                  <rect width='669' height='1028' fill='black'></rect>
+                  <path
+                    data-sn-scroll-mask-path
+                    d='M319.426 0C319.426 87.04 366.602 147.386 319.426 193C243.926 266 5.92969 241 1.42665 369.023C-2.99563 494.751 95.9297 538.5 246.43 527.5C469.339 511.208 618.43 550 660.426 646.023C702.422 742.047 567.93 800 346.926 820.523C203.43 833.849 90.3626 858.095 41.4283 887C-21.5885 924.223 -6.57412 959 49.4267 1027.52'
+                    fill='none'
+                    stroke='white'
+                    stroke-width='12'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                  />
+                </mask>
+              </defs>
               <path
                 class='sn_curves-path'
+                data-sn-scroll-visible-path
+                mask='url(#sn-stakes-curve-mask-{{ section.id }})'
                 d='M319.426 0C319.426 87.04 366.602 147.386 319.426 193C243.926 266 5.92969 241 1.42665 369.023C-2.99563 494.751 95.9297 538.5 246.43 527.5C469.339 511.208 618.43 550 660.426 646.023C702.422 742.047 567.93 800 346.926 820.523C203.43 833.849 90.3626 858.095 41.4283 887C-21.5885 924.223 -6.57412 959 49.4267 1027.52'
               />
             </svg>

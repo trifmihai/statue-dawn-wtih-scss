@@ -92,5 +92,11 @@
       type='text/javascript'
       defer
     ></script>
+    {% if request.page_type == 'index' %}
+      <script
+        src='{{ 'motion-init.js' | asset_url }}'
+        type='module'
+      ></script>
+    {% endif %}
   </body>
 </html>

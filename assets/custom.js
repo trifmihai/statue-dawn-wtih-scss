@@ -316,6 +316,72 @@
 })();
 
 // ==============================
+// SECTION ANCHOR SMOOTH SCROLL
+// ==============================
+
+(function () {
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const getStickyNavOffset = () => {
+    const navSection = document.getElementById('shopify-section-nav');
+    const nav = navSection ? navSection.querySelector('[data-nav-root]') : null;
+    const navHeight = nav
+      ? nav.offsetHeight
+      : parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 80;
+    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+
+    return navHeight + rootFontSize;
+  };
+
+  const handleSectionAnchorClick = event => {
+    const clickTarget =
+      event.target && event.target.nodeType === Node.TEXT_NODE ? event.target.parentElement : event.target;
+
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !(clickTarget instanceof Element)
+    ) {
+      return;
+    }
+
+    const link = clickTarget.closest("a[href^='#section-']");
+    if (!link) return;
+
+    const targetUrl = new URL(link.href, window.location.href);
+    if (targetUrl.origin !== window.location.origin || targetUrl.pathname !== window.location.pathname) {
+      return;
+    }
+
+    const hash = targetUrl.hash;
+    if (!hash || !hash.startsWith('#section-')) return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const targetTop = Math.max(0, target.getBoundingClientRect().top + window.scrollY - getStickyNavOffset());
+
+    window.scrollTo({
+      top: targetTop,
+      behavior: reducedMotionQuery.matches ? 'auto' : 'smooth',
+    });
+
+    if (window.location.hash !== hash && window.history && typeof window.history.pushState === 'function') {
+      window.history.pushState({}, '', hash);
+    }
+  };
+
+  document.addEventListener('click', handleSectionAnchorClick, true);
+})();
+
+// ==============================
 // NAV CART BUBBLE
 // ==============================
 
