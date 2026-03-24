@@ -18,6 +18,8 @@ const STAKES_CONTENT_WRAPPER_SELECTOR = '.content-wrapper.is-stakes';
 
 const MEDIA_QUERIES = {
   reducedMotion: '(prefers-reduced-motion: reduce)',
+  desktopHeroCover: '(min-width: 992px)',
+  desktopInteractiveManual: '(min-width: 992px)',
   desktopAnswerMotion: '(min-width: 992px)',
 };
 
@@ -120,6 +122,121 @@ const PLAN_SWORDS_MOTION = {
 };
 
 /* =============================
+   HERO COVER MOTION
+   Premium hover lift for the separate hero book cover.
+   ============================= */
+
+const HERO_COVER_MOTION = {
+  rootSelector: '[data-sn-hero-cover-root]',
+  hitAreaSelector: '[data-sn-hero-cover-hit-area]',
+  stageSelector: '[data-sn-hero-cover-stage]',
+  imageSelector: '[data-sn-hero-cover-image]',
+  readyFlag: 'heroCoverMotionReady',
+  cleanupKey: 'heroCoverMotionCleanup',
+  engagedFlag: 'snHeroCoverEngaged',
+
+  liftY: -10,
+  hoverScale: 1.014,
+  imageScale: 1.008,
+  maxShiftX: 8,
+  maxShiftY: 5,
+  maxRotate: 1.35,
+
+  pointerSpring: {
+    stiffness: 215,
+    damping: 25,
+    mass: 0.74,
+  },
+  hoverSpring: {
+    stiffness: 250,
+    damping: 28,
+    mass: 0.82,
+  },
+};
+
+/* =============================
+   INTERACTIVE MANUAL MOTION
+   Premium tactile hover reveal for the manual section.
+   ============================= */
+
+const INTERACTIVE_MANUAL_MOTION = {
+  rootSelector: '[data-sn-manual-root]',
+  hitAreaSelector: '[data-sn-manual-hit-area]',
+  baseSelector: '[data-sn-manual-base]',
+  revealSvgSelector: '[data-sn-manual-reveal-svg]',
+  fillImageSelector: '[data-sn-manual-fill-image]',
+  maskSelector: '[data-sn-manual-mask]',
+  maskShapeSelector: '[data-sn-manual-mask-shape]',
+  maskGradientSelector: '[data-sn-manual-mask-gradient]',
+  haloShapeSelector: '[data-sn-manual-halo-shape]',
+  haloGradientSelector: '[data-sn-manual-halo-gradient]',
+  toggleSelector: '[data-sn-manual-toggle]',
+  readyFlag: 'interactiveManualMotionReady',
+  cleanupKey: 'interactiveManualMotionCleanup',
+  engagedFlag: 'snManualEngaged',
+  simpleFlag: 'snManualSimple',
+  uidKey: 'snManualSvgUid',
+
+  // Inspection window:
+  // Increase the open sizes if you want to reveal more writing at once.
+  closedMaskRadiusX: 10.5,
+  closedMaskRadiusY: 9.5,
+  openMaskRadiusX: 24.5,
+  openMaskRadiusY: 22,
+  haloRadiusBoostX: 5.5,
+  haloRadiusBoostY: 5,
+
+  // Keep the reveal window away from the hard edges of the book.
+  maskInsetX: 10,
+  maskInsetY: 9,
+
+  // The aperture should feel editorial, not literally glued to the cursor.
+  leftPageAnchorX: 35,
+  rightPageAnchorX: 65,
+  pageAnchorY: 51.5,
+  anchorFollowX: 0.34,
+  anchorFollowY: 0.28,
+  edgeFollowBoostX: 0.48,
+  edgeFollowBoostY: 0.56,
+  haloOpacity: 0.1,
+
+  // Hover object feel:
+  // Raise liftY or hoverScale slightly if you want more presence.
+  liftY: -10,
+  hoverScale: 1.012,
+  maxShiftX: 6,
+  maxShiftY: 4,
+  maxRotate: 1.2,
+
+  pointerSpring: {
+    stiffness: 220,
+    damping: 26,
+    mass: 0.72,
+  },
+  hoverSpring: {
+    stiffness: 260,
+    damping: 28,
+    mass: 0.8,
+  },
+  revealSpring: {
+    stiffness: 240,
+    damping: 30,
+    mass: 0.88,
+  },
+  apertureSpring: {
+    stiffness: 160,
+    damping: 30,
+    mass: 0.96,
+  },
+
+  // One-time attract cue. Keep this subtle and non-looping.
+  idleCueDelayMs: 450,
+  idleCueLiftY: -4,
+  idleCueScale: 1.006,
+  idleCueDuration: 1.2,
+};
+
+/* =============================
    BRIDGE / ANSWER MOTION
    Controls the answer card and the vertical connector above it.
    ============================= */
@@ -188,6 +305,8 @@ const ANSWER_BRIDGE_MOTION = {
 };
 
 const reducedMotionMedia = window.matchMedia(MEDIA_QUERIES.reducedMotion);
+const heroCoverDesktopMedia = window.matchMedia(MEDIA_QUERIES.desktopHeroCover);
+const interactiveManualDesktopMedia = window.matchMedia(MEDIA_QUERIES.desktopInteractiveManual);
 const answerBridgeDesktopMedia = window.matchMedia(MEDIA_QUERIES.desktopAnswerMotion);
 
 /* =============================
@@ -239,6 +358,21 @@ function bindMediaQueryChange(mediaQueryList, handler) {
   if (typeof mediaQueryList.addListener === 'function') {
     mediaQueryList.addListener(handler);
   }
+}
+
+function bindMotionValueChange(value, handler) {
+  const unsubscribe =
+    typeof value?.on === 'function'
+      ? value.on('change', handler)
+      : typeof value?.subscribe === 'function'
+        ? value.subscribe(handler)
+        : null;
+
+  if (typeof value?.get === 'function') {
+    handler(value.get());
+  }
+
+  return typeof unsubscribe === 'function' ? unsubscribe : () => {};
 }
 
 function clampPointToEllipse(x, y, maxX, maxY) {
@@ -690,6 +824,633 @@ function initPlanSwordMotion(root = document) {
 }
 
 /* =============================
+   HERO COVER MOTION
+   ============================= */
+
+function getHeroCoverRoots(root) {
+  return getTargets(root, HERO_COVER_MOTION.rootSelector);
+}
+
+function getHeroCoverContext(heroCoverRoot) {
+  const hitArea = heroCoverRoot.querySelector(HERO_COVER_MOTION.hitAreaSelector);
+  const stage = heroCoverRoot.querySelector(HERO_COVER_MOTION.stageSelector);
+  const image = heroCoverRoot.querySelector(HERO_COVER_MOTION.imageSelector);
+
+  if (!hitArea || !stage || !image) return null;
+
+  return {
+    root: heroCoverRoot,
+    hitArea,
+    stage,
+    image,
+  };
+}
+
+function setHeroCoverEngaged(context, isEngaged) {
+  if (isEngaged) {
+    context.root.dataset[HERO_COVER_MOTION.engagedFlag] = 'true';
+    return;
+  }
+
+  delete context.root.dataset[HERO_COVER_MOTION.engagedFlag];
+}
+
+function resetHeroCoverStyles(context) {
+  if (!context) return;
+
+  context.stage.style.transform = '';
+  context.stage.style.willChange = '';
+  context.image.style.transform = '';
+  context.image.style.willChange = '';
+  setHeroCoverEngaged(context, false);
+}
+
+function setupHeroCoverMotion(context) {
+  const xTarget = motionValue(0);
+  const yTarget = motionValue(0);
+  const rotateTarget = motionValue(0);
+  const scaleTarget = motionValue(1);
+  const imageScaleTarget = motionValue(1);
+
+  const x = springValue(xTarget, HERO_COVER_MOTION.pointerSpring);
+  const y = springValue(yTarget, HERO_COVER_MOTION.hoverSpring);
+  const rotate = springValue(rotateTarget, HERO_COVER_MOTION.pointerSpring);
+  const scale = springValue(scaleTarget, HERO_COVER_MOTION.hoverSpring);
+  const imageScale = springValue(imageScaleTarget, HERO_COVER_MOTION.hoverSpring);
+
+  const stopStageEffect = styleEffect(context.stage, {
+    x,
+    y,
+    rotate,
+    scale,
+  });
+  const stopImageEffect = styleEffect(context.image, {
+    scale: imageScale,
+  });
+
+  const onPointerMove = event => {
+    if (!context.isHovered) return;
+
+    const rect = context.hitArea.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const relativeX = clampNumber(((event.clientX - rect.left) / rect.width) * 100, 0, 100);
+    const relativeY = clampNumber(((event.clientY - rect.top) / rect.height) * 100, 0, 100);
+    const normalizedX = mapNumberRange(relativeX, 0, 100, -1, 1);
+    const normalizedY = mapNumberRange(relativeY, 0, 100, -1, 1);
+
+    xTarget.set(normalizedX * HERO_COVER_MOTION.maxShiftX);
+    yTarget.set(HERO_COVER_MOTION.liftY + normalizedY * HERO_COVER_MOTION.maxShiftY);
+    rotateTarget.set(normalizedX * HERO_COVER_MOTION.maxRotate);
+  };
+
+  const stopHoverGesture = hover(context.hitArea, () => {
+    context.isHovered = true;
+    setHeroCoverEngaged(context, true);
+    yTarget.set(HERO_COVER_MOTION.liftY);
+    scaleTarget.set(HERO_COVER_MOTION.hoverScale);
+    imageScaleTarget.set(HERO_COVER_MOTION.imageScale);
+
+    return () => {
+      context.isHovered = false;
+      setHeroCoverEngaged(context, false);
+      xTarget.set(0);
+      yTarget.set(0);
+      rotateTarget.set(0);
+      scaleTarget.set(1);
+      imageScaleTarget.set(1);
+    };
+  });
+
+  context.isHovered = false;
+  context.stage.style.willChange = 'transform, filter';
+  context.image.style.willChange = 'transform';
+
+  context.hitArea.addEventListener('pointermove', onPointerMove);
+
+  return () => {
+    stopHoverGesture?.();
+    context.hitArea.removeEventListener('pointermove', onPointerMove);
+
+    stopStageEffect();
+    stopImageEffect();
+
+    [x, y, rotate, scale, imageScale, xTarget, yTarget, rotateTarget, scaleTarget, imageScaleTarget].forEach(
+      destroyMotionValue
+    );
+  };
+}
+
+function destroyHeroCoverMotion(root = document) {
+  getHeroCoverRoots(root).forEach(heroCoverRoot => {
+    if (typeof heroCoverRoot[HERO_COVER_MOTION.cleanupKey] === 'function') {
+      heroCoverRoot[HERO_COVER_MOTION.cleanupKey]();
+      return;
+    }
+
+    resetHeroCoverStyles(getHeroCoverContext(heroCoverRoot));
+    delete heroCoverRoot.dataset[HERO_COVER_MOTION.readyFlag];
+    delete heroCoverRoot[HERO_COVER_MOTION.cleanupKey];
+  });
+}
+
+function initHeroCoverMotion(root = document) {
+  const shouldUseHeroCoverMotion = heroCoverDesktopMedia.matches && !reducedMotionMedia.matches;
+  if (!shouldUseHeroCoverMotion) return;
+
+  getHeroCoverRoots(root).forEach(heroCoverRoot => {
+    if (heroCoverRoot.dataset[HERO_COVER_MOTION.readyFlag]) return;
+
+    const context = getHeroCoverContext(heroCoverRoot);
+    if (!context) return;
+
+    heroCoverRoot.dataset[HERO_COVER_MOTION.readyFlag] = 'true';
+
+    const cleanup = setupHeroCoverMotion(context);
+
+    heroCoverRoot[HERO_COVER_MOTION.cleanupKey] = () => {
+      cleanup?.();
+      resetHeroCoverStyles(context);
+
+      delete heroCoverRoot.dataset[HERO_COVER_MOTION.readyFlag];
+      delete heroCoverRoot[HERO_COVER_MOTION.cleanupKey];
+    };
+  });
+}
+
+function syncHeroCoverMotionForViewportChange() {
+  destroyHeroCoverMotion(document);
+  initHeroCoverMotion(document);
+}
+
+/* =============================
+   INTERACTIVE MANUAL MOTION
+   ============================= */
+
+let interactiveManualSvgIdCounter = 0;
+
+function getInteractiveManualRoots(root) {
+  return getTargets(root, INTERACTIVE_MANUAL_MOTION.rootSelector);
+}
+
+function getInteractiveManualContext(manualRoot) {
+  const hitArea = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.hitAreaSelector);
+  const manualFrame = hitArea?.querySelector('.interactive_manual-images');
+  const revealSvg = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.revealSvgSelector);
+  const fillImage = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.fillImageSelector);
+  const maskDefinition = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.maskSelector);
+  const maskShape = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.maskShapeSelector);
+  const maskGradient = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.maskGradientSelector);
+  const haloShape = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.haloShapeSelector);
+  const haloGradient = manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.haloGradientSelector);
+
+  if (
+    !hitArea ||
+    !manualFrame ||
+    !revealSvg ||
+    !fillImage ||
+    !maskDefinition ||
+    !maskShape ||
+    !maskGradient ||
+    !haloShape ||
+    !haloGradient
+  ) {
+    return null;
+  }
+
+  return {
+    root: manualRoot,
+    hitArea,
+    manualFrame,
+    baseImage: manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.baseSelector),
+    revealSvg,
+    fillImage,
+    maskDefinition,
+    maskShape,
+    maskGradient,
+    haloShape,
+    haloGradient,
+    toggle: manualRoot.querySelector(INTERACTIVE_MANUAL_MOTION.toggleSelector),
+  };
+}
+
+function getInteractiveManualFillSource(context) {
+  return interactiveManualDesktopMedia.matches
+    ? context.fillImage.dataset.snManualFillDesktopSrc
+    : context.fillImage.dataset.snManualFillMobileSrc || context.fillImage.dataset.snManualFillDesktopSrc;
+}
+
+function setInteractiveManualFillSource(context) {
+  const source = getInteractiveManualFillSource(context);
+  if (!source) return;
+
+  context.fillImage.setAttribute('href', source);
+  context.fillImage.setAttributeNS('http://www.w3.org/1999/xlink', 'href', source);
+}
+
+function ensureInteractiveManualSvgBindings(context) {
+  const uid =
+    context.root.dataset[INTERACTIVE_MANUAL_MOTION.uidKey] ||
+    `sn-manual-${interactiveManualSvgIdCounter++}`;
+  const maskId = `${uid}-mask`;
+  const maskGradientId = `${uid}-mask-gradient`;
+  const haloGradientId = `${uid}-halo-gradient`;
+
+  context.root.dataset[INTERACTIVE_MANUAL_MOTION.uidKey] = uid;
+
+  context.maskDefinition.id = maskId;
+  context.maskGradient.id = maskGradientId;
+  context.haloGradient.id = haloGradientId;
+  context.maskShape.setAttribute('fill', `url(#${maskGradientId})`);
+  context.haloShape.setAttribute('fill', `url(#${haloGradientId})`);
+  context.maskId = maskId;
+
+  setInteractiveManualFillSource(context);
+}
+
+function setInteractiveManualMaskEnabled(context, isEnabled) {
+  if (isEnabled) {
+    context.fillImage.setAttribute('mask', `url(#${context.maskId})`);
+    return;
+  }
+
+  context.fillImage.removeAttribute('mask');
+}
+
+function setInteractiveManualEngaged(context, isEngaged) {
+  if (isEngaged) {
+    context.root.dataset[INTERACTIVE_MANUAL_MOTION.engagedFlag] = 'true';
+    return;
+  }
+
+  delete context.root.dataset[INTERACTIVE_MANUAL_MOTION.engagedFlag];
+}
+
+function resetInteractiveManualStyles(context) {
+  if (!context) return;
+
+  context.fillImage.classList.remove('is-active');
+  context.haloShape.classList.remove('is-active');
+
+  context.manualFrame.style.transform = '';
+  context.manualFrame.style.willChange = '';
+
+  context.fillImage.style.opacity = '';
+  context.fillImage.style.willChange = '';
+  context.haloShape.style.opacity = '';
+  context.haloShape.style.willChange = '';
+
+  setInteractiveManualMaskEnabled(context, false);
+  setInteractiveManualFillSource(context);
+  setInteractiveManualEngaged(context, false);
+  delete context.root.dataset[INTERACTIVE_MANUAL_MOTION.simpleFlag];
+}
+
+function setInteractiveManualSimpleState(context, isActive, syncToggle = true) {
+  context.isSimpleActive = isActive;
+  setInteractiveManualMaskEnabled(context, false);
+  context.fillImage.classList.toggle('is-active', isActive);
+  context.haloShape.classList.toggle('is-active', isActive);
+  setInteractiveManualEngaged(context, isActive);
+
+  if (syncToggle && context.toggle && context.toggle.checked !== isActive) {
+    context.toggle.checked = isActive;
+  }
+}
+
+function setupInteractiveManualSimple(context) {
+  const isDesktop = interactiveManualDesktopMedia.matches;
+  const onDesktopSimpleHoverEnter = () => {
+    setInteractiveManualSimpleState(context, true, false);
+  };
+  const onDesktopSimpleHoverLeave = () => {
+    setInteractiveManualSimpleState(context, false, false);
+  };
+  const onToggleChange = () => {
+    setInteractiveManualSimpleState(context, context.toggle.checked, false);
+  };
+  const onHitAreaClick = event => {
+    if (isDesktop) return;
+    if (event.target.closest('.interactive_toggle')) return;
+
+    setInteractiveManualSimpleState(context, !context.isSimpleActive);
+  };
+
+  context.root.dataset[INTERACTIVE_MANUAL_MOTION.simpleFlag] = 'true';
+  ensureInteractiveManualSvgBindings(context);
+  setInteractiveManualSimpleState(context, !isDesktop && Boolean(context.toggle?.checked));
+
+  if (context.toggle) {
+    context.toggle.addEventListener('change', onToggleChange);
+  }
+
+  context.hitArea.addEventListener('click', onHitAreaClick);
+
+  if (isDesktop) {
+    context.hitArea.addEventListener('mouseenter', onDesktopSimpleHoverEnter);
+    context.hitArea.addEventListener('mouseleave', onDesktopSimpleHoverLeave);
+  }
+
+  return () => {
+    if (context.toggle) {
+      context.toggle.removeEventListener('change', onToggleChange);
+    }
+
+    context.hitArea.removeEventListener('click', onHitAreaClick);
+    context.hitArea.removeEventListener('mouseenter', onDesktopSimpleHoverEnter);
+    context.hitArea.removeEventListener('mouseleave', onDesktopSimpleHoverLeave);
+  };
+}
+
+function stopInteractiveManualAttractAnimations(context) {
+  context.attractAnimations.forEach(animation => {
+    animation?.stop?.();
+  });
+  context.attractAnimations = [];
+}
+
+function openInteractiveManualTactile(context) {
+  setInteractiveManualMaskEnabled(context, true);
+  setInteractiveManualEngaged(context, true);
+  context.revealOpacityTarget.set(1);
+  context.haloOpacityTarget.set(INTERACTIVE_MANUAL_MOTION.haloOpacity);
+  context.maskWidthTarget.set(INTERACTIVE_MANUAL_MOTION.openMaskRadiusX);
+  context.maskHeightTarget.set(INTERACTIVE_MANUAL_MOTION.openMaskRadiusY);
+  context.haloWidthTarget.set(
+    INTERACTIVE_MANUAL_MOTION.openMaskRadiusX + INTERACTIVE_MANUAL_MOTION.haloRadiusBoostX
+  );
+  context.haloHeightTarget.set(
+    INTERACTIVE_MANUAL_MOTION.openMaskRadiusY + INTERACTIVE_MANUAL_MOTION.haloRadiusBoostY
+  );
+  context.yTarget.set(INTERACTIVE_MANUAL_MOTION.liftY);
+  context.scaleTarget.set(INTERACTIVE_MANUAL_MOTION.hoverScale);
+}
+
+function closeInteractiveManualTactile(context) {
+  setInteractiveManualEngaged(context, false);
+  context.revealOpacityTarget.set(0);
+  context.haloOpacityTarget.set(0);
+  context.maskXTarget.set(50);
+  context.maskYTarget.set(50);
+  context.maskWidthTarget.set(INTERACTIVE_MANUAL_MOTION.closedMaskRadiusX);
+  context.maskHeightTarget.set(INTERACTIVE_MANUAL_MOTION.closedMaskRadiusY);
+  context.haloWidthTarget.set(
+    INTERACTIVE_MANUAL_MOTION.closedMaskRadiusX + INTERACTIVE_MANUAL_MOTION.haloRadiusBoostX
+  );
+  context.haloHeightTarget.set(
+    INTERACTIVE_MANUAL_MOTION.closedMaskRadiusY + INTERACTIVE_MANUAL_MOTION.haloRadiusBoostY
+  );
+  context.xTarget.set(0);
+  context.yTarget.set(0);
+  context.rotateTarget.set(0);
+  context.scaleTarget.set(1);
+}
+
+function updateInteractiveManualPointer(context, event) {
+  const frameRect = context.manualFrame.getBoundingClientRect();
+  if (!frameRect.width || !frameRect.height) return;
+
+  const relativeX = clampNumber(((event.clientX - frameRect.left) / frameRect.width) * 100, 0, 100);
+  const relativeY = clampNumber(((event.clientY - frameRect.top) / frameRect.height) * 100, 0, 100);
+  const clampedMaskX = clampNumber(
+    relativeX,
+    INTERACTIVE_MANUAL_MOTION.maskInsetX,
+    100 - INTERACTIVE_MANUAL_MOTION.maskInsetX
+  );
+  const clampedMaskY = clampNumber(
+    relativeY,
+    INTERACTIVE_MANUAL_MOTION.maskInsetY,
+    100 - INTERACTIVE_MANUAL_MOTION.maskInsetY
+  );
+  const anchorBlend = clampNumber(mapNumberRange(relativeX, 16, 84, 0, 1), 0, 1);
+  const anchorX =
+    INTERACTIVE_MANUAL_MOTION.leftPageAnchorX +
+    (INTERACTIVE_MANUAL_MOTION.rightPageAnchorX - INTERACTIVE_MANUAL_MOTION.leftPageAnchorX) *
+      anchorBlend;
+  const anchorY = INTERACTIVE_MANUAL_MOTION.pageAnchorY;
+  const normalizedX = mapNumberRange(relativeX, 0, 100, -1, 1);
+  const normalizedY = mapNumberRange(relativeY, 0, 100, -1, 1);
+  const edgeFollowX =
+    INTERACTIVE_MANUAL_MOTION.anchorFollowX +
+    clampNumber((Math.abs(normalizedX) - 0.28) / 0.72, 0, 1) * INTERACTIVE_MANUAL_MOTION.edgeFollowBoostX;
+  const edgeFollowY =
+    INTERACTIVE_MANUAL_MOTION.anchorFollowY +
+    clampNumber((Math.abs(normalizedY) - 0.18) / 0.82, 0, 1) * INTERACTIVE_MANUAL_MOTION.edgeFollowBoostY;
+  const composedMaskX =
+    anchorX + (clampedMaskX - anchorX) * clampNumber(edgeFollowX, 0, 1);
+  const composedMaskY =
+    anchorY + (clampedMaskY - anchorY) * clampNumber(edgeFollowY, 0, 1);
+
+  context.maskXTarget.set(composedMaskX);
+  context.maskYTarget.set(composedMaskY);
+  context.xTarget.set(normalizedX * INTERACTIVE_MANUAL_MOTION.maxShiftX);
+  context.yTarget.set(INTERACTIVE_MANUAL_MOTION.liftY + normalizedY * INTERACTIVE_MANUAL_MOTION.maxShiftY);
+  context.rotateTarget.set(normalizedX * INTERACTIVE_MANUAL_MOTION.maxRotate);
+}
+
+function setupInteractiveManualTactile(context) {
+  ensureInteractiveManualSvgBindings(context);
+  setInteractiveManualMaskEnabled(context, true);
+
+  const xTarget = motionValue(0);
+  const yTarget = motionValue(0);
+  const scaleTarget = motionValue(1);
+  const rotateTarget = motionValue(0);
+  const revealOpacityTarget = motionValue(0);
+  const haloOpacityTarget = motionValue(0);
+  const maskXTarget = motionValue(50);
+  const maskYTarget = motionValue(50);
+  const maskWidthTarget = motionValue(INTERACTIVE_MANUAL_MOTION.closedMaskRadiusX);
+  const maskHeightTarget = motionValue(INTERACTIVE_MANUAL_MOTION.closedMaskRadiusY);
+  const haloWidthTarget = motionValue(
+    INTERACTIVE_MANUAL_MOTION.closedMaskRadiusX + INTERACTIVE_MANUAL_MOTION.haloRadiusBoostX
+  );
+  const haloHeightTarget = motionValue(
+    INTERACTIVE_MANUAL_MOTION.closedMaskRadiusY + INTERACTIVE_MANUAL_MOTION.haloRadiusBoostY
+  );
+
+  const x = springValue(xTarget, INTERACTIVE_MANUAL_MOTION.pointerSpring);
+  const y = springValue(yTarget, INTERACTIVE_MANUAL_MOTION.hoverSpring);
+  const scale = springValue(scaleTarget, INTERACTIVE_MANUAL_MOTION.hoverSpring);
+  const rotate = springValue(rotateTarget, INTERACTIVE_MANUAL_MOTION.pointerSpring);
+  const revealOpacity = springValue(revealOpacityTarget, INTERACTIVE_MANUAL_MOTION.revealSpring);
+  const haloOpacity = springValue(haloOpacityTarget, INTERACTIVE_MANUAL_MOTION.revealSpring);
+  const maskX = springValue(maskXTarget, INTERACTIVE_MANUAL_MOTION.apertureSpring);
+  const maskY = springValue(maskYTarget, INTERACTIVE_MANUAL_MOTION.apertureSpring);
+  const maskWidth = springValue(maskWidthTarget, INTERACTIVE_MANUAL_MOTION.apertureSpring);
+  const maskHeight = springValue(maskHeightTarget, INTERACTIVE_MANUAL_MOTION.apertureSpring);
+  const haloWidth = springValue(haloWidthTarget, INTERACTIVE_MANUAL_MOTION.apertureSpring);
+  const haloHeight = springValue(haloHeightTarget, INTERACTIVE_MANUAL_MOTION.apertureSpring);
+
+  const stopFrameEffect = styleEffect(context.manualFrame, {
+    x,
+    y,
+    rotate,
+    scale,
+  });
+  const stopRevealEffect = styleEffect(context.fillImage, {
+    opacity: revealOpacity,
+  });
+  const stopHaloOpacityEffect = styleEffect(context.haloShape, {
+    opacity: haloOpacity,
+  });
+  const stopMaskShapeEffect = svgEffect(context.maskShape, {
+    cx: maskX,
+    cy: maskY,
+    rx: maskWidth,
+    ry: maskHeight,
+  });
+  const stopHaloGeometryEffect = svgEffect(context.haloShape, {
+    cx: maskX,
+    cy: maskY,
+    rx: haloWidth,
+    ry: haloHeight,
+  });
+
+  const onPointerMove = event => {
+    if (!context.isHovered) return;
+    updateInteractiveManualPointer(context, event);
+  };
+
+  const stopHoverGesture = hover(context.hitArea, () => {
+    context.isHovered = true;
+    context.hasInteracted = true;
+
+    window.clearTimeout(context.idleCueTimeoutId);
+    stopInteractiveManualAttractAnimations(context);
+    openInteractiveManualTactile(context);
+
+    return () => {
+      context.isHovered = false;
+      closeInteractiveManualTactile(context);
+    };
+  });
+
+  context.xTarget = xTarget;
+  context.yTarget = yTarget;
+  context.scaleTarget = scaleTarget;
+  context.rotateTarget = rotateTarget;
+  context.revealOpacityTarget = revealOpacityTarget;
+  context.haloOpacityTarget = haloOpacityTarget;
+  context.maskXTarget = maskXTarget;
+  context.maskYTarget = maskYTarget;
+  context.maskWidthTarget = maskWidthTarget;
+  context.maskHeightTarget = maskHeightTarget;
+  context.haloWidthTarget = haloWidthTarget;
+  context.haloHeightTarget = haloHeightTarget;
+  context.attractAnimations = [];
+  context.hasInteracted = false;
+  context.isHovered = false;
+  context.idleCueTimeoutId = window.setTimeout(() => {
+    if (context.isHovered || context.hasInteracted) return;
+
+    context.attractAnimations = [
+      animate(yTarget, [0, INTERACTIVE_MANUAL_MOTION.idleCueLiftY, 0], {
+        duration: INTERACTIVE_MANUAL_MOTION.idleCueDuration,
+        ease: 'easeInOut',
+      }),
+      animate(scaleTarget, [1, INTERACTIVE_MANUAL_MOTION.idleCueScale, 1], {
+        duration: INTERACTIVE_MANUAL_MOTION.idleCueDuration,
+        ease: 'easeInOut',
+      }),
+    ];
+  }, INTERACTIVE_MANUAL_MOTION.idleCueDelayMs);
+
+  context.manualFrame.style.willChange = 'transform, filter';
+  context.fillImage.style.willChange = 'opacity';
+  context.haloShape.style.willChange = 'opacity';
+
+  context.hitArea.addEventListener('pointermove', onPointerMove);
+
+  return () => {
+    stopHoverGesture?.();
+    stopInteractiveManualAttractAnimations(context);
+    window.clearTimeout(context.idleCueTimeoutId);
+
+    context.hitArea.removeEventListener('pointermove', onPointerMove);
+
+    stopFrameEffect();
+    stopRevealEffect();
+    stopHaloOpacityEffect();
+    stopMaskShapeEffect();
+    stopHaloGeometryEffect();
+
+    [
+      x,
+      y,
+      scale,
+      rotate,
+      revealOpacity,
+      haloOpacity,
+      maskX,
+      maskY,
+      maskWidth,
+      maskHeight,
+      haloWidth,
+      haloHeight,
+    ].forEach(destroyMotionValue);
+    [
+      xTarget,
+      yTarget,
+      scaleTarget,
+      rotateTarget,
+      revealOpacityTarget,
+      haloOpacityTarget,
+      maskXTarget,
+      maskYTarget,
+      maskWidthTarget,
+      maskHeightTarget,
+      haloWidthTarget,
+      haloHeightTarget,
+    ].forEach(destroyMotionValue);
+  };
+}
+
+function destroyInteractiveManualMotion(root = document) {
+  getInteractiveManualRoots(root).forEach(manualRoot => {
+    if (typeof manualRoot[INTERACTIVE_MANUAL_MOTION.cleanupKey] === 'function') {
+      manualRoot[INTERACTIVE_MANUAL_MOTION.cleanupKey]();
+      return;
+    }
+
+    resetInteractiveManualStyles(getInteractiveManualContext(manualRoot));
+    delete manualRoot.dataset[INTERACTIVE_MANUAL_MOTION.readyFlag];
+    delete manualRoot[INTERACTIVE_MANUAL_MOTION.cleanupKey];
+  });
+}
+
+function initInteractiveManualMotion(root = document) {
+  const shouldUseTactileMotion = interactiveManualDesktopMedia.matches && !reducedMotionMedia.matches;
+
+  getInteractiveManualRoots(root).forEach(manualRoot => {
+    if (manualRoot.dataset[INTERACTIVE_MANUAL_MOTION.readyFlag]) return;
+
+    const context = getInteractiveManualContext(manualRoot);
+    if (!context) return;
+
+    ensureInteractiveManualSvgBindings(context);
+    manualRoot.dataset[INTERACTIVE_MANUAL_MOTION.readyFlag] = 'true';
+
+    const cleanup = shouldUseTactileMotion
+      ? setupInteractiveManualTactile(context)
+      : setupInteractiveManualSimple(context);
+
+    manualRoot[INTERACTIVE_MANUAL_MOTION.cleanupKey] = () => {
+      cleanup?.();
+      resetInteractiveManualStyles(context);
+
+      delete manualRoot.dataset[INTERACTIVE_MANUAL_MOTION.readyFlag];
+      delete manualRoot[INTERACTIVE_MANUAL_MOTION.cleanupKey];
+    };
+  });
+}
+
+function syncInteractiveManualMotionForViewportChange() {
+  destroyInteractiveManualMotion(document);
+  initInteractiveManualMotion(document);
+}
+
+/* =============================
    BRIDGE / ANSWER MOTION
    ============================= */
 
@@ -1025,6 +1786,8 @@ function initThemeMotions(root = document) {
   initSvgPathMotion(root);
   initPlanLinesMotion(root);
   initPlanSwordMotion(root);
+  initHeroCoverMotion(root);
+  initInteractiveManualMotion(root);
   initAnswerBridgeMotion(root);
 }
 
@@ -1032,6 +1795,8 @@ function destroyThemeMotions(root = document) {
   destroySvgPathMotion(root);
   destroyPlanLinesMotion(root);
   destroyPlanSwordMotion(root);
+  destroyHeroCoverMotion(root);
+  destroyInteractiveManualMotion(root);
   destroyAnswerBridgeMotion(root);
 }
 
@@ -1047,3 +1812,7 @@ document.addEventListener('shopify:section:unload', event => {
 
 bindMediaQueryChange(answerBridgeDesktopMedia, syncAnswerBridgeMotionForViewportChange);
 bindMediaQueryChange(reducedMotionMedia, syncAnswerBridgeMotionForViewportChange);
+bindMediaQueryChange(heroCoverDesktopMedia, syncHeroCoverMotionForViewportChange);
+bindMediaQueryChange(reducedMotionMedia, syncHeroCoverMotionForViewportChange);
+bindMediaQueryChange(interactiveManualDesktopMedia, syncInteractiveManualMotionForViewportChange);
+bindMediaQueryChange(reducedMotionMedia, syncInteractiveManualMotionForViewportChange);

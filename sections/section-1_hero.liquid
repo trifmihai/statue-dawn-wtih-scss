@@ -43,7 +43,7 @@
               <div data-figma-id='8779:19265' class='hero_description text-align-center'>
                 <p class='text-size-medium'>
                   <strong>The life you want</strong>
-                  depends on the discipline you build. Install this guided system to
+                  depends on the discipline you build. Install this guided path to
                   <strong>make it permanent.</strong>
                 </p>
               </div>
@@ -56,11 +56,26 @@
         </div>
         <div class='spacer-xxlarge'></div>
         <div class='image-wrapper hero_visual-wrapper'>
+          <div class='hero_cover-root' data-sn-hero-cover-root>
+            <div class='hero_cover-hit-area' data-sn-hero-cover-hit-area>
+              <div class='hero_cover-stage' data-sn-hero-cover-stage>
+                <img
+                  src='{{ 'book-cover-animation.webp' | asset_url }}'
+                  loading='eager'
+                  fetchpriority='high'
+                  decoding='async'
+                  alt='{{ section.settings.hero_image_alt }}'
+                  class='hero_cover-image'
+                  data-sn-hero-cover-image
+                >
+              </div>
+            </div>
+          </div>
           <div class='hero_visual'>
             <img
               src='{{ 'hero-image.webp' | asset_url }}'
               loading='lazy'
-              alt='{{ section.settings.hero_image_alt }}'
+              alt=''
               class='main-image is-hero'
             >
             <div class='hero_benefits' aria-hidden='true'>
@@ -98,6 +113,7 @@
             <div class='visually-hidden'>Hero benefits: Sharpen Skills, See Progress, Build Proof.</div>
           </div>
         </div>
+
         <div class='spacer-xxlarge hide-mobile-portrait'></div>
       </div>
       <div class='line-wrapper is-desktop'>
